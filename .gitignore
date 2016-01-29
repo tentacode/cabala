@@ -35,5 +35,7 @@ ehthumbs.db
 Thumbs.db
 
 # Project related
+Assets/VSCode
+Assets/VSCode.meta
 Assets/Vendors
 Assets/Vendors.meta
