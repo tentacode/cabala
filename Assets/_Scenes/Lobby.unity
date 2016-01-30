@@ -148,6 +148,18 @@ Prefab:
       propertyPath: m_BroadcastPort
       value: 47778
       objectReference: {fileID: 0}
+    - target: {fileID: 11482596, guid: a0f387ca73ca348a0bf87470fde89fba, type: 2}
+      propertyPath: m_SpawnPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 113106, guid: a19837b32e3ccc44492f4a81e792b53c, type: 2}
+    - target: {fileID: 11482596, guid: a0f387ca73ca348a0bf87470fde89fba, type: 2}
+      propertyPath: m_PlayScene
+      value: Play Mael
+      objectReference: {fileID: 0}
+    - target: {fileID: 11482596, guid: a0f387ca73ca348a0bf87470fde89fba, type: 2}
+      propertyPath: m_ShowLobbyGUI
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a0f387ca73ca348a0bf87470fde89fba, type: 2}
   m_IsPrefabParent: 0

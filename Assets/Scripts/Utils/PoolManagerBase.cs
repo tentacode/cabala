@@ -32,9 +32,6 @@ public class PoolManagerBase : NetworkBehaviour
 
     protected virtual GameObject Generate()
     {
-
-
-        
         GameObject toPop = Instantiate(objectToInstantiate) as GameObject;
 
         toPop.name += " " + nextNameId;

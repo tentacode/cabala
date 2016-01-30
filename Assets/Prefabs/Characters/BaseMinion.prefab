@@ -14,6 +14,7 @@ GameObject:
   - 195: {fileID: 19575882}
   - 114: {fileID: 11439796}
   - 54: {fileID: 5443096}
+  - 114: {fileID: 11464224}
   m_Layer: 0
   m_Name: BaseMinion
   m_TagString: Minion
@@ -172,6 +173,38 @@ MonoBehaviour:
     type: 2}
   playerNumber: 0
   DEBUGFightInitator: 0
+--- !u!114 &11464224
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 161
+    i1: 152
+    i2: 55
+    i3: 179
+    i4: 46
+    i5: 60
+    i6: 204
+    i7: 68
+    i8: 73
+    i9: 47
+    i10: 74
+    i11: 129
+    i12: 231
+    i13: 146
+    i14: 181
+    i15: 60
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!135 &13525860
 SphereCollider:
   m_ObjectHideFlags: 1
