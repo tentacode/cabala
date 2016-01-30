@@ -101,7 +101,7 @@ public class Minions : MonoBehaviour
         {
             return;
         }
-
+        
         navAgent = GetComponent<NavMeshAgent>();
         playerNumber = GameObject.Find("GameSharedData").GetComponent<GameSharedData>().PlayerNumber;
         lifeBar = transform.FindChild("LifeBar").gameObject;
