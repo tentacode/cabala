@@ -14,6 +14,7 @@ GameObject:
   - 195: {fileID: 19575882}
   - 114: {fileID: 11439796}
   - 54: {fileID: 5443096}
+  - 114: {fileID: 11476888}
   m_Layer: 0
   m_Name: WizardMinion
   m_TagString: Minion
@@ -172,8 +173,39 @@ MonoBehaviour:
     type: 2}
   playerNumber: 0
   minionType: 2
-  DEBUGFightInitator: 0
   DEBUGState: 0
+--- !u!114 &11476888
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 5
+    i1: 206
+    i2: 209
+    i3: 164
+    i4: 70
+    i5: 31
+    i6: 95
+    i7: 100
+    i8: 56
+    i9: 114
+    i10: 143
+    i11: 190
+    i12: 209
+    i13: 250
+    i14: 138
+    i15: 64
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!135 &13525860
 SphereCollider:
   m_ObjectHideFlags: 1

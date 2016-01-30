@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd6384a8527f47e790862b69292686d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BroadcastPort: 47777
+  m_BroadcastPort: 47778
   m_BroadcastKey: 2222
   m_BroadcastVersion: 1
   m_BroadcastSubVersion: 1
@@ -76,7 +76,9 @@ MonoBehaviour:
   m_OfflineScene: Lobby
   m_OnlineScene: 
   m_SpawnPrefabs:
-  - {fileID: 0}
+  - {fileID: 113106, guid: a19837b32e3ccc44492f4a81e792b53c, type: 2}
+  - {fileID: 113106, guid: 88615d4c96cbc1b40a9d8900c6efb7a5, type: 2}
+  - {fileID: 113106, guid: 05ced1a4461f5f6438728fbed1fa8a40, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -108,7 +110,7 @@ MonoBehaviour:
   m_Channels: 0500000000000000
   m_UseWebSockets: 0
   m_UseSimulator: 0
-  m_SimulatedLatency: 1
+  m_SimulatedLatency: 400
   m_PacketLossPercentage: 0
   m_MatchHost: mm.unet.unity3d.com
   m_MatchPort: 443
@@ -119,7 +121,7 @@ MonoBehaviour:
   m_ShowLobbyGUI: 0
   m_MaxPlayers: 4
   m_MaxPlayersPerConnection: 1
-  m_MinPlayers: 2
+  m_MinPlayers: 1
   m_LobbyPlayerPrefab: {fileID: 11419812, guid: 86e845a10142546c1959a0a4ea773604,
     type: 2}
   m_GamePlayerPrefab: {fileID: 180276, guid: 50653290a43944505828ce4db2f52421, type: 2}
