@@ -4,9 +4,8 @@ using System.Collections;
 
 public class PlayerNetwork : NetworkBehaviour
 {
-    [SyncVar]
-    public int playerIndex = 0;
-    
+    private Unit_ID _unitID;
+
     [SyncVar]
     public int connectionId;
     
@@ -15,19 +14,19 @@ public class PlayerNetwork : NetworkBehaviour
 	void Awake () 
     {
 	   DontDestroyOnLoad(gameObject);
+       _unitID = GetComponent<Unit_ID>();
 	}
     
     void Update ()
     {
-        if (playerIndex != 0 && !initialized) {
+        if (_unitID.GetPlayerNumber() != 0 && !initialized)
+        {
             InitGame();
         }
     }
     
     public void InitGame()
     {
-        gameObject.name = "Player" + playerIndex;
-        
         InitPosition();
         InitCamera();
         initialized = true;
@@ -35,7 +34,7 @@ public class PlayerNetwork : NetworkBehaviour
     
     void InitPosition()
     {
-        var ground = GameObject.Find("Ground" + playerIndex);
+        var ground = GameObject.Find("SpawnPlayer" + _unitID.GetPlayerNumber());
         transform.position = ground.transform.position;
     }
     

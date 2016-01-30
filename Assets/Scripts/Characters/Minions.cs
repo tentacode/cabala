@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
+using UnityEngine.Networking;
 
 [Serializable]
 public enum MinionState
@@ -14,25 +15,22 @@ public enum MinionState
 [Serializable]
 public enum MinionType
 {
-    ghost,
-    warrior,
-    wizard
+    Ghost,
+    Warrior,
+    Wizard
 }
 
-public class Minions : MonoBehaviour
+public class Minions : NetworkBehaviour
 {
     #region parameters
     public MinionsInformations minionsInformations;
-    public int playerNumber;
     public MinionType minionType;
-    [Tooltip("if set to true, will keep its original material")]
-    public bool overrideMaterial;
 
     [SerializeField]
     public Dictionary<MinionType, MinionType> StongAgainst;
-    
+
     public MinionState DEBUGState;
-    
+
     public MinionState state
     {
         get
@@ -50,35 +48,63 @@ public class Minions : MonoBehaviour
     }
     public MinionState previousState { get; protected set; }
 
-    public int ownerIndex { get; private set; }
-    
     public Minions opponent { get; private set; }
 
     private MinionState _state;
     private NavMeshAgent navAgent;
     private Transform goal;
     private bool isInit = false;
-    private int currentLife = 10;
+
     private GameObject lifeBar;
-    
+
+    private Destructible _destructible;
+    private Unit_ID _unit_ID;
+
+    public int PlayerNumber
+    {
+        set
+        {
+            _unit_ID.CmdSetPlayerNumber(value);
+        }
+        get
+        {
+            return _unit_ID.GetPlayerNumber();
+        }
+    }
+
     #endregion
 
     #region engine methods
 
-    /*
+
     void Awake()
     {
+        _destructible = GetComponent<Destructible>();
+        _unit_ID = GetComponent<Unit_ID>();
+        _destructible.maxLife = minionsInformations.baseLifePoints;
 
-    } */
+        _destructible.HandleDestroyed += OnDie;
+    }
 
-    void Start () {
+    void Start()
+    {
         initalize();
+
+
     }
 
     void LateUpdate()
     {
-        CheckDeath();
         DEBUGState = state;
+
+        if (lifeBar == null)
+        {
+            return;
+        }
+
+        lifeBar.transform.localScale = new Vector3(lifeBar.transform.localScale.x,
+                                                   lifeBar.transform.localScale.y,
+                                                   _destructible.GetLife() / _destructible.maxLife);
     }
 
     void OnTriggerEnter(Collider other)
@@ -86,9 +112,9 @@ public class Minions : MonoBehaviour
         if (other.tag == "Minion")
         {
             Minions opponent = other.GetComponent<Minions>();
-            if (opponent.ownerIndex != ownerIndex && opponent.state != MinionState.fighting)
+            if (opponent.PlayerNumber != PlayerNumber && opponent.state != MinionState.fighting)
             {
-                LaunchFight(other.GetComponent<Minions>());
+                LaunchFight(opponent);
             }
         }
     }
@@ -97,41 +123,51 @@ public class Minions : MonoBehaviour
 
     #region methods
 
+
     protected void initalize()
     {
-        if(isInit)
+        if (isInit)
         {
             return;
         }
-        
+
         navAgent = GetComponent<NavMeshAgent>();
-        playerNumber = GameObject.Find("GameSharedData").GetComponent<GameSharedData>().PlayerNumber;
+
+        if (isServer)
+        {
+            PlayerNumber = GameObject.Find("GameSharedData").GetComponent<GameSharedData>().PlayerNumber;
+        }
+
         lifeBar = transform.FindChild("LifeBar").gameObject;
-        currentLife = minionsInformations.baseLifePoints;
 
         state = MinionState.moving;
     }
 
     private void setMaterial()
     {
-        if (!overrideMaterial)
-        {
-            GetComponent<Renderer>().material = minionsInformations.teamMaterials[ownerIndex - 1];
-        }
+        GetComponent<Renderer>().material = minionsInformations.teamMaterials[PlayerNumber];
     }
-    
+
     public void SetOwnerNumber(int owner)
     {
-        if(!isInit)
+        if (!isInit)
         {
             initalize();
         }
 
-        ownerIndex = owner;
+        PlayerNumber = owner;
 
         setMaterial();
 
-        SetGoal(GameObject.Find("Player" + ((ownerIndex%playerNumber) + 1)).transform);
+        if (PlayerNumber == 3)
+        {
+            SetGoal(Unit_ID.FindPlayer(1).transform);
+        }
+        else
+        {
+            SetGoal(Unit_ID.FindPlayer(PlayerNumber + 1).transform);
+        }
+
     }
 
     public void SetGoal(Transform goalTransform)
@@ -154,7 +190,7 @@ public class Minions : MonoBehaviour
 
     public void LaunchFight(Minions otherFighter)
     {
-        if(state == MinionState.fighting)
+        if (state == MinionState.fighting)
         {
             return;
         }
@@ -164,13 +200,13 @@ public class Minions : MonoBehaviour
 
         setupFight();
         opponent.setupFight();
-        
+
         Invoke("Attack", minionsInformations.firstAttackSpeed);
     }
 
     public void finishFight()
     {
-        if (currentLife <= 0)
+        if (_destructible.GetLife() <= 0)
         {
             return; // do nothing, will go on late state and die as it should
         }
@@ -195,9 +231,10 @@ public class Minions : MonoBehaviour
 
     public void Attack()
     {
-        opponent.TakeDamage(computeDamages());
-        TakeDamage(opponent.computeDamages());
-        
+        Destructible opponentDestructible = opponent.GetComponent<Destructible>();
+        opponentDestructible.TakeDamage(computeDamages(), _destructible);
+        _destructible.TakeDamage(opponent.computeDamages(), opponentDestructible);
+
         Invoke("Attack", minionsInformations.attackSpeed);
     }
 
@@ -205,40 +242,18 @@ public class Minions : MonoBehaviour
     {
         if (minionsInformations.minionStrengths.amIStrongAgainst(minionType, opponent.minionType))
         {
-            return(int) ((float)minionsInformations.damages * minionsInformations.damageMultiplicator);
+            return (int)((float)minionsInformations.damages * minionsInformations.damageMultiplicator);
         }
 
         return minionsInformations.damages;
     }
 
-    public void TakeDamage(int damages)
-    {
-        currentLife -= damages;
-
-        if(lifeBar == null)
-        {
-            return;
-        }
-
-        lifeBar.transform.localScale = new Vector3(lifeBar.transform.localScale.x,
-                                                   lifeBar.transform.localScale.y,
-                                                   Mathf.Max((float)currentLife / (float)minionsInformations.baseLifePoints, 0f));
-    }
-
-    public void CheckDeath()
-    {
-        if(currentLife <= 0)
-        {
-            Die();
-        }
-    }
-
-    public void Die()
+    private void OnDie(GameObject whoDied, Destructible whokill)
     {
         opponent.finishFight();
         state = MinionState.dead;
 
-        Destroy(gameObject);
+        //      Destroy(gameObject);
     }
 
     #endregion

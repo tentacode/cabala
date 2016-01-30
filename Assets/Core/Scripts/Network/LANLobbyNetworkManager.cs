@@ -78,7 +78,8 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
         var playerIndex = nlp.slot + 1;
         
         PlayerNetwork pn = gamePlayer.GetComponent<PlayerNetwork>();
-        pn.playerIndex = playerIndex;
+        pn.GetComponent<Unit_ID>().CmdSetPlayerNumber(playerIndex);
+        pn.GetComponent<Unit_ID>().CmdSetMyUniqueID("Player" + playerIndex);
         pn.connectionId = nlp.connectionToClient.connectionId;
         
         return true;

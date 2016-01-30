@@ -158,7 +158,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11482596, guid: a0f387ca73ca348a0bf87470fde89fba, type: 2}
       propertyPath: m_PlayScene
-      value: LeosLaboratory
+      value: Play
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a0f387ca73ca348a0bf87470fde89fba, type: 2}

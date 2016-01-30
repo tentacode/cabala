@@ -161,7 +161,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 479770}
   m_Layer: 0
-  m_Name: Player
+  m_Name: PlayerSpawn
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -15,6 +15,11 @@ public class PoolManagerBase : NetworkBehaviour
 
     protected static int nextNameId = 0;
 
+    public static PoolManagerBase FindPool(MinionType type)
+    {
+        return GameObject.Find("Pool" + type.ToString()).GetComponent<PoolManagerBase>();
+    }
+
     protected virtual void Start()
     {
         root = transform;
@@ -32,9 +37,6 @@ public class PoolManagerBase : NetworkBehaviour
 
     protected virtual GameObject Generate()
     {
-
-
-        
         GameObject toPop = Instantiate(objectToInstantiate) as GameObject;
 
         toPop.name += " " + nextNameId;

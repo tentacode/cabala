@@ -26,6 +26,11 @@ public class Unit_ID : NetworkBehaviour {
 	[SyncVar] public string my_uniqueID ;
 	private Transform myTransform;
 
+    public bool IsReady()
+    {
+        return my_uniqueID != "";
+    }
+
     public int GetPlayerNumber()
     {
         return PlayerNumber;
@@ -39,6 +44,11 @@ public class Unit_ID : NetworkBehaviour {
     public void CmdSetPlayerNumber(int number)
     {
         PlayerNumber = number;
+    }
+
+    public void CmdSetMyUniqueID(string id)
+    {
+        my_uniqueID = id;
     }
 
 	// Use this for initialization

@@ -4,25 +4,25 @@ using System.Collections;
 public class SpawnerController : MonoBehaviour
 {
     #region parameters
-    public int ownerNumber;
-    public Minions spawnedCharacter;
+    public MinionType spawnedCharacter;
 
     public SpawnersInformations spawnerInformations;
 
     private float beginTime;
 
+    [SerializeField]
+    private Transform _spawnPoint;
+
+    private Unit_ID _unitId;
+
     #endregion
     
     // Use this for initialization
     void Start () {
-        Invoke("FirstSpawn", spawnerInformations.TimeBeforeFirstLaunch);
+        _unitId = GetComponent<Unit_ID>();
+        Invoke("FirstSpawn", spawnerInformations.TimeBeforeFirstLaunch + 1);
     }
 	
-	// Update is called once per frame
-	void Update () {
-        
-	}
-
     private void FirstSpawn()
     {
         beginTime = Time.time;
@@ -31,9 +31,11 @@ public class SpawnerController : MonoBehaviour
 
     private void Spawn()
     {
-        Minions ennemy = Instantiate(spawnedCharacter, transform.position, transform.rotation) as Minions;
-        
-        ennemy.SetOwnerNumber(ownerNumber);
+        GameObject minion = PoolManagerBase.FindPool(spawnedCharacter).Pop();
+        minion.transform.position = _spawnPoint.position;
+        minion.transform.rotation = _spawnPoint.rotation;
+
+        minion.GetComponent<Unit_ID>().CmdSetPlayerNumber(_unitId.GetPlayerNumber());
         
         Invoke("Spawn", spawnerInformations.spawnSpeedCurve.Evaluate((Time.time - beginTime) / spawnerInformations.maxTime));
     }
