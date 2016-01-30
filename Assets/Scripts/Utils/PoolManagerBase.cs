@@ -11,37 +11,35 @@ public class PoolManagerBase : NetworkBehaviour
 
     public GameObject objectToInstantiate;
 
-    public int numberToPreInstantiate;
+  //  public int numberToPreInstantiate;
 
     protected static int nextNameId = 0;
 
     protected virtual void Start()
     {
-        if (!isServer)
-        {
-            return;
-        }
-
         root = transform;
 
-        for (int j = 0; j < numberToPreInstantiate; j++)
+   /*     for (int j = 0; j < numberToPreInstantiate; j++)
         {
             GameObject o = Generate();
             o.GetComponent<Destructible>().GoDeadNoBroadcart();
 
             pool.Push(o);
 
-        }
+        }*/
     }
 
 
     protected virtual GameObject Generate()
     {
+
+
+        
         GameObject toPop = Instantiate(objectToInstantiate) as GameObject;
 
         toPop.name += " " + nextNameId;
         nextNameId++;
-
+        Debug.Log("Generate " + toPop.name);
         toPop.transform.parent = root;
 
         toPop.GetComponent<Destructible>().HandleDestroyed += OnDeath;

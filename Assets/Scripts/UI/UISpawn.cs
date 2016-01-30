@@ -17,43 +17,26 @@ public class UISpawn : NetworkBehaviour {
 
     public void ButtonSpawnA()
     {
-        CmdSpawnA();
-    }
+        int side = int.Parse(_inputField.text);
+        SpawnUnitFromPlayer Spawner = GameObject.Find("Player" + side).GetComponent<SpawnUnitFromPlayer>();
 
-    [Command]
-    public void CmdSpawnA()
-    {
-        GameObject o = _poolA.Pop();
-        SetPosition(o);
+        Spawner.CmdSpawn(_poolA.name);
     }
 
     public void ButtonSpawnB()
     {
-        GameObject o = _poolB.Pop();
-        SetPosition(o);
+        int side = int.Parse(_inputField.text);
+        SpawnUnitFromPlayer Spawner = GameObject.Find("Player" + side).GetComponent<SpawnUnitFromPlayer>();
+
+        Spawner.CmdSpawn(_poolB.name);
     }
 
     public void ButtonSpawnC()
     {
-        GameObject o = _poolC.Pop();
-        SetPosition(o);
-    }
-
-    void SetPosition(GameObject o)
-    {
         int side = int.Parse(_inputField.text);
-        
-        o.GetComponent<Unit_ID>().CmdSetSideId(side);
+        SpawnUnitFromPlayer Spawner = GameObject.Find("Player" + side).GetComponent<SpawnUnitFromPlayer>();
 
-        GameObject SpawnPoint = GameObject.Find("Player" + side);
-
-        if (SpawnPoint == null)
-        {
-            Debug.LogError("Wrong Side " + side);
-        }
-        else
-        {
-            o.transform.position = SpawnPoint.transform.position;
-        }
+        Spawner.CmdSpawn(_poolC.name);
     }
+   
 }
