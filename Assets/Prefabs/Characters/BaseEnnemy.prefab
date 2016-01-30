@@ -13,6 +13,9 @@ GameObject:
   - 23: {fileID: 2326920}
   - 195: {fileID: 19575882}
   - 114: {fileID: 11439796}
+  - 114: {fileID: 11404346}
+  - 114: {fileID: 11499682}
+  - 114: {fileID: 11442186}
   m_Layer: 0
   m_Name: BaseEnnemy
   m_TagString: Untagged
@@ -141,6 +144,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11404346
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 161
+    i1: 152
+    i2: 55
+    i3: 179
+    i4: 46
+    i5: 60
+    i6: 204
+    i7: 68
+    i8: 73
+    i9: 47
+    i10: 74
+    i11: 129
+    i12: 231
+    i13: 146
+    i14: 181
+    i15: 60
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &11439796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -152,7 +187,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a54c570bd92651a419dfa9998cd0f133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minionsInformations: {fileID: 0}
   playerNumber: 0
+--- !u!114 &11442186
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344882d421f672c4c85821f6afe74124, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SideNumber: 0
+  my_ID: 
+--- !u!114 &11499682
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff4d8eb1cb6411f46ad0cc08912bb527, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: 0
 --- !u!135 &13525860
 SphereCollider:
   m_ObjectHideFlags: 1

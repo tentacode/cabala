@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.Networking;
 
-public class PoolManagerBase : MonoBehaviour
+public class PoolManagerBase : NetworkBehaviour
 {
     protected Stack<GameObject> pool = new Stack<GameObject>();
 
@@ -13,10 +13,15 @@ public class PoolManagerBase : MonoBehaviour
 
     public int numberToPreInstantiate;
 
-    protected int nextNameId = 0;
+    protected static int nextNameId = 0;
 
     protected virtual void Start()
     {
+        if (!isServer)
+        {
+            return;
+        }
+
         root = transform;
 
         for (int j = 0; j < numberToPreInstantiate; j++)
@@ -29,6 +34,7 @@ public class PoolManagerBase : MonoBehaviour
         }
     }
 
+
     protected virtual GameObject Generate()
     {
         GameObject toPop = Instantiate(objectToInstantiate) as GameObject;
@@ -39,6 +45,7 @@ public class PoolManagerBase : MonoBehaviour
         toPop.transform.parent = root;
 
         toPop.GetComponent<Destructible>().HandleDestroyed += OnDeath;
+        toPop.GetComponent<Unit_ID>().my_ID = toPop.name;
 
         NetworkServer.Spawn(toPop);
 
