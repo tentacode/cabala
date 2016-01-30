@@ -117,8 +117,9 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
     }
     
     public override void OnLobbyClientSceneChanged(NetworkConnection conn)
-    {      
+    {
         Debug.Log("OnLobbyClientSceneChanged");
+        GetComponent<LANNetworkDiscovery>().GameStarted();
           
         var lobbyPlayers = GameObject.FindGameObjectsWithTag("LobbyPlayer");
         foreach (GameObject go in lobbyPlayers) {
