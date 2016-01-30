@@ -7,6 +7,9 @@ public class PlayerNetwork : NetworkBehaviour
     [SyncVar]
     public int playerIndex;
     
+    [SyncVar]
+    public int connectionId;
+    
 	void Awake () 
     {
 	   DontDestroyOnLoad(gameObject);
