@@ -53,7 +53,9 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
         var playerIndex = lobbyPlayer.GetComponent<NetworkLobbyPlayer>().slot + 1;
         
         gamePlayer.name = "PLayer" + playerIndex;
-        // gamePlayer.GetComponent<PlayerNetwork>.SetPlayerIndex(playerIndex);
+        PlayerNetwork pn = gamePlayer.GetComponent<PlayerNetwork>();
+        pn.SetPlayerIndex(playerIndex);
+        pn.InitPosition();
         
         return true;
     }
