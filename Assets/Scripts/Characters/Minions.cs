@@ -158,14 +158,15 @@ public class Minions : NetworkBehaviour
 
         setMaterial();
 
-        if (PlayerNumber == 0)
+        if (PlayerNumber == 3)
         {
             SetGoal(Unit_ID.FindPlayer(1).transform);
         }
         else
         {
-            SetGoal(Unit_ID.FindPlayer(PlayerNumber + 1 % PlayerNumber).transform);
+            SetGoal(Unit_ID.FindPlayer(PlayerNumber + 1).transform);
         }
+        
     }
 
     public void SetGoal(Transform goalTransform)

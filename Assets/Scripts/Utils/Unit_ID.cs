@@ -19,7 +19,7 @@ public class Unit_ID : NetworkBehaviour {
 
     public static GameObject FindPlayer(int playerId)
     {
-        return GameObject.Find("Player" + (playerId + 1).ToString());
+        return GameObject.Find("Player" + (playerId ).ToString());
     }
 
     [HideInInspector]
@@ -35,7 +35,7 @@ public class Unit_ID : NetworkBehaviour {
     /// Has to be called on the server side !
     /// </summary>
     /// <param name="number"></param>
-    [Command]
+    //[Command]
     public void CmdSetPlayerNumber(int number)
     {
         PlayerNumber = number;
