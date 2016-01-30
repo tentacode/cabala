@@ -15,11 +15,11 @@ public class Unit_ID : NetworkBehaviour {
     // Side 0 is neutral
     [SerializeField]
     [SyncVar]
-    private int PlayerNumber;
+    private int PlayerIndex;
 
     public static GameObject FindPlayer(int playerId)
     {
-        return GameObject.Find("Player" + (playerId ).ToString());
+        return GameObject.Find("Player" + (playerId).ToString());
     }
 
     [HideInInspector]
@@ -31,9 +31,9 @@ public class Unit_ID : NetworkBehaviour {
         return my_uniqueID != "";
     }
 
-    public int GetPlayerNumber()
+    public int GetPlayerIndex()
     {
-        return PlayerNumber;
+        return PlayerIndex;
     }
 
     /// <summary>
@@ -41,9 +41,9 @@ public class Unit_ID : NetworkBehaviour {
     /// </summary>
     /// <param name="number"></param>
     //[Command]
-    public void CmdSetPlayerNumber(int number)
+    public void CmdSetPlayerIndex(int number)
     {
-        PlayerNumber = number;
+        PlayerIndex = number;
     }
 
     //[Command]

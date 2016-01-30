@@ -18,6 +18,7 @@ public class Destructible : NetworkBehaviour
 
     public Action<GameObject, Destructible> HandleDestroyed = delegate { };
     public Action<GameObject> HandleAlive = delegate { };
+    public Action<GameObject, int> HandleTakeDamage = delegate { };
 
     private Unit_ID unitId;
 
@@ -39,6 +40,8 @@ public class Destructible : NetworkBehaviour
         {
             GoDead(attaking);
         }
+
+        HandleTakeDamage(gameObject, damage);
     }
 
     public void GoDead(Destructible attaking)

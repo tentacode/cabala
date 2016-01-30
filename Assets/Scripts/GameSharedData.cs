@@ -3,15 +3,21 @@ using System.Collections;
 
 public class GameSharedData : MonoBehaviour
 {
-    public int playerNumber;
-
+    public int NumberOfPlayer
+    {
+        get
+        {
+            return GameObject.FindGameObjectsWithTag("Player").Length;
+        }
+    }
+    /*
     public bool autoCountPlayers;
 
     void Start()
     {
         if(autoCountPlayers)
         {
-            playerNumber = GameObject.FindGameObjectsWithTag("Player").Length;
+            NumberOfPlayer = 
         }
-    }
+    }*/
 }

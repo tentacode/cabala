@@ -59,28 +59,12 @@ public class Minions : NetworkBehaviour
     private Destructible _destructible;
     private Unit_ID _unit_ID;
 
-    public int PlayerNumber
+    public int PlayerIndex
     {
-        set
-        {
-            _unit_ID.CmdSetPlayerNumber(value);
-
-            setMaterial();
-
-            if (PlayerNumber == 3)
-            {
-                SetGoal(Unit_ID.FindPlayer(1).transform);
-            }
-            else
-            {
-                SetGoal(Unit_ID.FindPlayer(PlayerNumber + 1).transform);
-            }
-        }
+        
         get
         {
-           
-
-            return _unit_ID.GetPlayerNumber();
+            return _unit_ID.GetPlayerIndex();
         }
     }
 
@@ -93,23 +77,19 @@ public class Minions : NetworkBehaviour
     {
         _destructible = GetComponent<Destructible>();
         _unit_ID = GetComponent<Unit_ID>();
+        navAgent = GetComponent<NavMeshAgent>();
+
         _destructible.maxLife = minionsInformations.baseLifePoints;
 
         _destructible.HandleDestroyed += OnDie;
-    }
-
-    void Start()
-    {
-        initalize();
-
-
+        _destructible.HandleAlive += OnAlive;
     }
 
     void LateUpdate()
     {
         DEBUGState = state;
 
-        if (!isInit && _unit_ID.IsReady())
+        if (_unit_ID.IsReady())
         {
             initalize();
         }
@@ -120,7 +100,7 @@ public class Minions : NetworkBehaviour
         if (other.tag == "Minion")
         {
             Minions opponent = other.GetComponent<Minions>();
-            if (opponent.PlayerNumber != PlayerNumber && opponent.state != MinionState.fighting)
+            if (opponent.PlayerIndex != PlayerIndex && opponent.state != MinionState.fighting)
             {
                 LaunchFight(opponent);
             }
@@ -140,27 +120,25 @@ public class Minions : NetworkBehaviour
         }
         isInit = true;
 
-        navAgent = GetComponent<NavMeshAgent>();
-
-        if (isServer)
-        {
-            PlayerNumber = GameObject.Find("GameSharedData").GetComponent<GameSharedData>().PlayerNumber;
-        }
-
         state = MinionState.moving;
+
+        setMaterial();
+
+        int numberOfPlayer = GameObject.Find("GameSharedData").GetComponent<GameSharedData>().NumberOfPlayer;
+
+        Debug.Log((PlayerIndex % numberOfPlayer) + 1);
+        GameObject player = Unit_ID.FindPlayer((PlayerIndex % numberOfPlayer) + 1);
+        SetGoal(player.transform);
     }
 
     private void setMaterial()
     {
-        GetComponent<Renderer>().material = minionsInformations.teamMaterials[PlayerNumber];
+        GetComponent<Renderer>().material = minionsInformations.teamMaterials[PlayerIndex];
     }
 
     public void SetGoal(Transform goalTransform)
     {
-        if (!isInit)
-        {
-            initalize();
-        }
+        Debug.Log(name + " goto " + goalTransform.name); 
 
         goal = goalTransform;
         if (goal != null)
@@ -235,11 +213,20 @@ public class Minions : NetworkBehaviour
 
     private void OnDie(GameObject whoDied, Destructible whokill)
     {
-        opponent.finishFight();
+        if (opponent != null)
+        {
+            opponent.finishFight();
+        }
+
         state = MinionState.dead;
 
         //      Destroy(gameObject);
-   } 
+   }
+    private void OnAlive(GameObject whoAlive)
+    {
+        isInit = false;
+        initalize();
+    }
 
     #endregion
 }

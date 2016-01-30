@@ -23,9 +23,9 @@ public class SpawnUnitFromPlayer : NetworkBehaviour {
         Debug.Log(poolName + " " + pool);
         GameObject o = pool.Pop();
 
-        int side = _unitID.GetPlayerNumber();
+        int side = _unitID.GetPlayerIndex();
 
-        o.GetComponent<Unit_ID>().CmdSetPlayerNumber(side);
+        o.GetComponent<Unit_ID>().CmdSetPlayerIndex(side);
 
         o.transform.position = transform.position;
 

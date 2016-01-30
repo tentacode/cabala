@@ -3,15 +3,17 @@ using System.Collections.Generic;
 
 public class InvocationCircleControler : MonoBehaviour
 {
-    public int ownerIndex;
+    [SerializeField]
+    private Unit_ID _unitID;
 
+    [HideInInspector]
     public int lifePoints;
     
     public List<Cultist> cultists;
     public bool autoFillCultists;
 
-    public List<SpawnerController> spawners;
-    public bool autoFillSpawners;
+   // public List<SpawnerController> spawners;
+  //  public bool autoFillSpawners;
 
     // Use this for initialization
     void Start () {
@@ -30,7 +32,7 @@ public class InvocationCircleControler : MonoBehaviour
             }
         }
 
-        if(autoFillSpawners)
+      /*  if(autoFillSpawners)
         {
             spawners = new List<SpawnerController>();
             GameObject spawnerParents = transform.Find("Spawners").gameObject;
@@ -42,7 +44,7 @@ public class InvocationCircleControler : MonoBehaviour
                 currentSpawner.ownerIndex = ownerIndex;
                 //spawners.init(this, i);
             }
-        }
+        }*/
 	}
 	
 	// Update is called once per frame
@@ -54,7 +56,7 @@ public class InvocationCircleControler : MonoBehaviour
     {
         if (other.tag == "Minion")
         {
-            if (other.GetComponent<Minions>().ownerIndex != ownerIndex)
+            if (other.GetComponent<Unit_ID>().GetPlayerIndex() != _unitID.GetPlayerIndex())
             {
                 launchMinionOnCultist(other.GetComponent<Minions>());
             }
@@ -63,7 +65,7 @@ public class InvocationCircleControler : MonoBehaviour
 
     public void launchMinionOnCultist(Minions minion)
     {
-        Debug.Log("Launch Minion " + minion.name + " on cultist " + (lifePoints - 1));
+        //Debug.Log("Launch Minion " + minion.name + " on cultist " + (lifePoints - 1));
         minion.SetGoal(cultists[lifePoints - 1].transform);
     }
 

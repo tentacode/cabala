@@ -22,6 +22,6 @@ public class UIUnitLifeBar : MonoBehaviour {
 
         lifeBar.transform.localScale = new Vector3(lifeBar.transform.localScale.x,
                                                    lifeBar.transform.localScale.y,
-                                                   _destructible.GetLife() / _destructible.maxLife);
+                                                   (float)_destructible.GetLife() / (float)_destructible.maxLife);
     }
 }

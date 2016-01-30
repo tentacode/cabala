@@ -19,7 +19,7 @@ public class PlayerNetwork : NetworkBehaviour
     
     void Update ()
     {
-        if (_unitID.GetPlayerNumber() != 0 && !initialized)
+        if (_unitID.GetPlayerIndex() != 0 && !initialized)
         {
             InitGame();
         }
@@ -34,7 +34,7 @@ public class PlayerNetwork : NetworkBehaviour
     
     void InitPosition()
     {
-        var ground = GameObject.Find("SpawnPlayer" + _unitID.GetPlayerNumber());
+        var ground = GameObject.Find("SpawnPlayer" + _unitID.GetPlayerIndex());
         transform.position = ground.transform.position;
     }
     

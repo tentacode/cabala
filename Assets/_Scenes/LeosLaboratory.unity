@@ -315,7 +315,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 411768, guid: 50653290a43944505828ce4db2f52421, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 180276, guid: 50653290a43944505828ce4db2f52421, type: 2}
       propertyPath: m_Name
@@ -533,7 +533,7 @@ Transform:
   m_LocalScale: {x: 7.190813, y: 7.190814, z: 7.190814}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!1001 &1194914233
 Prefab:
   m_ObjectHideFlags: 0
@@ -801,7 +801,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 411768, guid: 50653290a43944505828ce4db2f52421, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 180276, guid: 50653290a43944505828ce4db2f52421, type: 2}
       propertyPath: m_Name
@@ -825,7 +825,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef00b431f4d834f4b8e2ae3abe5bcf63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNumber: 3
+  playerNumber: 0
+  autoCountPlayers: 0
 --- !u!1 &2096271109
 GameObject:
   m_ObjectHideFlags: 0

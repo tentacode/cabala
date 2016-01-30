@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking;
-
+/// <summary>
+/// TODO separate in two
+/// </summary>
 public class SpawnerController : NetworkBehaviour
 {
     #region parameters
@@ -43,7 +45,7 @@ public class SpawnerController : NetworkBehaviour
         minion.transform.position = _spawnPoint.position;
         minion.transform.rotation = _spawnPoint.rotation;
 
-        minion.GetComponent<Unit_ID>().CmdSetPlayerNumber(_unitId.GetPlayerNumber());
+        minion.GetComponent<Unit_ID>().CmdSetPlayerIndex(_unitId.GetPlayerIndex());
 
         NetworkServer.Spawn(minion);
 

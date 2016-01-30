@@ -5,13 +5,16 @@ public class Cultist : MonoBehaviour
 {
     public InvocationCircleControler parentCircle;
 
+    [SerializeField]
+    private Unit_ID _unitID;
+
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Minion")
         {
-            if (other.GetComponent<Minions>().ownerIndex != parentCircle.ownerIndex)
+            if (other.GetComponent<Unit_ID>().GetPlayerIndex() != _unitID.GetPlayerIndex())
             {
-                other.GetComponent<Minions>().Die();
+                other.GetComponent<Destructible>().TakeDamage(1000, null);
                 Die();
 
             }
