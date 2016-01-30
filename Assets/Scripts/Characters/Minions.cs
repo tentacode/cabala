@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
-using UnityEngine.Networking;
 
 [Serializable]
 public enum MinionState
@@ -20,11 +19,14 @@ public enum MinionType
     wizard
 }
 
-public class Minions : NetworkBehaviour
+public class Minions : MonoBehaviour
 {
     #region parameters
     public MinionsInformations minionsInformations;
+    public int playerNumber;
     public MinionType minionType;
+    [Tooltip("if set to true, will keep its original material")]
+    public bool overrideMaterial;
 
     [SerializeField]
     public Dictionary<MinionType, MinionType> StongAgainst;
@@ -47,6 +49,8 @@ public class Minions : NetworkBehaviour
         }
     }
     public MinionState previousState { get; protected set; }
+
+    public int ownerIndex { get; private set; }
     
     public Minions opponent { get; private set; }
 
@@ -54,56 +58,27 @@ public class Minions : NetworkBehaviour
     private NavMeshAgent navAgent;
     private Transform goal;
     private bool isInit = false;
-
+    private int currentLife = 10;
     private GameObject lifeBar;
-
-    private Destructible _destructible;
-    private Unit_ID _unit_ID;
-
-    public int PlayerNumber
-    {
-        set
-        {
-            _unit_ID.CmdSetPlayerNumber(value);
-        }
-        get
-        {
-            return _unit_ID.GetPlayerNumber();
-        }
-    }
     
     #endregion
 
     #region engine methods
 
-    
+    /*
     void Awake()
     {
-        _destructible = GetComponent<Destructible>();
-        _unit_ID = GetComponent<Unit_ID>();
-        _destructible.maxLife = minionsInformations.baseLifePoints;
 
-        _destructible.HandleDestroyed += OnDie;
-    } 
+    } */
 
     void Start () {
         initalize();
-
-        
     }
 
     void LateUpdate()
     {
+        CheckDeath();
         DEBUGState = state;
-
-        if (lifeBar == null)
-        {
-            return;
-        }
-
-        lifeBar.transform.localScale = new Vector3(lifeBar.transform.localScale.x,
-                                                   lifeBar.transform.localScale.y,
-                                                   _destructible.GetLife() / _destructible.maxLife);
     }
 
     void OnTriggerEnter(Collider other)
@@ -111,9 +86,9 @@ public class Minions : NetworkBehaviour
         if (other.tag == "Minion")
         {
             Minions opponent = other.GetComponent<Minions>();
-            if (opponent.PlayerNumber != PlayerNumber && opponent.state != MinionState.fighting)
+            if (opponent.ownerIndex != ownerIndex && opponent.state != MinionState.fighting)
             {
-                LaunchFight(opponent);
+                LaunchFight(other.GetComponent<Minions>());
             }
         }
     }
@@ -121,7 +96,6 @@ public class Minions : NetworkBehaviour
     #endregion
 
     #region methods
-
 
     protected void initalize()
     {
@@ -131,20 +105,19 @@ public class Minions : NetworkBehaviour
         }
         
         navAgent = GetComponent<NavMeshAgent>();
-
-        if (isServer)
-        {
-            PlayerNumber = GameObject.Find("GameSharedData").GetComponent<GameSharedData>().PlayerNumber;
-        }
-        
+        playerNumber = GameObject.Find("GameSharedData").GetComponent<GameSharedData>().PlayerNumber;
         lifeBar = transform.FindChild("LifeBar").gameObject;
+        currentLife = minionsInformations.baseLifePoints;
 
         state = MinionState.moving;
     }
 
     private void setMaterial()
     {
-        GetComponent<Renderer>().material = minionsInformations.teamMaterials[PlayerNumber];
+        if (!overrideMaterial)
+        {
+            GetComponent<Renderer>().material = minionsInformations.teamMaterials[ownerIndex - 1];
+        }
     }
     
     public void SetOwnerNumber(int owner)
@@ -154,19 +127,11 @@ public class Minions : NetworkBehaviour
             initalize();
         }
 
-        PlayerNumber = owner;
+        ownerIndex = owner;
 
         setMaterial();
 
-        if (PlayerNumber == 3)
-        {
-            SetGoal(Unit_ID.FindPlayer(1).transform);
-        }
-        else
-        {
-            SetGoal(Unit_ID.FindPlayer(PlayerNumber + 1).transform);
-        }
-        
+        SetGoal(GameObject.Find("Player" + ((ownerIndex%playerNumber) + 1)).transform);
     }
 
     public void SetGoal(Transform goalTransform)
@@ -205,7 +170,7 @@ public class Minions : NetworkBehaviour
 
     public void finishFight()
     {
-        if (_destructible.GetLife() <= 0)
+        if (currentLife <= 0)
         {
             return; // do nothing, will go on late state and die as it should
         }
@@ -230,9 +195,8 @@ public class Minions : NetworkBehaviour
 
     public void Attack()
     {
-        Destructible opponentDestructible = opponent.GetComponent<Destructible>();
-        opponentDestructible.TakeDamage(computeDamages(), _destructible);
-        _destructible.TakeDamage(opponent.computeDamages(), opponentDestructible);
+        opponent.TakeDamage(computeDamages());
+        TakeDamage(opponent.computeDamages());
         
         Invoke("Attack", minionsInformations.attackSpeed);
     }
@@ -247,12 +211,34 @@ public class Minions : NetworkBehaviour
         return minionsInformations.damages;
     }
 
-    private void OnDie(GameObject whoDied, Destructible whokill)
+    public void TakeDamage(int damages)
+    {
+        currentLife -= damages;
+
+        if(lifeBar == null)
+        {
+            return;
+        }
+
+        lifeBar.transform.localScale = new Vector3(lifeBar.transform.localScale.x,
+                                                   lifeBar.transform.localScale.y,
+                                                   Mathf.Max((float)currentLife / (float)minionsInformations.baseLifePoints, 0f));
+    }
+
+    public void CheckDeath()
+    {
+        if(currentLife <= 0)
+        {
+            Die();
+        }
+    }
+
+    public void Die()
     {
         opponent.finishFight();
         state = MinionState.dead;
 
-  //      Destroy(gameObject);
+        Destroy(gameObject);
     }
 
     #endregion
