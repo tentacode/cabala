@@ -19,7 +19,14 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
             networkLobbyPlayer.SendReadyToBeginMessage();
         }
         
-        CheckReadyToBegin();
+        if (AllPlayersAreReady()) {
+            CheckReadyToBegin();
+        }
+    }
+    
+    bool AllPlayersAreReady()
+    {
+        return true;
     }
     
     public void QuitLobby()
@@ -102,7 +109,5 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
         foreach (GameObject go in lobbyPlayers) {
             go.GetComponent<LobbyPlayer>().Hide();
         }
-        
-        GetLocalPlayer().GetComponent<PlayerNetwork>().InitGame();
     }
 }
