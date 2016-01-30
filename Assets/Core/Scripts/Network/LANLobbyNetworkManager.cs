@@ -4,6 +4,8 @@ using UnityEngine.Networking;
 
 public class LANLobbyNetworkManager : NetworkLobbyManager
 {
+    GameObject localPlayer;
+    
     public void TogglePlayerReady()
     {
         var networkLobbyPlayer = GetCurrentNetworkLobbyPlayer();
@@ -16,8 +18,30 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
         } else {
             networkLobbyPlayer.SendReadyToBeginMessage();
         }
+    }
+    
+    public override void OnLobbyServerConnect(NetworkConnection conn)
+    {        
+        int playerConnected = 0;
+        foreach (NetworkLobbyPlayer slot in lobbySlots) {
+            if (slot) {
+                playerConnected++;
+            }
+        }
         
-        CheckReadyToBegin();
+        minPlayers = playerConnected + 1;
+    }
+    
+    public override void OnLobbyServerDisconnect(NetworkConnection conn)
+    {        
+        int playerConnected = 0;
+        foreach (NetworkLobbyPlayer slot in lobbySlots) {
+            if (slot) {
+                playerConnected++;
+            }
+        }
+        
+        minPlayers = playerConnected;
     }
     
     public void QuitLobby()
@@ -50,17 +74,30 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
     {   
         Debug.Log("OnLobbyServerSceneLoadedForPlayer");
         
-        var playerIndex = lobbyPlayer.GetComponent<NetworkLobbyPlayer>().slot + 1;
+        NetworkLobbyPlayer nlp = lobbyPlayer.GetComponent<NetworkLobbyPlayer>();
+        var playerIndex = nlp.slot + 1;
         
         PlayerNetwork pn = gamePlayer.GetComponent<PlayerNetwork>();
         pn.playerIndex = playerIndex;
+        pn.connectionId = nlp.connectionToClient.connectionId;
         
         return true;
     }
     
     GameObject GetLocalPlayer()
     {
-        return client.connection.playerControllers[0].gameObject;
+        if (localPlayer) {
+            return localPlayer;
+        }
+        
+        var players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in players) {
+            if (player.GetComponent<PlayerNetwork>().connectionId == client.connection.connectionId) {
+                localPlayer = player;
+            }
+        }
+        
+        return localPlayer;
     }
     
     public override void OnLobbyClientExit()
@@ -80,16 +117,12 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
     }
     
     public override void OnLobbyClientSceneChanged(NetworkConnection conn)
-    {
-        base.OnLobbyClientSceneChanged(conn);
-        
+    {      
+        Debug.Log("OnLobbyClientSceneChanged");
+          
         var lobbyPlayers = GameObject.FindGameObjectsWithTag("LobbyPlayer");
         foreach (GameObject go in lobbyPlayers) {
             go.GetComponent<LobbyPlayer>().Hide();
         }
-        
-        GetLocalPlayer().GetComponent<PlayerNetwork>().InitGame();
-        
-        Debug.Log("OnLobbyClientSceneChanged");
     }
 }

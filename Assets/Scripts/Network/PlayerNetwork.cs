@@ -5,17 +5,32 @@ using System.Collections;
 public class PlayerNetwork : NetworkBehaviour
 {
     [SyncVar]
-    public int playerIndex;
+    public int playerIndex = 0;
+    
+    [SyncVar]
+    public int connectionId;
+    
+    private bool initialized = false;
     
 	void Awake () 
     {
 	   DontDestroyOnLoad(gameObject);
 	}
     
+    void Update ()
+    {
+        if (playerIndex != 0 && !initialized) {
+            InitGame();
+        }
+    }
+    
     public void InitGame()
     {
+        gameObject.name = "Player" + playerIndex;
+        
         InitPosition();
         InitCamera();
+        initialized = true;
     }
     
     void InitPosition()
@@ -26,14 +41,14 @@ public class PlayerNetwork : NetworkBehaviour
     
     void InitCamera()
     {
-        Debug.Log("Init camera");
+        if (!isLocalPlayer) {
+            return;
+        }
+        
+        Debug.Log("Camera Init");
+        
         GameObject cameraTarget = GameObject.Find("CameraTarget");
         cameraTarget.transform.position = transform.position;
         cameraTarget.transform.rotation = transform.rotation;
-    }
-    
-    void Update()
-    {
-        gameObject.name = "Player"+playerIndex;
     }
 }

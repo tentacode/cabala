@@ -9,6 +9,8 @@ TagManager:
   - Spawner
   - Base
   - LobbyPlayer
+  - SpawnPoint
+  - Minion
   layers:
   - Default
   - TransparentFX
@@ -18,7 +20,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - No Collison
   - 
   - 
   - 
