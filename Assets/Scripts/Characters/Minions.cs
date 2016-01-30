@@ -241,8 +241,8 @@ public class Minions : NetworkBehaviour
         }
 
         Destructible opponentDestructible = opponent.GetComponent<Destructible>();
-        opponentDestructible.TakeDamage(computeDamages(), _destructible);
-        _destructible.TakeDamage(opponent.computeDamages(), opponentDestructible);
+        opponentDestructible.CmdTakeDamage(computeDamages());
+        _destructible.CmdTakeDamage(opponent.computeDamages());
 
         Invoke("Attack", minionsInformations.attackSpeed);
     }
@@ -262,7 +262,7 @@ public class Minions : NetworkBehaviour
         return minionsInformations.damages;
     }
 
-    private void OnDie(GameObject whoDied, Destructible whokill)
+    private void OnDie(GameObject whoDied)
     {
         if (!isServer)
         {

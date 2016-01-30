@@ -82,7 +82,7 @@ public class PoolManagerBase : NetworkBehaviour
         return toPop;
     }
 
-    public void OnDeath(GameObject deadObject, Destructible attaking)
+    public void OnDeath(GameObject deadObject)
     {
         pool.Push(deadObject);
     }

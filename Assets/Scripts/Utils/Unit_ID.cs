@@ -40,13 +40,13 @@ public class Unit_ID : NetworkBehaviour {
     /// Has to be called on the server side !
     /// </summary>
     /// <param name="number"></param>
-    //[Command]
+    [Command]
     public void CmdSetPlayerIndex(int number)
     {
         PlayerIndex = number;
     }
 
-    //[Command]
+    [Command]
     public void CmdSetMyUniqueID(string id)
     {
         my_uniqueID = id;

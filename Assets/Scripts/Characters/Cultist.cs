@@ -14,7 +14,7 @@ public class Cultist : MonoBehaviour
         {
             if (other.GetComponent<Unit_ID>().GetPlayerIndex() != _unitID.GetPlayerIndex())
             {
-                other.GetComponent<Destructible>().TakeDamage(1000, null);
+                other.GetComponent<Destructible>().CmdTakeDamage(1000);
                 Die();
 
             }
