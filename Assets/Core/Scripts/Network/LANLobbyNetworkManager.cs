@@ -18,8 +18,30 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
         } else {
             networkLobbyPlayer.SendReadyToBeginMessage();
         }
+    }
+    
+    public override void OnLobbyServerConnect(NetworkConnection conn)
+    {        
+        int playerConnected = 0;
+        foreach (NetworkLobbyPlayer slot in lobbySlots) {
+            if (slot) {
+                playerConnected++;
+            }
+        }
         
-        CheckReadyToBegin();
+        minPlayers = playerConnected + 1;
+    }
+    
+    public override void OnLobbyServerDisconnect(NetworkConnection conn)
+    {        
+        int playerConnected = 0;
+        foreach (NetworkLobbyPlayer slot in lobbySlots) {
+            if (slot) {
+                playerConnected++;
+            }
+        }
+        
+        minPlayers = playerConnected;
     }
     
     public void QuitLobby()
@@ -102,7 +124,5 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
         foreach (GameObject go in lobbyPlayers) {
             go.GetComponent<LobbyPlayer>().Hide();
         }
-        
-        GetLocalPlayer().GetComponent<PlayerNetwork>().InitGame();
     }
 }
