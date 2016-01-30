@@ -53,6 +53,13 @@ public class LANNetworkDiscovery : NetworkDiscovery
         networkManager.StartClient();
     }
     
+    public void GameStarted()
+    {
+        if (isServer) {
+            StopBroadcast();
+        }
+    }
+    
     public void QuitLobby()
     {
         if (isServer) {
