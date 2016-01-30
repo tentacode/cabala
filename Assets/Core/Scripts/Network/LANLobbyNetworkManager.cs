@@ -4,6 +4,8 @@ using UnityEngine.Networking;
 
 public class LANLobbyNetworkManager : NetworkLobbyManager
 {
+    GameObject localPlayer;
+    
     public void TogglePlayerReady()
     {
         var networkLobbyPlayer = GetCurrentNetworkLobbyPlayer();
@@ -16,8 +18,30 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
         } else {
             networkLobbyPlayer.SendReadyToBeginMessage();
         }
+    }
+    
+    public override void OnLobbyServerConnect(NetworkConnection conn)
+    {        
+        int playerConnected = 0;
+        foreach (NetworkLobbyPlayer slot in lobbySlots) {
+            if (slot) {
+                playerConnected++;
+            }
+        }
         
-        CheckReadyToBegin();
+        minPlayers = playerConnected + 1;
+    }
+    
+    public override void OnLobbyServerDisconnect(NetworkConnection conn)
+    {        
+        int playerConnected = 0;
+        foreach (NetworkLobbyPlayer slot in lobbySlots) {
+            if (slot) {
+                playerConnected++;
+            }
+        }
+        
+        minPlayers = playerConnected;
     }
     
     public void QuitLobby()
@@ -50,14 +74,30 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
     {   
         Debug.Log("OnLobbyServerSceneLoadedForPlayer");
         
-        var playerIndex = lobbyPlayer.GetComponent<NetworkLobbyPlayer>().slot + 1;
+        NetworkLobbyPlayer nlp = lobbyPlayer.GetComponent<NetworkLobbyPlayer>();
+        var playerIndex = nlp.slot + 1;
         
-        gamePlayer.name = "PLayer" + playerIndex;
         PlayerNetwork pn = gamePlayer.GetComponent<PlayerNetwork>();
-        pn.SetPlayerIndex(playerIndex);
-        pn.InitPosition();
+        pn.playerIndex = playerIndex;
+        pn.connectionId = nlp.connectionToClient.connectionId;
         
         return true;
+    }
+    
+    GameObject GetLocalPlayer()
+    {
+        if (localPlayer) {
+            return localPlayer;
+        }
+        
+        var players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in players) {
+            if (player.GetComponent<PlayerNetwork>().connectionId == client.connection.connectionId) {
+                localPlayer = player;
+            }
+        }
+        
+        return localPlayer;
     }
     
     public override void OnLobbyClientExit()
@@ -77,60 +117,12 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
     }
     
     public override void OnLobbyClientSceneChanged(NetworkConnection conn)
-    {
-        base.OnLobbyClientSceneChanged(conn);
-        
+    {      
+        Debug.Log("OnLobbyClientSceneChanged");
+          
         var lobbyPlayers = GameObject.FindGameObjectsWithTag("LobbyPlayer");
         foreach (GameObject go in lobbyPlayers) {
             go.GetComponent<LobbyPlayer>().Hide();
         }
-        
-        Debug.Log("OnLobbyClientSceneChanged");
     }
-    
-    public override void OnClientConnect(NetworkConnection conn)
-    {
-        base.OnClientConnect(conn);
-        
-        Debug.Log("Connect");
-        // ClientScene.Ready (conn);
-        // ClientScene.AddPlayer (0);
-}
-    
-	// public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader)
-	// {
-    //     Debug.Log("Player added");
-        
-	// 	base.OnServerAddPlayer(conn, playerControllerId, extraMessageReader);
-	// }
-    
-    // public override void OnLobbyClientAddPlayerFailed()
-    // {
-    //     Debug.Log("OnLobbyClientSceneChanged");
-    // }
-    
-    // public override void OnClientError(NetworkConnection conn, int errorCode)
-    // {
-    //     Debug.Log("OnClientError");
-    // }
-    
-    // public override void OnLobbyClientConnect(NetworkConnection conn)
-    // {
-    //     Debug.Log("OnLobbyClientConnect");
-    // }
-    
-    // public override void OnLobbyClientEnter()
-    // {
-    //     Debug.Log("OnLobbyClientEnter");
-    // }
-    
-    // public override void OnLobbyStartClient(NetworkClient client)
-    // {
-    //     Debug.Log("OnLobbyStartClient");
-    // }
-    
-    // public override void OnLobbyStopClient()
-    // {
-    //     Debug.Log("OnLobbyStopClient");
-    // }
 }

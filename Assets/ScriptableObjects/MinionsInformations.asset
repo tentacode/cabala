@@ -11,7 +11,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7421fc43ed28a684ba3a06627971ff69, type: 3}
   m_Name: MinionsInformations
   m_EditorClassIdentifier: 
-  baseLifePoint: 10
-  attackSpeed: 0.2
+  baseLifePoints: 10
+  attackSpeed: 1
+  firstAttackSpeed: 0.5
   damages: 2
   damageMultiplicator: 2
+  teamMaterials:
+  - {fileID: 2100000, guid: f8bc68f720509f445a25c8e337bbd792, type: 2}
+  - {fileID: 2100000, guid: 38be5d30616073e4e97b55e59dbc0950, type: 2}
+  - {fileID: 2100000, guid: 64ce2a768a1642c4fba1298f74989af8, type: 2}
+  - {fileID: 2100000, guid: ee0cddb87379db6418cf306805503fc2, type: 2}
+  minionStrengths: {fileID: 11405780, guid: 54ca2b3b10988cc4ebf0d52a8a8e3249, type: 2}
