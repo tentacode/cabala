@@ -5,10 +5,9 @@ public class SpawnerController : MonoBehaviour
 {
     #region parameters
     public int ownerNumber;
-    public Ennemy spawnedCharacter;
-    public AnimationCurve spawnRateCurve;
-    public float TimeBeforeFirstLaunch;
-    public float maxTime;
+    public Minions spawnedCharacter;
+
+    public SpawnersInformations spawnerInformations;
 
     private float beginTime;
 
@@ -16,12 +15,12 @@ public class SpawnerController : MonoBehaviour
     
     // Use this for initialization
     void Start () {
-        Invoke("FirstSpawn", TimeBeforeFirstLaunch);
+        Invoke("FirstSpawn", spawnerInformations.TimeBeforeFirstLaunch);
     }
 	
 	// Update is called once per frame
 	void Update () {
-        float x = spawnRateCurve.Evaluate(Time.time - beginTime);
+        
 	}
 
     private void FirstSpawn()
@@ -32,11 +31,10 @@ public class SpawnerController : MonoBehaviour
 
     private void Spawn()
     {
-        Ennemy ennemy = Instantiate(spawnedCharacter, transform.position, transform.rotation) as Ennemy;
+        Minions ennemy = Instantiate(spawnedCharacter, transform.position, transform.rotation) as Minions;
         
         ennemy.SetOwnerNumber(ownerNumber);
-
-
-        Invoke("Spawn", spawnRateCurve.Evaluate((Time.time - beginTime) / maxTime));
+        
+        Invoke("Spawn", spawnerInformations.spawnSpeedCurve.Evaluate((Time.time - beginTime) / spawnerInformations.maxTime));
     }
 }

@@ -2,8 +2,9 @@
 using System.Collections;
 using System;
 
-public class Ennemy : MonoBehaviour
+public class Minions : MonoBehaviour
 {
+    public MinionsInformations minionsInformations;
     public int ownerNumber { get; private set; }
     public int playerNumber;
 
@@ -11,6 +12,8 @@ public class Ennemy : MonoBehaviour
     private Transform goal;
 
     private bool isInit = false;
+
+    private GameObject healthBar;
 
     // Use this for initialization
     protected void Start () {
@@ -26,10 +29,9 @@ public class Ennemy : MonoBehaviour
 
         navAgent = GetComponent<NavMeshAgent>();
 
-        if (playerNumber <= 0)
-        {
-            playerNumber = GameObject.Find("GameSharedData").GetComponent<GameSharedData>().PlayerNumber;
-        }
+        playerNumber = GameObject.Find("GameSharedData").GetComponent<GameSharedData>().PlayerNumber;
+
+        healthBar = transform.FindChild("HealthBar").gameObject;
     }
 
 	// Update is called once per frame
@@ -66,4 +68,6 @@ public class Ennemy : MonoBehaviour
             navAgent.Stop();
         }
     }
+
+
 }
