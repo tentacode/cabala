@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class SpawnerController : MonoBehaviour
+public class SpawnerController : NetworkBehaviour
 {
     #region parameters
     public MinionType spawnedCharacter;
@@ -25,18 +26,25 @@ public class SpawnerController : MonoBehaviour
 	
     private void FirstSpawn()
     {
+        if (!isServer)
+        {
+            return;
+        }
+
         beginTime = Time.time;
-        Spawn();
+        CmdSpawn();
     }
 
-    private void Spawn()
+    [Command]
+    private void CmdSpawn()
     {
         GameObject minion = PoolManagerBase.FindPool(spawnedCharacter).Pop();
+        
         minion.transform.position = _spawnPoint.position;
         minion.transform.rotation = _spawnPoint.rotation;
 
         minion.GetComponent<Unit_ID>().CmdSetPlayerNumber(_unitId.GetPlayerNumber());
-        
-        Invoke("Spawn", spawnerInformations.spawnSpeedCurve.Evaluate((Time.time - beginTime) / spawnerInformations.maxTime));
+
+        Invoke("CmdSpawn", spawnerInformations.spawnSpeedCurve.Evaluate((Time.time - beginTime) / spawnerInformations.maxTime));
     }
 }

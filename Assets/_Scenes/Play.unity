@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 9800106}
   - 114: {fileID: 9800105}
+  - 114: {fileID: 9800107}
   m_Layer: 0
   m_Name: PoolWarrior
   m_TagString: Untagged
@@ -115,6 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   root: {fileID: 0}
   objectToInstantiate: {fileID: 113106, guid: a19837b32e3ccc44492f4a81e792b53c, type: 2}
+  numberToPreInstantiate: 0
 --- !u!4 &9800106
 Transform:
   m_ObjectHideFlags: 0
@@ -127,6 +129,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1581262958}
   m_RootOrder: 1
+--- !u!114 &9800107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 9800104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0
 --- !u!1 &104500866
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,6 +754,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 658969461}
   - 114: {fileID: 658969460}
+  - 114: {fileID: 658969462}
   m_Layer: 0
   m_Name: PoolWizard
   m_TagString: Untagged
@@ -741,6 +776,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   root: {fileID: 0}
   objectToInstantiate: {fileID: 113106, guid: a19837b32e3ccc44492f4a81e792b53c, type: 2}
+  numberToPreInstantiate: 0
 --- !u!4 &658969461
 Transform:
   m_ObjectHideFlags: 0
@@ -753,6 +789,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1581262958}
   m_RootOrder: 2
+--- !u!114 &658969462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 658969459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0
 --- !u!1 &684753940
 GameObject:
   m_ObjectHideFlags: 0
@@ -789,6 +857,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 690407497}
   - 114: {fileID: 690407496}
+  - 114: {fileID: 690407498}
   m_Layer: 0
   m_Name: PoolGhost
   m_TagString: Untagged
@@ -810,6 +879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   root: {fileID: 0}
   objectToInstantiate: {fileID: 113106, guid: a19837b32e3ccc44492f4a81e792b53c, type: 2}
+  numberToPreInstantiate: 0
 --- !u!4 &690407497
 Transform:
   m_ObjectHideFlags: 0
@@ -822,6 +892,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1581262958}
   m_RootOrder: 0
+--- !u!114 &690407498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 690407495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0
 --- !u!1 &848599629
 GameObject:
   m_ObjectHideFlags: 0
