@@ -72,21 +72,27 @@ public class Minions : NetworkBehaviour
 
     #region engine methods
 
-
-    void Awake()
+    public override void OnStartServer()
     {
         _destructible = GetComponent<Destructible>();
         _unit_ID = GetComponent<Unit_ID>();
         navAgent = GetComponent<NavMeshAgent>();
 
-        _destructible.maxLife = minionsInformations.baseLifePoints;
+        _destructible.CmdSetMaxLife(minionsInformations.baseLifePoints);
 
         _destructible.HandleDestroyed += OnDie;
         _destructible.HandleAlive += OnAlive;
     }
 
+
+
     void LateUpdate()
     {
+        if (!isServer)
+        {
+            return;
+        }
+
         DEBUGState = state;
 
         if (_unit_ID.IsReady())
@@ -97,6 +103,11 @@ public class Minions : NetworkBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (!isServer)
+        {
+            return;
+        }
+
         if (other.tag == "Minion")
         {
             Minions opponent = other.GetComponent<Minions>();
@@ -114,6 +125,11 @@ public class Minions : NetworkBehaviour
 
     protected void initalize()
     {
+        if (!isServer)
+        {
+            return;
+        }
+
         if (isInit)
         {
             return;
@@ -133,11 +149,21 @@ public class Minions : NetworkBehaviour
 
     private void setMaterial()
     {
+        if (!isServer)
+        {
+            return;
+        }
+
         GetComponent<Renderer>().material = minionsInformations.teamMaterials[PlayerIndex];
     }
 
     public void SetGoal(Transform goalTransform)
     {
+        if (!isServer)
+        {
+            return;
+        }
+
         Debug.Log(name + " goto " + goalTransform.name); 
 
         goal = goalTransform;
@@ -153,6 +179,11 @@ public class Minions : NetworkBehaviour
 
     public void LaunchFight(Minions otherFighter)
     {
+        if (!isServer)
+        {
+            return;
+        }
+
         if (state == MinionState.fighting)
         {
             return;
@@ -169,6 +200,11 @@ public class Minions : NetworkBehaviour
 
     public void finishFight()
     {
+        if (!isServer)
+        {
+            return;
+        }
+
         if (_destructible.GetLife() <= 0)
         {
             return; // do nothing, will go on late state and die as it should
@@ -188,12 +224,22 @@ public class Minions : NetworkBehaviour
 
     public void setupFight()
     {
+        if (!isServer)
+        {
+            return;
+        }
+
         state = MinionState.fighting;
         navAgent.Stop();
     }
 
     public void Attack()
     {
+        if (!isServer)
+        {
+            return;
+        }
+
         Destructible opponentDestructible = opponent.GetComponent<Destructible>();
         opponentDestructible.TakeDamage(computeDamages(), _destructible);
         _destructible.TakeDamage(opponent.computeDamages(), opponentDestructible);
@@ -201,8 +247,13 @@ public class Minions : NetworkBehaviour
         Invoke("Attack", minionsInformations.attackSpeed);
     }
 
-    public int computeDamages()
+    private int computeDamages()
     {
+        if (!isServer)
+        {
+            return 0;
+        }
+
         if (minionsInformations.minionStrengths.amIStrongAgainst(minionType, opponent.minionType))
         {
             return (int)((float)minionsInformations.damages * minionsInformations.damageMultiplicator);
@@ -213,6 +264,11 @@ public class Minions : NetworkBehaviour
 
     private void OnDie(GameObject whoDied, Destructible whokill)
     {
+        if (!isServer)
+        {
+            return;
+        }
+
         if (opponent != null)
         {
             opponent.finishFight();
@@ -224,6 +280,11 @@ public class Minions : NetworkBehaviour
    }
     private void OnAlive(GameObject whoAlive)
     {
+        if (!isServer)
+        {
+            return;
+        }
+
         isInit = false;
         initalize();
     }
