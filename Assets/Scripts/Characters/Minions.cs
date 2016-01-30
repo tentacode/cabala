@@ -25,6 +25,8 @@ public class Minions : MonoBehaviour
     public MinionsInformations minionsInformations;
     public int playerNumber;
     public MinionType minionType;
+    [Tooltip("if set to true, will keep its original material")]
+    public bool overrideMaterial;
 
     [SerializeField]
     public Dictionary<MinionType, MinionType> StongAgainst;
@@ -112,7 +114,10 @@ public class Minions : MonoBehaviour
 
     private void setMaterial()
     {
-        GetComponent<Renderer>().material = minionsInformations.teamMaterials[ownerIndex - 1];
+        if (!overrideMaterial)
+        {
+            GetComponent<Renderer>().material = minionsInformations.teamMaterials[ownerIndex - 1];
+        }
     }
     
     public void SetOwnerNumber(int owner)
