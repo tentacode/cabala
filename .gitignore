@@ -7,6 +7,7 @@ UnityGenerated/
 Library/
 Assets/AssetStoreTools*
 Assets/StreamingAssets/build_info.txt
+Assets/StreamingAssets/build_info.txt.meta
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
