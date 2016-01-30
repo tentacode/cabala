@@ -15,6 +15,7 @@ public class SpawnerController : MonoBehaviour
     
     // Use this for initialization
     void Start () {
+        Debug.Log("prout");
         Invoke("FirstSpawn", spawnerInformations.TimeBeforeFirstLaunch);
     }
 	
@@ -31,6 +32,8 @@ public class SpawnerController : MonoBehaviour
 
     private void Spawn()
     {
+        Debug.Log("Spawning biatch !");
+
         Minions ennemy = Instantiate(spawnedCharacter, transform.position, transform.rotation) as Minions;
         
         ennemy.SetOwnerNumber(ownerNumber);

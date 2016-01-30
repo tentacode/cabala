@@ -6,31 +6,63 @@ public enum MinionState
 {
     stop,
     moving,
-    fighting
+    fighting,
+    dead
 }
 
 public class Minions : MonoBehaviour
 {
+    #region parameters
     public MinionsInformations minionsInformations;
     public int playerNumber;
     public bool DEBUGFightInitator = false;
 
     public MinionState state { get; protected set; }
-    public int ownerNumber { get; private set; }
+    public int ownerIndex { get; private set; }
     
     public Minions opponent { get; private set; }
 
     private NavMeshAgent navAgent;
     private Transform goal;
     private bool isInit = false;
-    private int currentLife;
+    private int currentLife = 10;
     private GameObject lifeBar;
-    
-    // Use this for initialization
-    protected void Start () {
+
+    #endregion
+
+    #region engine methods
+
+    /*
+    void Awake()
+    {
+
+    } */
+
+    void Start () {
         initalize();
     }
-	
+
+    void LateUpdate()
+    {
+        CheckDeath();
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Minion")
+        {
+            Minions opponent = other.GetComponent<Minions>();
+            if (opponent.ownerIndex != ownerIndex && opponent.opponent != this)
+            {
+                LaunchFight(other.GetComponent<Minions>());
+            }
+        }
+    }
+
+    #endregion
+
+    #region methods
+
     protected void initalize()
     {
         if(isInit)
@@ -46,22 +78,14 @@ public class Minions : MonoBehaviour
         state = MinionState.stop;
     }
 
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-    void OnTriggerEnter(Collider other)
+    private void setMaterial()
     {
-        if (other.tag == "Minion")
-        {
-            if (other.GetComponent<Minions>().opponent != this)
-            {
-                LaunchFight(other.GetComponent<Minions>());
-            }
-        }
-    }
+        Debug.Log(ownerIndex - 1);
+        Debug.Log(minionsInformations.teamMaterials.Length);
 
+        GetComponent<Renderer>().material = minionsInformations.teamMaterials[ownerIndex - 1];
+    }
+    
     public void SetOwnerNumber(int owner)
     {
         if(!isInit)
@@ -69,9 +93,11 @@ public class Minions : MonoBehaviour
             initalize();
         }
 
-        ownerNumber = owner;
-        
-        SetGoal(GameObject.Find("Player" + ((ownerNumber%playerNumber) + 1)).transform);
+        ownerIndex = owner;
+
+        setMaterial();
+
+        SetGoal(GameObject.Find("Player" + ((ownerIndex%playerNumber) + 1)).transform);
     }
 
     public void SetGoal(Transform goalTransform)
@@ -120,7 +146,9 @@ public class Minions : MonoBehaviour
 
     public void Attack()
     {
-        
+        opponent.TakeDamage(computeDamages());
+        TakeDamage(opponent.computeDamages());
+        Invoke("Attack", minionsInformations.attackSpeed);
     }
 
     public int computeDamages()
@@ -134,12 +162,23 @@ public class Minions : MonoBehaviour
 
         lifeBar.transform.localScale = new Vector3(lifeBar.transform.localScale.x,
                                                    lifeBar.transform.localScale.y,
-                                                   (minionsInformations.baseLifePoints - currentLife) / minionsInformations.baseLifePoints);
+                                                   Mathf.Max((float)currentLife / (float)minionsInformations.baseLifePoints, 0f));
     }
 
+    public void CheckDeath()
+    {
+        if(currentLife <= 0)
+        {
+            Die();
+        }
+    }
 
     public void Die()
     {
+        state = MinionState.dead;
 
+        Destroy(gameObject);
     }
+
+    #endregion
 }

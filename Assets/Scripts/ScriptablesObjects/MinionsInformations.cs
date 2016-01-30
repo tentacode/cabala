@@ -4,6 +4,7 @@ using System.Collections;
 [System.Serializable]
 public class MinionsInformations : ScriptableObject
 {
+    [Header("Combat Stats")]
     public int baseLifePoints;
 
     [Tooltip("In seconds")]
@@ -16,4 +17,7 @@ public class MinionsInformations : ScriptableObject
 
     [Tooltip("Damage dealt to units weak againts this unit")]
     public float damageMultiplicator;
+
+    [Header("material teams")]
+    public Material[] teamMaterials;
 }
