@@ -55,7 +55,6 @@ public class Minions : NetworkBehaviour
     private Transform goal;
     private bool isInit = false;
 
-    private GameObject lifeBar;
 
     private Destructible _destructible;
     private Unit_ID _unit_ID;
@@ -65,9 +64,22 @@ public class Minions : NetworkBehaviour
         set
         {
             _unit_ID.CmdSetPlayerNumber(value);
+
+            setMaterial();
+
+            if (PlayerNumber == 3)
+            {
+                SetGoal(Unit_ID.FindPlayer(1).transform);
+            }
+            else
+            {
+                SetGoal(Unit_ID.FindPlayer(PlayerNumber + 1).transform);
+            }
         }
         get
         {
+           
+
             return _unit_ID.GetPlayerNumber();
         }
     }
@@ -97,14 +109,10 @@ public class Minions : NetworkBehaviour
     {
         DEBUGState = state;
 
-        if (lifeBar == null)
+        if (!isInit && _unit_ID.IsReady())
         {
-            return;
+            initalize();
         }
-
-        lifeBar.transform.localScale = new Vector3(lifeBar.transform.localScale.x,
-                                                   lifeBar.transform.localScale.y,
-                                                   _destructible.GetLife() / _destructible.maxLife);
     }
 
     void OnTriggerEnter(Collider other)
@@ -130,6 +138,7 @@ public class Minions : NetworkBehaviour
         {
             return;
         }
+        isInit = true;
 
         navAgent = GetComponent<NavMeshAgent>();
 
@@ -138,36 +147,12 @@ public class Minions : NetworkBehaviour
             PlayerNumber = GameObject.Find("GameSharedData").GetComponent<GameSharedData>().PlayerNumber;
         }
 
-        lifeBar = transform.FindChild("LifeBar").gameObject;
-
         state = MinionState.moving;
     }
 
     private void setMaterial()
     {
         GetComponent<Renderer>().material = minionsInformations.teamMaterials[PlayerNumber];
-    }
-
-    public void SetOwnerNumber(int owner)
-    {
-        if (!isInit)
-        {
-            initalize();
-        }
-
-        PlayerNumber = owner;
-
-        setMaterial();
-
-        if (PlayerNumber == 3)
-        {
-            SetGoal(Unit_ID.FindPlayer(1).transform);
-        }
-        else
-        {
-            SetGoal(Unit_ID.FindPlayer(PlayerNumber + 1).transform);
-        }
-
     }
 
     public void SetGoal(Transform goalTransform)
@@ -254,7 +239,7 @@ public class Minions : NetworkBehaviour
         state = MinionState.dead;
 
         //      Destroy(gameObject);
-    }
+   } 
 
     #endregion
 }

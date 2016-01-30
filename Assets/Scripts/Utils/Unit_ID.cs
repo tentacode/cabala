@@ -23,7 +23,7 @@ public class Unit_ID : NetworkBehaviour {
     }
 
     [HideInInspector]
-	[SyncVar] public string my_uniqueID ;
+	[SyncVar] private string my_uniqueID ;
 	private Transform myTransform;
 
     public bool IsReady()
@@ -46,6 +46,7 @@ public class Unit_ID : NetworkBehaviour {
         PlayerNumber = number;
     }
 
+    //[Command]
     public void CmdSetMyUniqueID(string id)
     {
         my_uniqueID = id;

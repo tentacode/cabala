@@ -19,6 +19,8 @@ public class Destructible : NetworkBehaviour
     public Action<GameObject, Destructible> HandleDestroyed = delegate { };
     public Action<GameObject> HandleAlive = delegate { };
 
+    private Unit_ID unitId;
+
     public int GetLife()
     {
         return life;
@@ -27,6 +29,7 @@ public class Destructible : NetworkBehaviour
     void Awake()
     {
         life = maxLife;
+        unitId = GetComponent<Unit_ID>();
     }
 
     public void TakeDamage(int damage, Destructible attaking)
@@ -51,9 +54,18 @@ public class Destructible : NetworkBehaviour
 
     public void GoAlive()
     {
+        //yield return null;
+      //  yield return new WaitForSeconds(1);
+
+        /*while (!unitId.IsReady())
+        {
+            yield return null;
+        }*/
+
+        
+
         gameObject.SetActive(true);
         life = maxLife;
-        HandleAlive(gameObject);    
+        HandleAlive(gameObject);  
     }
-   
 }

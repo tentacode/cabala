@@ -51,15 +51,15 @@ public class PoolManagerBase : NetworkBehaviour
 
         toPop.SetActive(false);
 
-        toPop.name += " " + nextNameId;
+        string uniqueID = toPop.name + " " + nextNameId;
+        toPop.GetComponent<Unit_ID>().CmdSetMyUniqueID(uniqueID);
+        Debug.Log("Generate " + uniqueID);
+
         nextNameId++;
-        Debug.Log("Generate " + toPop.name);
+        
         toPop.transform.parent = root;
 
         toPop.GetComponent<Destructible>().HandleDestroyed += OnDeath;
-        toPop.GetComponent<Unit_ID>().my_uniqueID = toPop.name;
-
-        NetworkServer.Spawn(toPop);
 
         return toPop;
     }

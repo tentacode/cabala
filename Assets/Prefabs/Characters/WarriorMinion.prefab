@@ -18,6 +18,7 @@ GameObject:
   - 114: {fileID: 11451282}
   - 114: {fileID: 11441484}
   - 114: {fileID: 11402358}
+  - 114: {fileID: 11419296}
   m_Layer: 0
   m_Name: WarriorMinion
   m_TagString: Minion
@@ -213,6 +214,17 @@ MonoBehaviour:
     i15: 165
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &11419296
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b0859a8c3777db44b05a9b8e6160453, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11439796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -240,7 +252,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerNumber: 0
-  my_uniqueID: 
 --- !u!114 &11451282
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -312,6 +323,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_SendInterval
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

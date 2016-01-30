@@ -45,6 +45,8 @@ public class SpawnerController : NetworkBehaviour
 
         minion.GetComponent<Unit_ID>().CmdSetPlayerNumber(_unitId.GetPlayerNumber());
 
+        NetworkServer.Spawn(minion);
+
         Invoke("CmdSpawn", spawnerInformations.spawnSpeedCurve.Evaluate((Time.time - beginTime) / spawnerInformations.maxTime));
     }
 }

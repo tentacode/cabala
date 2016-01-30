@@ -28,6 +28,8 @@ public class SpawnUnitFromPlayer : NetworkBehaviour {
         o.GetComponent<Unit_ID>().CmdSetPlayerNumber(side);
 
         o.transform.position = transform.position;
+
+        NetworkServer.Spawn(o);
         
     }
    
