@@ -14,14 +14,19 @@ public class Destructible : NetworkBehaviour
     [SerializeField]
     [SyncVar]
     int life;
-    int maxLife;
+    public int maxLife;
 
     public Action<GameObject, Destructible> HandleDestroyed = delegate { };
     public Action<GameObject> HandleAlive = delegate { };
 
+    public int GetLife()
+    {
+        return life;
+    }
+
     void Awake()
     {
-        maxLife = life;
+        life = maxLife;
     }
 
     public void TakeDamage(int damage, Destructible attaking)
