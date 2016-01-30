@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
+using UnityEngine.Networking;
 
 [Serializable]
 public enum MinionState
@@ -19,11 +20,10 @@ public enum MinionType
     wizard
 }
 
-public class Minions : MonoBehaviour
+public class Minions : NetworkBehaviour
 {
     #region parameters
     public MinionsInformations minionsInformations;
-    public int playerNumber;
     public MinionType minionType;
 
     [SerializeField]
@@ -47,8 +47,6 @@ public class Minions : MonoBehaviour
         }
     }
     public MinionState previousState { get; protected set; }
-
-    public int ownerIndex { get; private set; }
     
     public Minions opponent { get; private set; }
 
@@ -60,6 +58,19 @@ public class Minions : MonoBehaviour
     private GameObject lifeBar;
 
     private Destructible _destructible;
+    private Unit_ID _unit_ID;
+
+    public int PlayerNumber
+    {
+        set
+        {
+            _unit_ID.CmdSetPlayerNumber(value);
+        }
+        get
+        {
+            return _unit_ID.GetPlayerNumber();
+        }
+    }
     
     #endregion
 
@@ -69,6 +80,7 @@ public class Minions : MonoBehaviour
     void Awake()
     {
         _destructible = GetComponent<Destructible>();
+        _unit_ID = GetComponent<Unit_ID>();
         _destructible.maxLife = minionsInformations.baseLifePoints;
 
         _destructible.HandleDestroyed += OnDie;
@@ -99,9 +111,9 @@ public class Minions : MonoBehaviour
         if (other.tag == "Minion")
         {
             Minions opponent = other.GetComponent<Minions>();
-            if (opponent.ownerIndex != ownerIndex && opponent.state != MinionState.fighting)
+            if (opponent.PlayerNumber != PlayerNumber && opponent.state != MinionState.fighting)
             {
-                LaunchFight(other.GetComponent<Minions>());
+                LaunchFight(opponent);
             }
         }
     }
@@ -119,7 +131,12 @@ public class Minions : MonoBehaviour
         }
         
         navAgent = GetComponent<NavMeshAgent>();
-        playerNumber = GameObject.Find("GameSharedData").GetComponent<GameSharedData>().PlayerNumber;
+
+        if (isServer)
+        {
+            PlayerNumber = GameObject.Find("GameSharedData").GetComponent<GameSharedData>().PlayerNumber;
+        }
+        
         lifeBar = transform.FindChild("LifeBar").gameObject;
 
         state = MinionState.moving;
@@ -127,7 +144,7 @@ public class Minions : MonoBehaviour
 
     private void setMaterial()
     {
-        GetComponent<Renderer>().material = minionsInformations.teamMaterials[ownerIndex - 1];
+        GetComponent<Renderer>().material = minionsInformations.teamMaterials[PlayerNumber];
     }
     
     public void SetOwnerNumber(int owner)
@@ -137,11 +154,18 @@ public class Minions : MonoBehaviour
             initalize();
         }
 
-        ownerIndex = owner;
+        PlayerNumber = owner;
 
         setMaterial();
 
-        SetGoal(GameObject.Find("Player" + ((ownerIndex%playerNumber) + 1)).transform);
+        if (PlayerNumber == 0)
+        {
+            SetGoal(Unit_ID.FindPlayer(1).transform);
+        }
+        else
+        {
+            SetGoal(Unit_ID.FindPlayer(PlayerNumber + 1 % PlayerNumber).transform);
+        }
     }
 
     public void SetGoal(Transform goalTransform)

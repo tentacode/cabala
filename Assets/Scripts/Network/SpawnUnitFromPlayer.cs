@@ -22,7 +22,7 @@ public class SpawnUnitFromPlayer : NetworkBehaviour {
 
         int side = _playerNetwork.playerIndex;
 
-        o.GetComponent<Unit_ID>().CmdSetSideId(side);
+        o.GetComponent<Unit_ID>().CmdSetPlayerNumber(side);
 
         o.transform.position = transform.position;
         

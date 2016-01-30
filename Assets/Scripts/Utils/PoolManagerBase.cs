@@ -43,7 +43,7 @@ public class PoolManagerBase : NetworkBehaviour
         toPop.transform.parent = root;
 
         toPop.GetComponent<Destructible>().HandleDestroyed += OnDeath;
-        toPop.GetComponent<Unit_ID>().my_ID = toPop.name;
+        toPop.GetComponent<Unit_ID>().my_uniqueID = toPop.name;
 
         NetworkServer.Spawn(toPop);
 
