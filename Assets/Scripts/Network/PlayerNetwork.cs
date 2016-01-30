@@ -44,9 +44,8 @@ public class PlayerNetwork : NetworkBehaviour
         if (!isLocalPlayer) {
             return;
         }
-        
-        Debug.Log("Camera Init");
-        
+     
+        Debug.Log("InitCamera");   
         GameObject cameraTarget = GameObject.Find("CameraTarget");
         cameraTarget.transform.position = transform.position;
         cameraTarget.transform.rotation = transform.rotation;

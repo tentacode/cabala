@@ -14,6 +14,7 @@ GameObject:
   - 195: {fileID: 19575882}
   - 114: {fileID: 11439796}
   - 54: {fileID: 5443096}
+  - 114: {fileID: 11412280}
   m_Layer: 0
   m_Name: WarriorMinion
   m_TagString: Minion
@@ -157,6 +158,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11412280
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 136
+    i1: 97
+    i2: 93
+    i3: 76
+    i4: 150
+    i5: 203
+    i6: 193
+    i7: 180
+    i8: 10
+    i9: 157
+    i10: 137
+    i11: 0
+    i12: 198
+    i13: 239
+    i14: 183
+    i15: 165
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &11439796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -172,7 +205,6 @@ MonoBehaviour:
     type: 2}
   playerNumber: 0
   minionType: 1
-  DEBUGFightInitator: 0
   DEBUGState: 0
 --- !u!135 &13525860
 SphereCollider:
