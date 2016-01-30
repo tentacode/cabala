@@ -134,7 +134,7 @@ Prefab:
       objectReference: {fileID: 180276, guid: 50653290a43944505828ce4db2f52421, type: 2}
     - target: {fileID: 11482596, guid: a0f387ca73ca348a0bf87470fde89fba, type: 2}
       propertyPath: m_MinPlayers
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11482596, guid: a0f387ca73ca348a0bf87470fde89fba, type: 2}
       propertyPath: m_AutoCreatePlayer
@@ -350,7 +350,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!1001 &1050879557
 Prefab:
   m_ObjectHideFlags: 0
