@@ -47,49 +47,37 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
     }
     
     public override bool OnLobbyServerSceneLoadedForPlayer(GameObject lobbyPlayer, GameObject gamePlayer)
-    {        
-        return false;
-    }
-    
-    public override void OnLobbyClientEnter()
-    {
-        Debug.Log("OnLobbyClientEnter");
+    {   
+        Debug.Log("OnLobbyServerSceneLoadedForPlayer");
+        
+        var playerIndex = lobbyPlayer.GetComponent<NetworkLobbyPlayer>().slot + 1;
+        
+        gamePlayer.name = "PLayer" + playerIndex;
+        // gamePlayer.GetComponent<PlayerNetwork>.SetPlayerIndex(playerIndex);
+        
+        return true;
     }
     
     public override void OnLobbyClientExit()
     {
-        var lobbyPlayers = GameObject.FindGameObjectsWithTag("LobbyPlayer");
-        foreach (GameObject go in lobbyPlayers) {
-            go.GetComponent<LobbyPlayer>().Hide();
-        }
+        base.OnLobbyClientExit();
         
         Debug.Log("OnLobbyClientExit");
     }
     
-    public override void OnLobbyClientConnect(NetworkConnection conn)
-    {
-        Debug.Log("OnLobbyClientConnect");
-    }
-    
     public override void OnLobbyClientDisconnect(NetworkConnection conn)
     {
+        base.OnLobbyClientDisconnect(conn);
+        
         StopClient(); // ?
         GetComponent<LANNetworkDiscovery>().QuitLobby();
         Debug.Log("Leaving Lobby because disconnected");
     }
     
-    public override void OnLobbyStartClient(NetworkClient client)
-    {
-        Debug.Log("OnLobbyStartClient");
-    }
-    
-    public override void OnLobbyStopClient()
-    {
-        Debug.Log("OnLobbyStopClient");
-    }
-    
     public override void OnLobbyClientSceneChanged(NetworkConnection conn)
     {
+        base.OnLobbyClientSceneChanged(conn);
+        
         var lobbyPlayers = GameObject.FindGameObjectsWithTag("LobbyPlayer");
         foreach (GameObject go in lobbyPlayers) {
             go.GetComponent<LobbyPlayer>().Hide();
@@ -98,13 +86,49 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
         Debug.Log("OnLobbyClientSceneChanged");
     }
     
-    public override void OnLobbyClientAddPlayerFailed()
+    public override void OnClientConnect(NetworkConnection conn)
     {
-        Debug.Log("OnLobbyClientSceneChanged");
-    }
+        base.OnClientConnect(conn);
+        
+        Debug.Log("Connect");
+        // ClientScene.Ready (conn);
+        // ClientScene.AddPlayer (0);
+}
     
-    public override void OnClientError(NetworkConnection conn, int errorCode)
-    {
-        Debug.Log("OnClientError");
-    }
+	// public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader)
+	// {
+    //     Debug.Log("Player added");
+        
+	// 	base.OnServerAddPlayer(conn, playerControllerId, extraMessageReader);
+	// }
+    
+    // public override void OnLobbyClientAddPlayerFailed()
+    // {
+    //     Debug.Log("OnLobbyClientSceneChanged");
+    // }
+    
+    // public override void OnClientError(NetworkConnection conn, int errorCode)
+    // {
+    //     Debug.Log("OnClientError");
+    // }
+    
+    // public override void OnLobbyClientConnect(NetworkConnection conn)
+    // {
+    //     Debug.Log("OnLobbyClientConnect");
+    // }
+    
+    // public override void OnLobbyClientEnter()
+    // {
+    //     Debug.Log("OnLobbyClientEnter");
+    // }
+    
+    // public override void OnLobbyStartClient(NetworkClient client)
+    // {
+    //     Debug.Log("OnLobbyStartClient");
+    // }
+    
+    // public override void OnLobbyStopClient()
+    // {
+    //     Debug.Log("OnLobbyStopClient");
+    // }
 }
