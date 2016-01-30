@@ -18,15 +18,30 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
         } else {
             networkLobbyPlayer.SendReadyToBeginMessage();
         }
-        
-        if (AllPlayersAreReady()) {
-            CheckReadyToBegin();
-        }
     }
     
-    bool AllPlayersAreReady()
-    {
-        return true;
+    public override void OnLobbyServerConnect(NetworkConnection conn)
+    {        
+        int playerConnected = 0;
+        foreach (NetworkLobbyPlayer slot in lobbySlots) {
+            if (slot) {
+                playerConnected++;
+            }
+        }
+        
+        minPlayers = playerConnected + 1;
+    }
+    
+    public override void OnLobbyServerDisconnect(NetworkConnection conn)
+    {        
+        int playerConnected = 0;
+        foreach (NetworkLobbyPlayer slot in lobbySlots) {
+            if (slot) {
+                playerConnected++;
+            }
+        }
+        
+        minPlayers = playerConnected;
     }
     
     public void QuitLobby()
