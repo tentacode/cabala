@@ -56,27 +56,42 @@ public class Minions : MonoBehaviour
     private NavMeshAgent navAgent;
     private Transform goal;
     private bool isInit = false;
-    private int currentLife = 10;
+
     private GameObject lifeBar;
+
+    private Destructible _destructible;
     
     #endregion
 
     #region engine methods
 
-    /*
+    
     void Awake()
     {
+        _destructible = GetComponent<Destructible>();
+        _destructible.maxLife = minionsInformations.baseLifePoints;
 
-    } */
+        _destructible.HandleDestroyed += OnDie;
+    } 
 
     void Start () {
         initalize();
+
+        
     }
 
     void LateUpdate()
     {
-        CheckDeath();
         DEBUGState = state;
+
+        if (lifeBar == null)
+        {
+            return;
+        }
+
+        lifeBar.transform.localScale = new Vector3(lifeBar.transform.localScale.x,
+                                                   lifeBar.transform.localScale.y,
+                                                   _destructible.GetLife() / _destructible.maxLife);
     }
 
     void OnTriggerEnter(Collider other)
@@ -95,6 +110,7 @@ public class Minions : MonoBehaviour
 
     #region methods
 
+
     protected void initalize()
     {
         if(isInit)
@@ -105,7 +121,6 @@ public class Minions : MonoBehaviour
         navAgent = GetComponent<NavMeshAgent>();
         playerNumber = GameObject.Find("GameSharedData").GetComponent<GameSharedData>().PlayerNumber;
         lifeBar = transform.FindChild("LifeBar").gameObject;
-        currentLife = minionsInformations.baseLifePoints;
 
         state = MinionState.moving;
     }
@@ -165,7 +180,7 @@ public class Minions : MonoBehaviour
 
     public void finishFight()
     {
-        if (currentLife <= 0)
+        if (_destructible.GetLife() <= 0)
         {
             return; // do nothing, will go on late state and die as it should
         }
@@ -190,8 +205,9 @@ public class Minions : MonoBehaviour
 
     public void Attack()
     {
-        opponent.TakeDamage(computeDamages());
-        TakeDamage(opponent.computeDamages());
+        Destructible opponentDestructible = opponent.GetComponent<Destructible>();
+        opponentDestructible.TakeDamage(computeDamages(), _destructible);
+        _destructible.TakeDamage(opponent.computeDamages(), opponentDestructible);
         
         Invoke("Attack", minionsInformations.attackSpeed);
     }
@@ -206,34 +222,12 @@ public class Minions : MonoBehaviour
         return minionsInformations.damages;
     }
 
-    public void TakeDamage(int damages)
-    {
-        currentLife -= damages;
-
-        if(lifeBar == null)
-        {
-            return;
-        }
-
-        lifeBar.transform.localScale = new Vector3(lifeBar.transform.localScale.x,
-                                                   lifeBar.transform.localScale.y,
-                                                   Mathf.Max((float)currentLife / (float)minionsInformations.baseLifePoints, 0f));
-    }
-
-    public void CheckDeath()
-    {
-        if(currentLife <= 0)
-        {
-            Die();
-        }
-    }
-
-    public void Die()
+    private void OnDie(GameObject whoDied, Destructible whokill)
     {
         opponent.finishFight();
         state = MinionState.dead;
 
-        Destroy(gameObject);
+  //      Destroy(gameObject);
     }
 
     #endregion
