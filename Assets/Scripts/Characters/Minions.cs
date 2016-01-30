@@ -8,6 +8,7 @@ public enum MinionState
     stop,
     moving,
     fighting,
+    attackCultist,
     dead
 }
 
@@ -86,7 +87,7 @@ public class Minions : MonoBehaviour
         if (other.tag == "Minion")
         {
             Minions opponent = other.GetComponent<Minions>();
-            if (opponent.ownerIndex != ownerIndex && opponent.state != MinionState.fighting)
+            if (opponent.ownerIndex != ownerIndex && (opponent.state != MinionState.fighting) || (opponent.state != MinionState.attackCultist))
             {
                 LaunchFight(other.GetComponent<Minions>());
             }
@@ -105,7 +106,7 @@ public class Minions : MonoBehaviour
         }
         
         navAgent = GetComponent<NavMeshAgent>();
-        playerNumber = GameObject.Find("GameSharedData").GetComponent<GameSharedData>().PlayerNumber;
+        playerNumber = GameObject.Find("GameSharedData").GetComponent<GameSharedData>().playerNumber;
         lifeBar = transform.FindChild("LifeBar").gameObject;
         currentLife = minionsInformations.baseLifePoints;
 
@@ -235,7 +236,11 @@ public class Minions : MonoBehaviour
 
     public void Die()
     {
-        opponent.finishFight();
+        if (state == MinionState.fighting)
+        {
+            opponent.finishFight();
+        }
+
         state = MinionState.dead;
 
         Destroy(gameObject);

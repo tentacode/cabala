@@ -4,7 +4,7 @@ using System.Collections;
 public class SpawnerController : MonoBehaviour
 {
     #region parameters
-    public int ownerNumber;
+    public int ownerIndex;
     public Minions spawnedCharacter;
 
     public SpawnersInformations spawnerInformations;
@@ -33,7 +33,7 @@ public class SpawnerController : MonoBehaviour
     {
         Minions ennemy = Instantiate(spawnedCharacter, transform.position, transform.rotation) as Minions;
         
-        ennemy.SetOwnerNumber(ownerNumber);
+        ennemy.SetOwnerNumber(ownerIndex);
         
         Invoke("Spawn", spawnerInformations.spawnSpeedCurve.Evaluate((Time.time - beginTime) / spawnerInformations.maxTime));
     }
