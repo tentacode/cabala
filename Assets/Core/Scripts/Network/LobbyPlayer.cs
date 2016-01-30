@@ -7,6 +7,12 @@ public class LobbyPlayer : MonoBehaviour
     
     NetworkLobbyPlayer networkLobbyPlayer;
     
+    public void Hide()
+    {
+        GetComponent<Renderer>().enabled = false;
+        readyFlag.GetComponent<Renderer>().enabled = false;
+    }
+
     void Start ()
     {
         networkLobbyPlayer = GetComponent<NetworkLobbyPlayer>();

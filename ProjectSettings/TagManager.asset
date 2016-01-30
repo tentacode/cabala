@@ -8,7 +8,7 @@ TagManager:
   - Ennemy
   - Spawner
   - Base
-  - SpawnPoint
+  - LobbyPlayer
   layers:
   - Default
   - TransparentFX

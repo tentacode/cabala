@@ -46,6 +46,11 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
         return Array.Find(lobbySlots, slot => slot && slot.isLocalPlayer);
     }
     
+    public override bool OnLobbyServerSceneLoadedForPlayer(GameObject lobbyPlayer, GameObject gamePlayer)
+    {        
+        return false;
+    }
+    
     public override void OnLobbyClientEnter()
     {
         Debug.Log("OnLobbyClientEnter");
@@ -53,6 +58,11 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
     
     public override void OnLobbyClientExit()
     {
+        var lobbyPlayers = GameObject.FindGameObjectsWithTag("LobbyPlayer");
+        foreach (GameObject go in lobbyPlayers) {
+            go.GetComponent<LobbyPlayer>().Hide();
+        }
+        
         Debug.Log("OnLobbyClientExit");
     }
     
@@ -80,6 +90,11 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
     
     public override void OnLobbyClientSceneChanged(NetworkConnection conn)
     {
+        var lobbyPlayers = GameObject.FindGameObjectsWithTag("LobbyPlayer");
+        foreach (GameObject go in lobbyPlayers) {
+            go.GetComponent<LobbyPlayer>().Hide();
+        }
+        
         Debug.Log("OnLobbyClientSceneChanged");
     }
     
@@ -92,5 +107,4 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
     {
         Debug.Log("OnClientError");
     }
-
 }
