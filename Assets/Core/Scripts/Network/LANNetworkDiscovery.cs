@@ -9,10 +9,13 @@ public enum PlayerLobbyState
 }
 
 public class LANNetworkDiscovery : NetworkDiscovery
-{
+{    
+    public int broadcastTimeout = 5;
+
     LANLobbyNetworkManager networkManager;
     private PlayerLobbyState playerLobbyState;
     private string gameIp;
+    private float lastBroadcast;
     
     public PlayerLobbyState PlayerLobbyState
     {
@@ -24,6 +27,14 @@ public class LANNetworkDiscovery : NetworkDiscovery
         networkManager = GetComponent<LANLobbyNetworkManager>();
 
         StartDiscovering();
+    }
+    
+    void LateUpdate()
+    {
+        if (isClient && lastBroadcast < Time.time - broadcastTimeout) {
+            gameIp = null;
+            playerLobbyState = PlayerLobbyState.Discovering;
+        }
     }
 
     public void StartDiscovering()
@@ -71,6 +82,7 @@ public class LANNetworkDiscovery : NetworkDiscovery
 
     override public void OnReceivedBroadcast(string fromAddress, string data)
     {
+        lastBroadcast = Time.time;
         playerLobbyState = PlayerLobbyState.GameFound;
         gameIp = fromAddress;
     }
