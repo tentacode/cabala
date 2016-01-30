@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/_Scenes/Play.unity
   - enabled: 1
     path: Assets/_Scenes/Play Mael.unity
+  - enabled: 1
+    path: Assets/_Scenes/LeosLaboratory.unity

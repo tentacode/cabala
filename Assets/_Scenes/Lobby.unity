@@ -156,6 +156,10 @@ Prefab:
       propertyPath: m_SimulatedLatency
       value: 400
       objectReference: {fileID: 0}
+    - target: {fileID: 11482596, guid: a0f387ca73ca348a0bf87470fde89fba, type: 2}
+      propertyPath: m_PlayScene
+      value: LeosLaboratory
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a0f387ca73ca348a0bf87470fde89fba, type: 2}
   m_IsPrefabParent: 0
