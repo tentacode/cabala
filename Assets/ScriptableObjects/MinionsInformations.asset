@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseLifePoints: 10
   attackSpeed: 1
-  firstAttackSpeed: 0
+  firstAttackSpeed: 0.5
   damages: 2
   damageMultiplicator: 2
   teamMaterials:
@@ -21,3 +21,4 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 38be5d30616073e4e97b55e59dbc0950, type: 2}
   - {fileID: 2100000, guid: 64ce2a768a1642c4fba1298f74989af8, type: 2}
   - {fileID: 2100000, guid: ee0cddb87379db6418cf306805503fc2, type: 2}
+  minionStrengths: {fileID: 11405780, guid: 54ca2b3b10988cc4ebf0d52a8a8e3249, type: 2}

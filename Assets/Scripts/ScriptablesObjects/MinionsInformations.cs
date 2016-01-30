@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class MinionsInformations : ScriptableObject
@@ -20,4 +20,7 @@ public class MinionsInformations : ScriptableObject
 
     [Header("material teams")]
     public Material[] teamMaterials;
+
+    [Header("Minions Strenghts")]
+    public MinionStrengths minionStrengths;
 }

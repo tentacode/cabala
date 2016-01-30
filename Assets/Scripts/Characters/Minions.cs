@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using System;
 
+[Serializable]
 public enum MinionState
 {
     stop,
@@ -10,24 +11,54 @@ public enum MinionState
     dead
 }
 
+[Serializable]
+public enum MinionType
+{
+    ghost,
+    warrior,
+    wizard
+}
+
 public class Minions : MonoBehaviour
 {
     #region parameters
     public MinionsInformations minionsInformations;
     public int playerNumber;
-    public bool DEBUGFightInitator = false;
+    public MinionType minionType;
 
-    public MinionState state { get; protected set; }
+    [SerializeField]
+    public Dictionary<MinionType, MinionType> StongAgainst;
+    
+    public MinionState DEBUGState;
+    
+    public MinionState state
+    {
+        get
+        {
+            return _state;
+        }
+        set
+        {
+            if (value != state)
+            {
+                previousState = _state;
+                _state = value;
+            }
+        }
+    }
+    public MinionState previousState { get; protected set; }
+
     public int ownerIndex { get; private set; }
     
     public Minions opponent { get; private set; }
 
+    private MinionState _state;
     private NavMeshAgent navAgent;
     private Transform goal;
     private bool isInit = false;
     private int currentLife = 10;
     private GameObject lifeBar;
-
+    
     #endregion
 
     #region engine methods
@@ -45,6 +76,7 @@ public class Minions : MonoBehaviour
     void LateUpdate()
     {
         CheckDeath();
+        DEBUGState = state;
     }
 
     void OnTriggerEnter(Collider other)
@@ -52,7 +84,7 @@ public class Minions : MonoBehaviour
         if (other.tag == "Minion")
         {
             Minions opponent = other.GetComponent<Minions>();
-            if (opponent.ownerIndex != ownerIndex && opponent.opponent != this)
+            if (opponent.ownerIndex != ownerIndex && opponent.state != MinionState.fighting)
             {
                 LaunchFight(other.GetComponent<Minions>());
             }
@@ -75,14 +107,11 @@ public class Minions : MonoBehaviour
         lifeBar = transform.FindChild("LifeBar").gameObject;
         currentLife = minionsInformations.baseLifePoints;
 
-        state = MinionState.stop;
+        state = MinionState.moving;
     }
 
     private void setMaterial()
     {
-        Debug.Log(ownerIndex - 1);
-        Debug.Log(minionsInformations.teamMaterials.Length);
-
         GetComponent<Renderer>().material = minionsInformations.teamMaterials[ownerIndex - 1];
     }
     
@@ -125,10 +154,6 @@ public class Minions : MonoBehaviour
             return;
         }
 
-        Debug.Log("LaunchFight");
-
-        DEBUGFightInitator = true;
-
         opponent = otherFighter;
         opponent.opponent = this;
 
@@ -136,6 +161,25 @@ public class Minions : MonoBehaviour
         opponent.setupFight();
         
         Invoke("Attack", minionsInformations.firstAttackSpeed);
+    }
+
+    public void finishFight()
+    {
+        if (currentLife <= 0)
+        {
+            return; // do nothing, will go on late state and die as it should
+        }
+
+        opponent = null;
+        state = previousState;
+
+        CancelInvoke("Attack");
+
+        if (state == MinionState.moving)
+        {
+            navAgent.destination = goal.position;
+            navAgent.Resume();
+        }
     }
 
     public void setupFight()
@@ -148,17 +192,28 @@ public class Minions : MonoBehaviour
     {
         opponent.TakeDamage(computeDamages());
         TakeDamage(opponent.computeDamages());
+        
         Invoke("Attack", minionsInformations.attackSpeed);
     }
 
     public int computeDamages()
     {
+        if (minionsInformations.minionStrengths.amIStrongAgainst(minionType, opponent.minionType))
+        {
+            return(int) ((float)minionsInformations.damages * minionsInformations.damageMultiplicator);
+        }
+
         return minionsInformations.damages;
     }
 
     public void TakeDamage(int damages)
     {
         currentLife -= damages;
+
+        if(lifeBar == null)
+        {
+            return;
+        }
 
         lifeBar.transform.localScale = new Vector3(lifeBar.transform.localScale.x,
                                                    lifeBar.transform.localScale.y,
@@ -175,6 +230,7 @@ public class Minions : MonoBehaviour
 
     public void Die()
     {
+        opponent.finishFight();
         state = MinionState.dead;
 
         Destroy(gameObject);
