@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &127208
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 495262}
+  - 114: {fileID: 11475538}
+  m_Layer: 0
+  m_Name: GhostSound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &495262
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127208}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11475538
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13983e04e9be6c545b8d70357a3c3070, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minionType: 0
+  minionSounds:
+  - sound: {fileID: 8300000, guid: 975e2af9f81d7524dbf468b628db8111, type: 3}
+    mixerGroup: {fileID: 24363318, guid: 5bcf8c73e25ab524e9edf5e15b9c6a50, type: 2}
+    action: 0
+  - sound: {fileID: 8300000, guid: 834693aaad4844f4584ecdb0de88acb2, type: 3}
+    mixerGroup: {fileID: 24370186, guid: 5bcf8c73e25ab524e9edf5e15b9c6a50, type: 2}
+    action: 1
+  - sound: {fileID: 8300000, guid: 1d32c2a814dfa5f4fbd9644bc4fe8b19, type: 3}
+    mixerGroup: {fileID: 24345488, guid: 5bcf8c73e25ab524e9edf5e15b9c6a50, type: 2}
+    action: 2
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 127208}
+  m_IsPrefabParent: 1
