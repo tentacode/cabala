@@ -11,7 +11,7 @@ public class SpawnerController : NetworkBehaviour
     public MinionType spawnedCharacter;
 
     [SyncVar]
-    private bool ISActive;
+    public bool ISActive = true;
 
     public SpawnersInformations spawnerInformations;
 
@@ -80,6 +80,11 @@ public class SpawnerController : NetworkBehaviour
     [Command]
     private void CmdSpawn()
     {
+        if (!ISActive)
+        {
+            return;
+        }
+
         GameObject minion = PoolManagerBase.FindPool(spawnedCharacter).Pop();
 
         Transform spawnPoint;

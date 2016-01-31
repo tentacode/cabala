@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class InvocationCircleControler : NetworkBehaviour
 {
     [SerializeField]
-    private SpawnerController _spawner;
+    public SpawnerController _spawner;
 
     [SerializeField]
     private Unit_ID _unitID;
@@ -54,8 +54,6 @@ public class InvocationCircleControler : NetworkBehaviour
             return;
         }
 
-        Debug.Log("Invoc enter !");
-
         if (other.tag == "Minion")
         {
             if (other.GetComponent<Unit_ID>().GetPlayerIndex() != _unitID.GetPlayerIndex())
@@ -70,13 +68,25 @@ public class InvocationCircleControler : NetworkBehaviour
         }
     }
 
+    bool DeadIsAquired = false;
+
+    public int CountPLayerDead()
+    {
+        int count = 0;
+        foreach (var p in GameSharedData.GetAllPlayers)
+        {
+            if (!p.GetComponent<SpawnerController>().ISActive)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+    float timeToWait = 10;
+    float t = 0;
     void Update()
     {
-        if (Life <= 0)
-        {
-            return;
-        }
-
+        // Just draw Cultitsts
         int count = 0;
         foreach (var c in AllCultists)
         {
@@ -90,46 +100,44 @@ public class InvocationCircleControler : NetworkBehaviour
             }
             count++;
         }
+        
+        if (t < timeToWait)
+        {
+            t += Time.deltaTime;
+            return;
+        }
 
-       
+        Debug.Log("Player dead : " + CountPLayerDead() + " " + GameSharedData.NumberOfPlayer);
+        if (_unitID.isLocalPlayer && !DeadIsAquired && Life <= 0)
+        {
+            DeadIsAquired = true;
+            Debug.Log("Dead " + CountPLayerDead() + " " + GameSharedData.NumberOfPlayer);
 
-       
+            GameObject.Find("GameOverEffects").GetComponent<UIDeath>().Activate(false);
+            
+        }
+        else if (_unitID.isLocalPlayer && !DeadIsAquired && CountPLayerDead() >= GameSharedData.NumberOfPlayer - 1)
+        {
+
+            Debug.Log("Win " + CountPLayerDead() + " " + GameSharedData.NumberOfPlayer);
+
+            DeadIsAquired = true;
+             GameObject.Find("GameOverEffects").GetComponent<UIDeath>().Activate(true);
+        }
+
+        
     }
 
     public void CultistDeath(string minionName)
     {
-        Debug.Log("Life--");
-
-        
-        /*
-        AllCultists.RemoveAt(0);
-        AllCultists[0].CmdSetIsActive(false);*/
-        
-
-       // Destroy( cultistsLeft[0].gameObject);
-       // NetworkServer.UnSpawn(cultistsLeft[0].gameObject);
-
-
         if (Life <= 0)
         {
             Lose();
         }
     }
-    public static int PlayerDead = 0;
 
     public void Lose()
     {
-        PlayerDead++;
-
-        _spawner.CmdisActive( false );
-
-        if (_unitID.IsReady() && PlayerDead >= GameSharedData.NumberOfPlayer - 1)
-        {
-            // Game OVER
-            _unitID.GetComponent<PlayerAuthorityScript>().CmdGameOver();
-        }
-
-
-        // do stuff
+        _spawner.CmdisActive(false);
     }
 }
