@@ -93,6 +93,12 @@ public class InvocationCircleControler : NetworkBehaviour
             }
             count++;
         }
+
+        if (Life == 0)
+        {
+            enabled = false;
+        }
+
     }
 
     public void CultistDeath(string minionName)
@@ -114,8 +120,6 @@ public class InvocationCircleControler : NetworkBehaviour
             Lose();
         }
     }
-
-
     static int PlayerDead;
 
     public void Lose()
@@ -123,11 +127,11 @@ public class InvocationCircleControler : NetworkBehaviour
         PlayerDead++;
 
         _spawner.CmdisActive( false );
-        enabled = false;
 
         if (PlayerDead >= GameSharedData.NumberOfPlayer - 1)
         {
-            GameObject.Find("GameOverEffects").GetComponent<UIDeath>().Activate(true);
+            // Game OVER
+            _unitID.GetComponent<PlayerAuthorityScript>().CmdRematch();
         }
 
         // do stuff

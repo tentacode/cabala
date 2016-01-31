@@ -56,10 +56,7 @@ public class UIDeath : MonoBehaviour {
     public void ButtonGameAgain()
     {
         Activate(false);
-        foreach (var p in GameSharedData.GetAllPlayers)
-        {
-            p.GetComponent<PlayerAuthorityScript>().CmdSetLife(5);
-        }
+        
     }
 
     public void ButtonGoLobby()

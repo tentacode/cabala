@@ -93,7 +93,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 442732}
-  - 114: {fileID: 11486124}
   - 114: {fileID: 11469212}
   m_Layer: 0
   m_Name: GameOverEffects
@@ -1341,20 +1340,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11486124
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6f940127ffe1da47bf27b926d65f15a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _buttonGameOver: {fileID: 0}
-  _buttonGameOver2: {fileID: 0}
-  _text: {fileID: 0}
 --- !u!114 &11487510
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -44348,10 +44333,10 @@ RectTransform:
   - {fileID: 22442366}
   m_Father: {fileID: 22418214}
   m_RootOrder: 2
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -11}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: 0.36273614, y: 0.4255962}
+  m_AnchorMax: {x: 0.6392639, y: 0.5}
+  m_AnchoredPosition: {x: -0.5, y: 4.5}
+  m_SizeDelta: {x: 1, y: -1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22442366
 RectTransform:
@@ -44399,10 +44384,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 22418214}
   m_RootOrder: 1
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 89.6}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: 0.314, y: 0.656}
+  m_AnchorMax: {x: 0.6808473, y: 0.85300004}
+  m_AnchoredPosition: {x: 1.5, y: 2}
+  m_SizeDelta: {x: -7.5, y: -16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22477786
 RectTransform:
@@ -44417,10 +44402,10 @@ RectTransform:
   - {fileID: 22446140}
   m_Father: {fileID: 22418214}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 34.4}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: 0.36273614, y: 0.5455962}
+  m_AnchorMax: {x: 0.6392639, y: 0.6152116}
+  m_AnchoredPosition: {x: -0.5, y: 0.9000015}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &100100000
 Prefab:
