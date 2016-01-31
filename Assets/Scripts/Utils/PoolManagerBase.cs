@@ -49,8 +49,6 @@ public class PoolManagerBase : NetworkBehaviour
 
         GameObject toPop = Instantiate(objectToInstantiate) as GameObject;
 
-        toPop.SetActive(false);
-
         string uniqueID = toPop.name + " " + nextNameId;
         toPop.GetComponent<Unit_ID>().CmdSetMyUniqueID(uniqueID);
         Debug.Log("Generate " + uniqueID);
@@ -82,8 +80,8 @@ public class PoolManagerBase : NetworkBehaviour
         return toPop;
     }
 
-    public void OnDeath(GameObject deadObject, Destructible attaking)
+    public void OnDeath(GameObject deadObject)
     {
-        pool.Push(deadObject);
+      //  pool.Push(deadObject);
     }
 }

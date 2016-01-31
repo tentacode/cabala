@@ -11,13 +11,12 @@ using UnityEngine.Networking;
 
 public class Destructible : NetworkBehaviour
 {
-    [SerializeField]
     [SyncVar]
     int life;
     [SyncVar]
     int maxLife;
 
-    public Action<GameObject, Destructible> HandleDestroyed = delegate { };
+    public Action<GameObject> HandleDestroyed = delegate { };
     public Action<GameObject> HandleAlive = delegate { };
     public Action<GameObject, int> HandleTakeDamage = delegate { };
 
@@ -36,10 +35,8 @@ public class Destructible : NetworkBehaviour
     [Command]
     public void CmdSetMaxLife(int v)
     {
-        
         maxLife = v;
 
-        Debug.Log("MaxLife change " + maxLife);
         life = maxLife;
     }
 
@@ -51,25 +48,32 @@ public class Destructible : NetworkBehaviour
         {
             return;
         }
-
-        CmdSetMaxLife(life);
     }
 
-    public void TakeDamage(int damage, Destructible attaking)
+    [Command]
+    public void CmdTakeDamage(int damage)
     {
         life -= damage;
-        if (life <= 0)
-        {
-            GoDead(attaking);
-        }
-
         HandleTakeDamage(gameObject, damage);
     }
 
-    public void GoDead(Destructible attaking)
+    void LateUpdate()
+    {
+        if (!isServer)
+        {
+            return;
+        }
+
+        if (life <= 0)
+        {
+            GoDead();
+        }
+    }
+
+    private void GoDead()
     {
         GoDeadNoBroadcart();
-        HandleDestroyed(gameObject, attaking);
+        HandleDestroyed(gameObject);
     }
 
     public void GoDeadNoBroadcart()
@@ -78,18 +82,8 @@ public class Destructible : NetworkBehaviour
     }
 
     public void GoAlive()
-    {
-        //yield return null;
-      //  yield return new WaitForSeconds(1);
-
-        /*while (!unitId.IsReady())
-        {
-            yield return null;
-        }*/
-
-        
-
-        gameObject.SetActive(true);
+    {   
+        //  gameObject.SetActive(true);
         life = maxLife;
         HandleAlive(gameObject);  
     }

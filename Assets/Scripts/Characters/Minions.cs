@@ -29,8 +29,6 @@ public class Minions : NetworkBehaviour
     [SerializeField]
     public Dictionary<MinionType, MinionType> StongAgainst;
 
-    public MinionState DEBUGState;
-
     public MinionState state
     {
         get
@@ -55,6 +53,8 @@ public class Minions : NetworkBehaviour
     private Transform goal;
     private bool isInit = false;
 
+    public bool overrideMaterial = false;
+
 
     private Destructible _destructible;
     private Unit_ID _unit_ID;
@@ -72,28 +72,38 @@ public class Minions : NetworkBehaviour
 
     #region engine methods
 
+    public bool CanRun
+    {
+        get
+        {
+            return isServer && gameObject.activeSelf;
+        }
+    }
+
     public override void OnStartServer()
     {
         _destructible = GetComponent<Destructible>();
-        _unit_ID = GetComponent<Unit_ID>();
         navAgent = GetComponent<NavMeshAgent>();
-
+        _unit_ID = GetComponent<Unit_ID>();
         _destructible.CmdSetMaxLife(minionsInformations.baseLifePoints);
 
         _destructible.HandleDestroyed += OnDie;
         _destructible.HandleAlive += OnAlive;
     }
 
+    void Awake()
+    {
+        _unit_ID = GetComponent<Unit_ID>();
+    }
+
 
 
     void LateUpdate()
     {
-        if (!isServer)
+        if (!CanRun)
         {
             return;
         }
-
-        DEBUGState = state;
 
         if (_unit_ID.IsReady())
         {
@@ -103,7 +113,7 @@ public class Minions : NetworkBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (!isServer)
+        if (!CanRun)
         {
             return;
         }
@@ -125,7 +135,7 @@ public class Minions : NetworkBehaviour
 
     protected void initalize()
     {
-        if (!isServer)
+        if (!CanRun)
         {
             return;
         }
@@ -138,28 +148,28 @@ public class Minions : NetworkBehaviour
 
         state = MinionState.moving;
 
-        setMaterial();
-
         int numberOfPlayer = GameObject.Find("GameSharedData").GetComponent<GameSharedData>().NumberOfPlayer;
 
-        Debug.Log((PlayerIndex % numberOfPlayer) + 1);
         GameObject player = Unit_ID.FindPlayer((PlayerIndex % numberOfPlayer) + 1);
         SetGoal(player.transform);
     }
 
+    void Update()
+    {
+        setMaterial();
+    }
+
     private void setMaterial()
     {
-        if (!isServer)
+        if (overrideMaterial)
         {
-            return;
+            GetComponent<Renderer>().material = minionsInformations.teamMaterials[PlayerIndex - 1];
         }
-
-        GetComponent<Renderer>().material = minionsInformations.teamMaterials[PlayerIndex];
     }
 
     public void SetGoal(Transform goalTransform)
     {
-        if (!isServer)
+        if (!CanRun)
         {
             return;
         }
@@ -179,7 +189,7 @@ public class Minions : NetworkBehaviour
 
     public void LaunchFight(Minions otherFighter)
     {
-        if (!isServer)
+        if (!CanRun)
         {
             return;
         }
@@ -200,20 +210,26 @@ public class Minions : NetworkBehaviour
 
     public void finishFight()
     {
-        if (!isServer)
+        if (!CanRun)
         {
             return;
-        }
-
-        if (_destructible.GetLife() <= 0)
-        {
-            return; // do nothing, will go on late state and die as it should
         }
 
         opponent = null;
         state = previousState;
 
         CancelInvoke("Attack");
+
+        setupMoving();
+        
+    }
+
+    void setupMoving()
+    {
+        if (!CanRun)
+        {
+            return;
+        }
 
         if (state == MinionState.moving)
         {
@@ -224,7 +240,7 @@ public class Minions : NetworkBehaviour
 
     public void setupFight()
     {
-        if (!isServer)
+        if (!CanRun)
         {
             return;
         }
@@ -235,21 +251,23 @@ public class Minions : NetworkBehaviour
 
     public void Attack()
     {
-        if (!isServer)
+        if (!CanRun)
         {
+            
             return;
         }
 
         Destructible opponentDestructible = opponent.GetComponent<Destructible>();
-        opponentDestructible.TakeDamage(computeDamages(), _destructible);
-        _destructible.TakeDamage(opponent.computeDamages(), opponentDestructible);
+        opponentDestructible.CmdTakeDamage(computeDamages());
+
+        _destructible.CmdTakeDamage(opponent.computeDamages());
 
         Invoke("Attack", minionsInformations.attackSpeed);
     }
 
     private int computeDamages()
     {
-        if (!isServer)
+        if (!CanRun || opponent == null)
         {
             return 0;
         }
@@ -262,9 +280,9 @@ public class Minions : NetworkBehaviour
         return minionsInformations.damages;
     }
 
-    private void OnDie(GameObject whoDied, Destructible whokill)
+    private void OnDie(GameObject whoDied)
     {
-        if (!isServer)
+        if (!CanRun)
         {
             return;
         }
@@ -280,7 +298,7 @@ public class Minions : NetworkBehaviour
    }
     private void OnAlive(GameObject whoAlive)
     {
-        if (!isServer)
+        if (!CanRun)
         {
             return;
         }

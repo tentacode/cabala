@@ -11,6 +11,10 @@ TagManager:
   - LobbyPlayer
   - SpawnPoint
   - Minion
+  - IngredientSpawnPoint1
+  - IngredientSpawnPoint2
+  - IngredientSpawnPoint3
+  - IngredientSpawnPoint4
   layers:
   - Default
   - TransparentFX
@@ -21,8 +25,8 @@ TagManager:
   - 
   - 
   - No Collison
-  - 
-  - 
+  - Ingredient
+  - Minion
   - 
   - 
   - 
