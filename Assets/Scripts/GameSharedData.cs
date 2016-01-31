@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class GameSharedData : MonoBehaviour
 {
@@ -48,9 +49,15 @@ public class GameSharedData : MonoBehaviour
     {
         get
         {
-            return GameObject.FindGameObjectsWithTag("Player");
+            GameObject[] AllPlayer = GameObject.FindGameObjectsWithTag("Player");
+            Array.Sort<GameObject>(AllPlayer, delegate(GameObject a, GameObject b) {
+                return a.name.CompareTo(b.name);
+            });
+
+            return AllPlayer;
         }
     }
+
 
     public static int NumberOfPlayer
     {
