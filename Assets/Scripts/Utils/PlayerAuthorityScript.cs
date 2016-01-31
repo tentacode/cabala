@@ -6,17 +6,7 @@ public class PlayerAuthorityScript : NetworkBehaviour {
 
     private Unit_ID _unit_ID;
 
-    [SyncVar]
-    public int PlayerDeadSync = 0;
-    private static int PLayerDead = 0;
-
-    [Command]
-    public void CmdAddPlayerDeadSync()
-    {
-        PLayerDead++;
-
-        PlayerDeadSync = PLayerDead;
-    }
+   
 
     [SyncVar]
     public int cultisteLife = 5;

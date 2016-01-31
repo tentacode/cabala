@@ -11,7 +11,7 @@ public class SpawnerController : NetworkBehaviour
     public MinionType spawnedCharacter;
 
     [SyncVar]
-    private bool ISActive = true;
+    public bool ISActive = true;
 
     public SpawnersInformations spawnerInformations;
 

@@ -70,7 +70,20 @@ public class InvocationCircleControler : NetworkBehaviour
 
     bool DeadIsAquired = false;
 
-
+    public int CountPLayerDead()
+    {
+        int count = 0;
+        foreach (var p in GameSharedData.GetAllPlayers)
+        {
+            if (!p.GetComponent<SpawnerController>().ISActive)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+    float timeToWait = 10;
+    float t = 0;
     void Update()
     {
         // Just draw Cultitsts
@@ -87,20 +100,26 @@ public class InvocationCircleControler : NetworkBehaviour
             }
             count++;
         }
-
         
+        if (t < timeToWait)
+        {
+            t += Time.deltaTime;
+            return;
+        }
+
+        Debug.Log("Player dead : " + CountPLayerDead() + " " + GameSharedData.NumberOfPlayer);
         if (_unitID.isLocalPlayer && !DeadIsAquired && Life <= 0)
         {
             DeadIsAquired = true;
-            Debug.Log("Dead " + _unitID.GetComponent<PlayerAuthorityScript>().PlayerDeadSync + " " + GameSharedData.NumberOfPlayer);
+            Debug.Log("Dead " + CountPLayerDead() + " " + GameSharedData.NumberOfPlayer);
 
             GameObject.Find("GameOverEffects").GetComponent<UIDeath>().Activate(false);
             
         }
-        else if (_unitID.isLocalPlayer && !DeadIsAquired && _unitID.GetComponent<PlayerAuthorityScript>().PlayerDeadSync >= GameSharedData.NumberOfPlayer)
+        else if (_unitID.isLocalPlayer && !DeadIsAquired && CountPLayerDead() >= GameSharedData.NumberOfPlayer - 1)
         {
 
-            Debug.Log("Win " + _unitID.GetComponent<PlayerAuthorityScript>().PlayerDeadSync + " " + GameSharedData.NumberOfPlayer);
+            Debug.Log("Win " + CountPLayerDead() + " " + GameSharedData.NumberOfPlayer);
 
             DeadIsAquired = true;
              GameObject.Find("GameOverEffects").GetComponent<UIDeath>().Activate(true);
@@ -119,7 +138,6 @@ public class InvocationCircleControler : NetworkBehaviour
 
     public void Lose()
     {
-        _unitID.GetComponent<PlayerAuthorityScript>().CmdAddPlayerDeadSync();
         _spawner.CmdisActive(false);
     }
 }
