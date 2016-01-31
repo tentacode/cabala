@@ -55,6 +55,8 @@ public class Minions : NetworkBehaviour
     private Transform goal;
     private bool isInit = false;
 
+    public bool overrideMaterial = false;
+
 
     private Destructible _destructible;
     private Unit_ID _unit_ID;
@@ -158,9 +160,10 @@ public class Minions : NetworkBehaviour
 
     private void setMaterial()
     {
-
-        Debug.Log("SetMaterial " + (PlayerIndex-1) + " " + minionsInformations.teamMaterials[PlayerIndex-1]);
-        GetComponent<Renderer>().material = minionsInformations.teamMaterials[PlayerIndex-1];
+        if (overrideMaterial)
+        {
+            GetComponent<Renderer>().material = minionsInformations.teamMaterials[PlayerIndex - 1];
+        }
     }
 
     public void SetGoal(Transform goalTransform)
@@ -258,7 +261,7 @@ public class Minions : NetworkBehaviour
             return;
         }
 
-        if (opponent == null)
+        if (opponent == null || _destructible == null)
         {
             state = MinionState.moving;
             setupMoving();
@@ -267,6 +270,7 @@ public class Minions : NetworkBehaviour
 
         Destructible opponentDestructible = opponent.GetComponent<Destructible>();
         opponentDestructible.CmdTakeDamage(computeDamages());
+       
         _destructible.CmdTakeDamage(opponent.computeDamages());
 
         Invoke("Attack", minionsInformations.attackSpeed);
