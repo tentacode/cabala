@@ -12,7 +12,7 @@ public class IngredientSpawner : MonoBehaviour
 
 	void Start ()
     {
-        lastTick = 0;
+        lastTick = Time.time;
 
         if (ingredients.Count != 3) {
             Debug.LogError("IngredientSpawner must have exactly 3 ingredients");

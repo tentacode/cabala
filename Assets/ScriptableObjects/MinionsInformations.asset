@@ -16,9 +16,24 @@ MonoBehaviour:
   firstAttackSpeed: 0.5
   damages: 2
   damageMultiplicator: 2
-  teamMaterials:
+  healBarTeamMaterials:
   - {fileID: 2100000, guid: f8bc68f720509f445a25c8e337bbd792, type: 2}
   - {fileID: 2100000, guid: 38be5d30616073e4e97b55e59dbc0950, type: 2}
   - {fileID: 2100000, guid: 64ce2a768a1642c4fba1298f74989af8, type: 2}
   - {fileID: 2100000, guid: ee0cddb87379db6418cf306805503fc2, type: 2}
   minionStrengths: {fileID: 11405780, guid: 54ca2b3b10988cc4ebf0d52a8a8e3249, type: 2}
+  ghostsMaterials:
+  - {fileID: 2100000, guid: 4914365d5878c6440a78b0d7cb57efad, type: 2}
+  - {fileID: 2100000, guid: 495236ec693a43446babeb6d30da3b5a, type: 2}
+  - {fileID: 2100000, guid: 40e44d0a9981aba42abbde10cf96aa8b, type: 2}
+  - {fileID: 2100000, guid: 4596549413f7ba946a1996fb499acc81, type: 2}
+  warriorMaterials:
+  - {fileID: 2100000, guid: f1fce1b83c86dde4ba5e22345ccd7922, type: 2}
+  - {fileID: 2100000, guid: ddf8d7ce28efbca4e95bfe8d744c05ac, type: 2}
+  - {fileID: 2100000, guid: fe6b7bf8f65014140b0d6ce31e358b4b, type: 2}
+  - {fileID: 2100000, guid: 3918f47b992b73742b9e6e0639f5769e, type: 2}
+  wizardMaterials:
+  - {fileID: 2100000, guid: 6228fb9d94906a84f8febe6535ccf2be, type: 2}
+  - {fileID: 2100000, guid: bfc85c00ab6e6234385ddbe011bbbdc8, type: 2}
+  - {fileID: 2100000, guid: 6bc84ea0e3a5df74c86e9f98c771182d, type: 2}
+  - {fileID: 2100000, guid: 7b242bc4897aa0248aab6544a6f68aaf, type: 2}
