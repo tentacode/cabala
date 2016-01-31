@@ -34,6 +34,8 @@ public class Minions : NetworkBehaviour
     public MinionsInformations minionsInformations;
     public MinionType minionType;
 
+    public bool overrideMaterial = false;
+
     [SerializeField]
     public Dictionary<MinionType, MinionType> StongAgainst;
 
@@ -61,7 +63,7 @@ public class Minions : NetworkBehaviour
     private Transform goal;
     private bool isInit = false;
 
-    public bool overrideMaterial = false;
+    
 
 
     private Destructible _destructible;
