@@ -117,6 +117,9 @@ GameObject:
   - 33: {fileID: 3340598}
   - 136: {fileID: 13629460}
   - 23: {fileID: 2398144}
+  - 114: {fileID: 11494838}
+  - 114: {fileID: 11498060}
+  - 114: {fileID: 11480636}
   m_Layer: 0
   m_Name: SpawnPoint (2)
   m_TagString: SpawnPoint
@@ -150,6 +153,9 @@ GameObject:
   - 33: {fileID: 3395188}
   - 136: {fileID: 13688098}
   - 23: {fileID: 2393322}
+  - 114: {fileID: 11419256}
+  - 114: {fileID: 11433798}
+  - 114: {fileID: 11415328}
   m_Layer: 0
   m_Name: SpawnPoint
   m_TagString: SpawnPoint
@@ -188,6 +194,9 @@ GameObject:
   - 33: {fileID: 3349018}
   - 136: {fileID: 13649708}
   - 23: {fileID: 2306286}
+  - 114: {fileID: 11402728}
+  - 114: {fileID: 11413606}
+  - 114: {fileID: 11427666}
   m_Layer: 0
   m_Name: SpawnPoint (1)
   m_TagString: SpawnPoint
@@ -276,7 +285,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.42, y: 0, z: 4.07}
+  m_LocalPosition: {x: -5.0654078, y: 12.808405, z: 5.043872}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 432534}
@@ -698,6 +707,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 118896}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &11402728
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 184038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64880a7e479cc4174a4e5939d02983ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11404056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -724,6 +744,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentCircle: {fileID: 11456874}
   _unitID: {fileID: 11471150}
+--- !u!114 &11413606
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 184038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 80
+    i1: 101
+    i2: 50
+    i3: 144
+    i4: 164
+    i5: 57
+    i6: 68
+    i7: 80
+    i8: 88
+    i9: 40
+    i10: 206
+    i11: 77
+    i12: 178
+    i13: 245
+    i14: 36
+    i15: 33
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &11415328
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4efd832652e933640901f7379781db9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unit_ID: {fileID: 11471150}
+  _typeToSpawn: 0
 --- !u!114 &11418774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -737,6 +802,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentCircle: {fileID: 11456874}
   _unitID: {fileID: 11471150}
+--- !u!114 &11419256
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64880a7e479cc4174a4e5939d02983ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11427666
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 184038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4efd832652e933640901f7379781db9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unit_ID: {fileID: 11471150}
+  _typeToSpawn: 1
+--- !u!114 &11433798
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 80
+    i1: 101
+    i2: 50
+    i3: 144
+    i4: 164
+    i5: 57
+    i6: 68
+    i7: 80
+    i8: 88
+    i9: 40
+    i10: 206
+    i11: 77
+    i12: 178
+    i13: 245
+    i14: 36
+    i15: 33
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &11453392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -848,6 +969,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionId: 0
+--- !u!114 &11480636
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4efd832652e933640901f7379781db9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unit_ID: {fileID: 11471150}
+  _typeToSpawn: 2
 --- !u!114 &11491492
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -868,6 +1002,49 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &11494838
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64880a7e479cc4174a4e5939d02983ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11498060
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 80
+    i1: 101
+    i2: 50
+    i3: 144
+    i4: 164
+    i5: 57
+    i6: 68
+    i7: 80
+    i8: 88
+    i9: 40
+    i10: 206
+    i11: 77
+    i12: 178
+    i13: 245
+    i14: 36
+    i15: 33
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!136 &13614114
 CapsuleCollider:
   m_ObjectHideFlags: 1

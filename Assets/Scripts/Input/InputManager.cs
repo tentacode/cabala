@@ -4,13 +4,15 @@ using System.Collections.Generic;
 
 public class TouchInfo
 {
-    public Touch touch;
+    public Vector2 touchPos;
+    public int touchID;
     public GameObject touchedObject;
     public float time;
     
-    public TouchInfo(Touch _touch, GameObject _touchedObject, float _time)
+    public TouchInfo(Vector2 touchPos, int touchId, GameObject _touchedObject, float _time)
     {
-        touch = _touch;
+        this.touchID = touchId;
+        this.touchPos = touchPos;
         touchedObject = _touchedObject;
         time = _time;
     }
@@ -35,23 +37,57 @@ public class InputManager : MonoBehaviour
     public float clickDistanceThreshold = 80f;
 
     List<TouchInfo> touchInfos = new List<TouchInfo>();
+
+    Vector2 _origineMouse;
+
+    bool mouseOnClick = false;
     
 	void Update () 
     {
         var touches = Input.touches;
-        
+
+#if !UNITY_EDITOR && (UNITY_ANDROID || UNITY_IPHONE)
         foreach (Touch touch in touches) {
             if (touch.phase == TouchPhase.Began) {
                 AddTouch(touch);
             } else if (touch.phase == TouchPhase.Ended) {
-                Resolve(touch);
+                Resolve(touch.position, touch.fingerId);
             }
         }
+#else
+        if (Input.GetButtonDown("Fire1"))
+        {
+            AddMouse();
+            
+        }
+        else if (Input.GetButtonUp("Fire1"))
+        {
+            Resolve(Input.mousePosition, -1);
+        }
+#endif
 	}
+
+    void AddMouse()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            GameObject hitGameObject = hit.collider.gameObject;
+            Swipeable swipeable = hitGameObject.GetComponent<Swipeable>();
+
+            if (swipeable)
+            {
+                touchInfos.Add(new TouchInfo(Input.mousePosition, -1, hitGameObject, Time.time));
+            }
+        }
+    }
 
     void AddTouch(Touch touch)
     {
         Ray ray = Camera.main.ScreenPointToRay(touch.position); 
+
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
@@ -59,20 +95,20 @@ public class InputManager : MonoBehaviour
             Swipeable swipeable = hitGameObject.GetComponent<Swipeable>();
 
             if (swipeable) {
-                touchInfos.Add(new TouchInfo(touch, hitGameObject, Time.time));
+                touchInfos.Add(new TouchInfo(touch.position, touch.fingerId, hitGameObject, Time.time));
             }
         }
     }
 
-    void Resolve(Touch touch)
+    void Resolve(Vector2 touchPos, int fingerID)
     {
-        TouchInfo touchInfo = touchInfos.Find(t => t.touch.fingerId == touch.fingerId);
+        TouchInfo touchInfo = touchInfos.Find(t => t.touchID == fingerID);
         if (touchInfo == null) {
             return;
         }
 
-        Vector3 startPosition = touchInfo.touch.position;
-        Vector3 newPosition = touch.position;
+        Vector3 startPosition = touchInfo.touchPos;
+        Vector3 newPosition = touchPos;
 
         float distance = Vector3.Distance(startPosition, newPosition);
         float deltaTime = Time.time - touchInfo.time;
