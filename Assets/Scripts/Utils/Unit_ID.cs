@@ -15,25 +15,41 @@ public class Unit_ID : NetworkBehaviour {
     // Side 0 is neutral
     [SerializeField]
     [SyncVar]
-    private int SideNumber;
+    private int PlayerIndex;
+
+    public static GameObject FindPlayer(int playerId)
+    {
+        return GameObject.Find("Player" + (playerId).ToString());
+    }
 
     [HideInInspector]
-	[SyncVar] public string my_ID ;
+	[SyncVar] private string my_uniqueID ;
 	private Transform myTransform;
 
-    public int GetSideNumber()
+    public bool IsReady()
     {
-        return SideNumber;
+        return my_uniqueID != "";
+    }
+
+    public int GetPlayerIndex()
+    {
+        return PlayerIndex;
     }
 
     /// <summary>
     /// Has to be called on the server side !
     /// </summary>
-    /// <param name="side"></param>
-    [Command]
-    public void CmdSetSideId(int side)
+    /// <param name="number"></param>
+    //[Command]
+    public void CmdSetPlayerIndex(int number)
     {
-        SideNumber = side;
+        PlayerIndex = number;
+    }
+
+    //[Command]
+    public void CmdSetMyUniqueID(string id)
+    {
+        my_uniqueID = id;
     }
 
 	// Use this for initialization
@@ -46,12 +62,12 @@ public class Unit_ID : NetworkBehaviour {
 	void Update () 
 	{
         // Set Identity
-        myTransform.name = my_ID;
+        myTransform.name = my_uniqueID;
 	}
 
     void LateUpdate()
     {
         // Change color regarding his side
-        GetComponent<Renderer>().material.color = _colors[SideNumber];
+      //  GetComponent<Renderer>().material.color = _colors[PlayerNumber];
     }
 }

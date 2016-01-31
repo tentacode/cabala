@@ -6,9 +6,12 @@ public class SpawnUnitFromPlayer : NetworkBehaviour {
 
     private PlayerNetwork _playerNetwork;
 
+    private Unit_ID _unitID;
+
     void Start()
     {
         _playerNetwork = GetComponent<PlayerNetwork>();
+        _unitID = GetComponent<Unit_ID>();
     }
 
 
@@ -20,11 +23,13 @@ public class SpawnUnitFromPlayer : NetworkBehaviour {
         Debug.Log(poolName + " " + pool);
         GameObject o = pool.Pop();
 
-        int side = _playerNetwork.playerIndex;
+        int side = _unitID.GetPlayerIndex();
 
-        o.GetComponent<Unit_ID>().CmdSetSideId(side);
+        o.GetComponent<Unit_ID>().CmdSetPlayerIndex(side);
 
         o.transform.position = transform.position;
+
+        NetworkServer.Spawn(o);
         
     }
    

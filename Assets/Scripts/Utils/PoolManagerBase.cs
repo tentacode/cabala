@@ -11,41 +11,55 @@ public class PoolManagerBase : NetworkBehaviour
 
     public GameObject objectToInstantiate;
 
-  //  public int numberToPreInstantiate;
+    public int numberToPreInstantiate;
 
     protected static int nextNameId = 0;
+
+    public static PoolManagerBase FindPool(MinionType type)
+    {
+        return GameObject.Find("Pool" + type.ToString()).GetComponent<PoolManagerBase>();
+    }
 
     protected virtual void Start()
     {
         root = transform;
 
-   /*     for (int j = 0; j < numberToPreInstantiate; j++)
+        if (!isServer)
+        {
+            return;
+        }
+
+        for (int j = 0; j < numberToPreInstantiate; j++)
         {
             GameObject o = Generate();
             o.GetComponent<Destructible>().GoDeadNoBroadcart();
 
             pool.Push(o);
 
-        }*/
+        }
     }
 
 
     protected virtual GameObject Generate()
     {
+        if (!isServer)
+        {
+            Debug.LogError("Only server should generate new units !");
+        }
 
-
-        
         GameObject toPop = Instantiate(objectToInstantiate) as GameObject;
 
-        toPop.name += " " + nextNameId;
+        toPop.SetActive(false);
+
+        string uniqueID = toPop.name + " " + nextNameId;
+        toPop.GetComponent<Unit_ID>().CmdSetMyUniqueID(uniqueID);
+        Debug.Log("Generate " + uniqueID);
+
         nextNameId++;
-        Debug.Log("Generate " + toPop.name);
+        
         toPop.transform.parent = root;
 
         toPop.GetComponent<Destructible>().HandleDestroyed += OnDeath;
-        toPop.GetComponent<Unit_ID>().my_ID = toPop.name;
-
-        NetworkServer.Spawn(toPop);
 
         return toPop;
     }

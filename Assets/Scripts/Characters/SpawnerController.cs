@@ -1,40 +1,54 @@
 ﻿using UnityEngine;
 using System.Collections;
-
-public class SpawnerController : MonoBehaviour
+using UnityEngine.Networking;
+/// <summary>
+/// TODO separate in two
+/// </summary>
+public class SpawnerController : NetworkBehaviour
 {
     #region parameters
-    public int ownerNumber;
-    public Minions spawnedCharacter;
+    public MinionType spawnedCharacter;
 
     public SpawnersInformations spawnerInformations;
 
     private float beginTime;
 
+    [SerializeField]
+    private Transform _spawnPoint;
+
+    private Unit_ID _unitId;
+
     #endregion
     
     // Use this for initialization
     void Start () {
-        Invoke("FirstSpawn", spawnerInformations.TimeBeforeFirstLaunch);
+        _unitId = GetComponent<Unit_ID>();
+        Invoke("FirstSpawn", spawnerInformations.TimeBeforeFirstLaunch + 1);
     }
 	
-	// Update is called once per frame
-	void Update () {
-        
-	}
-
     private void FirstSpawn()
     {
+        if (!isServer)
+        {
+            return;
+        }
+
         beginTime = Time.time;
-        Spawn();
+        CmdSpawn();
     }
 
-    private void Spawn()
+    [Command]
+    private void CmdSpawn()
     {
-        Minions ennemy = Instantiate(spawnedCharacter, transform.position, transform.rotation) as Minions;
+        GameObject minion = PoolManagerBase.FindPool(spawnedCharacter).Pop();
         
-        ennemy.SetOwnerNumber(ownerNumber);
-        
-        Invoke("Spawn", spawnerInformations.spawnSpeedCurve.Evaluate((Time.time - beginTime) / spawnerInformations.maxTime));
+        minion.transform.position = _spawnPoint.position;
+        minion.transform.rotation = _spawnPoint.rotation;
+
+        minion.GetComponent<Unit_ID>().CmdSetPlayerIndex(_unitId.GetPlayerIndex());
+
+        NetworkServer.Spawn(minion);
+
+        Invoke("CmdSpawn", spawnerInformations.spawnSpeedCurve.Evaluate((Time.time - beginTime) / spawnerInformations.maxTime));
     }
 }
