@@ -156,9 +156,9 @@ public class Minions : NetworkBehaviour
 
         state = MinionState.moving;
 
-        int numberOfPlayer = GameObject.Find("GameSharedData").GetComponent<GameSharedData>().NumberOfPlayer;
 
-        GameObject player = Unit_ID.FindPlayer((PlayerIndex % numberOfPlayer) + 1);
+
+        GameObject player = GameSharedData.GetPlayerNumberNext(_unit_ID, 1);
         SetGoal(player.transform);
     }
 
@@ -187,11 +187,11 @@ public class Minions : NetworkBehaviour
         goal = goalTransform;
         if (goal != null)
         {
-            navAgent.destination = goal.position;
+            MovementGoTo(goal.position);
         }
         else
         {
-            navAgent.Stop();
+            MovementStop();
         }
     }
 
@@ -242,12 +242,10 @@ public class Minions : NetworkBehaviour
             return;
         }
 
-        if (state == MinionState.moving)
-        {
-            navAgent.destination = goal.position;
-            navAgent.Resume();
-        }
+        
+        MovementGoTo(goal.position);
     }
+
 
     public void setupFight()
     {
@@ -257,10 +255,21 @@ public class Minions : NetworkBehaviour
         }
 
         state = MinionState.fighting;
-        StopMovement();
+        MovementStop();
     }
 
-    public void StopMovement()
+    public void MovementGoTo(Vector3 objectif)
+    {
+        if (state != MinionState.moving)
+        {
+            return;
+        }
+
+         navAgent.destination = objectif;
+         navAgent.Resume();
+    }
+
+    public void MovementStop()
     {
         navAgent.Stop();
     }

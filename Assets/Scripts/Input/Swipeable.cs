@@ -13,7 +13,7 @@ public class Swipeable : MonoBehaviour
         if (onSwipe != null) {
             onSwipe(touchResult);
         } else {
-            Debug.LogError("Delegate for onSwipe was not defined on GameObject: " + gameObject.name);
+          //  Debug.LogError("Delegate for onSwipe was not defined on GameObject: " + gameObject.name);
         }
     }
 
@@ -22,7 +22,7 @@ public class Swipeable : MonoBehaviour
         if (onTouched != null) {
             onTouched(touchResult);
         } else {
-            Debug.LogError("Delegate for onTouched was not defined on GameObject: " + gameObject.name);
+         //   Debug.LogError("Delegate for onTouched was not defined on GameObject: " + gameObject.name);
         }
     }
 }
