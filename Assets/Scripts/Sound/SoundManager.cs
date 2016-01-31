@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 using System.Collections;
 
 public class SoundManager : MonoBehaviour
 {
+    private AudioSource audioSource;
 
 	// Use this for initialization
 	void Start () {
@@ -13,4 +15,11 @@ public class SoundManager : MonoBehaviour
 	void Update () {
 	
 	}
+
+    public void PlaySound(AudioClip sound, AudioMixerGroup mixerGroup)
+    {
+        audioSource.clip = sound;
+        audioSource.outputAudioMixerGroup = mixerGroup;
+        audioSource.Play();
+    }
 }

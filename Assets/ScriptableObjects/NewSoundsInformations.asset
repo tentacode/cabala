@@ -11,4 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186579afff8a28a4c97a661848a40705, type: 3}
   m_Name: NewSoundsInformations
   m_EditorClassIdentifier: 
-  minionSounds: []
+  minionSounds:
+  - {fileID: 11475538, guid: d5e8aabab7252c44488f94f317a90633, type: 2}
+  - {fileID: 11479978, guid: e2f5e52147ea59e46a9a8258e0b19f1b, type: 2}
+  - {fileID: 11400706, guid: 6c8813a3e56d5924fb53377eff77074f, type: 2}
