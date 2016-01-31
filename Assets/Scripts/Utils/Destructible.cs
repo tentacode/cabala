@@ -63,7 +63,7 @@ public class Destructible : NetworkBehaviour
         HandleTakeDamage(gameObject, damage);
     }
 
-    public void GoDead()
+    private void GoDead()
     {
         GoDeadNoBroadcart();
         HandleDestroyed(gameObject);

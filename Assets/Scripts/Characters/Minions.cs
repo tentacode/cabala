@@ -75,13 +75,17 @@ public class Minions : NetworkBehaviour
     public override void OnStartServer()
     {
         _destructible = GetComponent<Destructible>();
-        _unit_ID = GetComponent<Unit_ID>();
         navAgent = GetComponent<NavMeshAgent>();
-
+        _unit_ID = GetComponent<Unit_ID>();
         _destructible.CmdSetMaxLife(minionsInformations.baseLifePoints);
 
         _destructible.HandleDestroyed += OnDie;
         _destructible.HandleAlive += OnAlive;
+    }
+
+    void Awake()
+    {
+        _unit_ID = GetComponent<Unit_ID>();
     }
 
 
@@ -138,7 +142,7 @@ public class Minions : NetworkBehaviour
 
         state = MinionState.moving;
 
-        setMaterial();
+        
 
         int numberOfPlayer = GameObject.Find("GameSharedData").GetComponent<GameSharedData>().NumberOfPlayer;
 
@@ -147,14 +151,16 @@ public class Minions : NetworkBehaviour
         SetGoal(player.transform);
     }
 
+    void Update()
+    {
+        setMaterial();
+    }
+
     private void setMaterial()
     {
-        if (!isServer)
-        {
-            return;
-        }
 
-        GetComponent<Renderer>().material = minionsInformations.teamMaterials[PlayerIndex];
+        Debug.Log("SetMaterial " + (PlayerIndex-1) + " " + minionsInformations.teamMaterials[PlayerIndex-1]);
+        GetComponent<Renderer>().material = minionsInformations.teamMaterials[PlayerIndex-1];
     }
 
     public void SetGoal(Transform goalTransform)
@@ -215,6 +221,17 @@ public class Minions : NetworkBehaviour
 
         CancelInvoke("Attack");
 
+        setupMoving();
+        
+    }
+
+    void setupMoving()
+    {
+        if (!isServer)
+        {
+            return;
+        }
+
         if (state == MinionState.moving)
         {
             navAgent.destination = goal.position;
@@ -237,6 +254,14 @@ public class Minions : NetworkBehaviour
     {
         if (!isServer)
         {
+            
+            return;
+        }
+
+        if (opponent == null)
+        {
+            state = MinionState.moving;
+            setupMoving();
             return;
         }
 
@@ -249,7 +274,7 @@ public class Minions : NetworkBehaviour
 
     private int computeDamages()
     {
-        if (!isServer)
+        if (!isServer || opponent == null)
         {
             return 0;
         }

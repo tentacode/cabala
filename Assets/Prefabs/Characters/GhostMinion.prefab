@@ -201,13 +201,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 1
   m_SendInterval: 0.1
-  m_SyncRotationAxis: 7
+  m_SyncRotationAxis: 2
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
   m_MovementTheshold: 0.001
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
+  m_InterpolateMovement: 0
 --- !u!114 &11488944
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -219,7 +219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 344882d421f672c4c85821f6afe74124, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNumber: 0
 --- !u!114 &11491500
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -231,8 +230,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff4d8eb1cb6411f46ad0cc08912bb527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 10
-  maxLife: 0
 --- !u!114 &11496898
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -319,6 +316,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_InterpolateMovement
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

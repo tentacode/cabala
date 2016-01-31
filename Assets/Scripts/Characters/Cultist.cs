@@ -10,6 +10,7 @@ public class Cultist : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+
         if (other.tag == "Minion")
         {
             if (other.GetComponent<Unit_ID>().GetPlayerIndex() != _unitID.GetPlayerIndex())
