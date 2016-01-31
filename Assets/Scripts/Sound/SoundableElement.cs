@@ -1,21 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Audio;
 
-public abstract class SoundableElement : MonoBehaviour
+public class SoundableElement : MonoBehaviour
 {
-    private SoundManager soundManager;
+    protected SoundManager soundManager;
 	
-	void Awake () {
+	protected virtual void Start () {
         soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
-    protected virtual void PlaySound()
+    public virtual void LaunchSound(AudioClip sound, AudioMixerGroup mixerGroup)
     {
-
+        soundManager.PlaySound(sound, mixerGroup);
     }
 }

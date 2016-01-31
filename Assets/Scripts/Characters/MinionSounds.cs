@@ -27,4 +27,29 @@ public class MinionSounds : MonoBehaviour
         }
         return null;
     }
+
+    public AudioMixerGroup getMixerFromAction(MinionAction action)
+    {
+        for (int i = 0; i < minionSounds.Length; i++)
+        {
+            if (minionSounds[i].action == action)
+            {
+                return minionSounds[i].mixerGroup;
+            }
+        }
+        return null;
+    }
+
+    public ActionSound getActionSoundFromAction(MinionAction action)
+    {
+        for (int i = 0; i < minionSounds.Length; i++)
+        {
+            if (minionSounds[i].action == action)
+            {
+                return minionSounds[i];
+            }
+        }
+        return null;
+    }
+
 }
