@@ -3,18 +3,14 @@ using UnityEngine.Audio;
 using System.Collections;
 using UnityEngine.Networking;
 
-public class SoundManager : NetworkBehaviour
+public class SoundManager : MonoBehaviour
 {
     private AudioSource audioSource;
 
 	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	void Awake () {
+        DontDestroyOnLoad(gameObject);
+        audioSource = GetComponent<AudioSource>();
 	}
 
     public void PlaySound(AudioClip sound, AudioMixerGroup mixerGroup)
