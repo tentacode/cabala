@@ -12,6 +12,7 @@ GameObject:
   - 23: {fileID: 2393426}
   - 114: {fileID: 11465528}
   - 136: {fileID: 13656674}
+  - 114: {fileID: 11474186}
   m_Layer: 0
   m_Name: Cultist
   m_TagString: Untagged
@@ -65,6 +66,7 @@ GameObject:
   - 23: {fileID: 2319088}
   - 114: {fileID: 11418774}
   - 136: {fileID: 13654418}
+  - 114: {fileID: 11455754}
   m_Layer: 0
   m_Name: Cultist
   m_TagString: Untagged
@@ -99,6 +101,7 @@ GameObject:
   - 23: {fileID: 2309244}
   - 114: {fileID: 11404056}
   - 136: {fileID: 13672678}
+  - 114: {fileID: 11444484}
   m_Layer: 0
   m_Name: Cultist
   m_TagString: Untagged
@@ -217,6 +220,7 @@ GameObject:
   - 23: {fileID: 2332372}
   - 114: {fileID: 11457758}
   - 136: {fileID: 13660132}
+  - 114: {fileID: 11461702}
   m_Layer: 0
   m_Name: Cultist
   m_TagString: Untagged
@@ -236,6 +240,7 @@ GameObject:
   - 23: {fileID: 2327336}
   - 114: {fileID: 11404674}
   - 136: {fileID: 13614114}
+  - 114: {fileID: 11414500}
   m_Layer: 0
   m_Name: Cultist
   m_TagString: Untagged
@@ -286,7 +291,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.1261487, y: 0, z: -4.2912464}
+  m_LocalPosition: {x: 12.133712, y: -0.4803877, z: -0.42934823}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 432534}
@@ -777,6 +782,38 @@ MonoBehaviour:
     i15: 33
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &11414500
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 198414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 80
+    i1: 101
+    i2: 50
+    i3: 144
+    i4: 164
+    i5: 57
+    i6: 68
+    i7: 80
+    i8: 88
+    i9: 40
+    i10: 206
+    i11: 77
+    i12: 178
+    i13: 245
+    i14: 36
+    i15: 33
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &11415328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -870,6 +907,38 @@ MonoBehaviour:
     i15: 33
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &11444484
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 80
+    i1: 101
+    i2: 50
+    i3: 144
+    i4: 164
+    i5: 57
+    i6: 68
+    i7: 80
+    i8: 88
+    i9: 40
+    i10: 206
+    i11: 77
+    i12: 178
+    i13: 245
+    i14: 36
+    i15: 33
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &11453392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -887,6 +956,38 @@ MonoBehaviour:
   _spawnPointWarrior: {fileID: 415428}
   _spawnPointGhost: {fileID: 404154}
   _spawnPointWizard: {fileID: 461132}
+--- !u!114 &11455754
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 136706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 80
+    i1: 101
+    i2: 50
+    i3: 144
+    i4: 164
+    i5: 57
+    i6: 68
+    i7: 80
+    i8: 88
+    i9: 40
+    i10: 206
+    i11: 77
+    i12: 178
+    i13: 245
+    i14: 36
+    i15: 33
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &11456874
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -915,6 +1016,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentCircle: {fileID: 11456874}
   _unitID: {fileID: 11471150}
+--- !u!114 &11461702
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 190312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 80
+    i1: 101
+    i2: 50
+    i3: 144
+    i4: 164
+    i5: 57
+    i6: 68
+    i7: 80
+    i8: 88
+    i9: 40
+    i10: 206
+    i11: 77
+    i12: 178
+    i13: 245
+    i14: 36
+    i15: 33
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &11465528
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -971,6 +1104,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 344882d421f672c4c85821f6afe74124, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11474186
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 104778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 80
+    i1: 101
+    i2: 50
+    i3: 144
+    i4: 164
+    i5: 57
+    i6: 68
+    i7: 80
+    i8: 88
+    i9: 40
+    i10: 206
+    i11: 77
+    i12: 178
+    i13: 245
+    i14: 36
+    i15: 33
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &11475494
 MonoBehaviour:
   m_ObjectHideFlags: 1

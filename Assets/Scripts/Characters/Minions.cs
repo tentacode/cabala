@@ -257,6 +257,11 @@ public class Minions : NetworkBehaviour
         }
 
         state = MinionState.fighting;
+        StopMovement();
+    }
+
+    public void StopMovement()
+    {
         navAgent.Stop();
     }
 

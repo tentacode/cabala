@@ -16,4 +16,10 @@ public class PlayerAuthorityScript : NetworkBehaviour {
     {
         Unit_ID.FindPlayer(_unit_ID.GetPlayerIndex()).GetComponent<SpawnerController>().spawnedCharacter = _typeToSpawn;
     }
+
+    [Command]
+    public void CmdOrderMinionToStop(string minionName)
+    {
+        GameObject.Find(minionName).GetComponent<Minions>().StopMovement();
+    }
 }

@@ -19,6 +19,8 @@ GameObject:
   - 114: {fileID: 11475744}
   - 114: {fileID: 11464962}
   - 114: {fileID: 11402682}
+  - 114: {fileID: 11431244}
+  - 114: {fileID: 11481542}
   m_Layer: 10
   m_Name: WizardMinion
   m_TagString: Minion
@@ -173,6 +175,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b0859a8c3777db44b05a9b8e6160453, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11431244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cc238e3f567c96458b96bec8efb41e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11439796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -187,7 +200,6 @@ MonoBehaviour:
   minionsInformations: {fileID: 11400000, guid: 16415e4dacfab264fb9f4bc45dca3e29,
     type: 2}
   minionType: 2
-  DEBUGState: 0
   overrideMaterial: 0
 --- !u!114 &11464962
 MonoBehaviour:
@@ -252,6 +264,17 @@ MonoBehaviour:
     i15: 64
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &11481542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64880a7e479cc4174a4e5939d02983ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11498254
 MonoBehaviour:
   m_ObjectHideFlags: 1
