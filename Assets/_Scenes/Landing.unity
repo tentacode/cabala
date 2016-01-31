@@ -112,6 +112,7 @@ Transform:
   m_Children:
   - {fileID: 1119847080}
   - {fileID: 891379732}
+  - {fileID: 1536197639}
   m_Father: {fileID: 0}
   m_RootOrder: 5
 --- !u!1 &280353593
@@ -361,6 +362,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 832232972}
+--- !u!114 &891379731 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11406958, guid: 0547300e815865a478b5dff87dc32bc3,
+    type: 2}
+  m_PrefabInternal: {fileID: 1849338083}
+  m_Script: {fileID: 11500000, guid: 30e0c06c66dbe06459ba713e72136654, type: 3}
 --- !u!4 &891379732 stripped
 Transform:
   m_PrefabParentObject: {fileID: 438504, guid: 0547300e815865a478b5dff87dc32bc3, type: 2}
@@ -508,6 +515,8 @@ MonoBehaviour:
   landingUI: {fileID: 946438064}
   creditsUI: {fileID: 1540574527}
   sound: {fileID: 1119847081}
+  menuMusic: {fileID: 891379731}
+  creditMusic: {fileID: 1536197640}
 --- !u!114 &1095026146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -918,6 +927,48 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1447354093}
+--- !u!1 &1536197638
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1536197639}
+  - 114: {fileID: 1536197640}
+  m_Layer: 0
+  m_Name: CreditMusic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1536197639
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1536197638}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 229396768}
+  m_RootOrder: 2
+--- !u!114 &1536197640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1536197638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c76bc8ad0819786468e05666b0dd1e5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loop: 0
+  music: {fileID: 8300000, guid: 9dec7e35b77130e498401852756fbc38, type: 3}
+  mixerGroup: {fileID: 24390358, guid: 5bcf8c73e25ab524e9edf5e15b9c6a50, type: 2}
 --- !u!1 &1540574527
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,8 @@ public class LandingUI : MonoBehaviour
     public GameObject creditsUI;
 
     public MonoSoundable sound;
+    public MusicalMono menuMusic;
+    public MusicalMono creditMusic;
 
     bool isCredits = false;
 
@@ -15,12 +17,14 @@ public class LandingUI : MonoBehaviour
     {
         isCredits = true;
         sound.playSound();
+        creditMusic.playSound();
     }
 
     public void BackToLanding()
     {
         isCredits = false;
         sound.playSound();
+        menuMusic.playSound();
     }
 
     public void SwitchToPlay()
