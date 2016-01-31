@@ -17,6 +17,7 @@ public class MusicManager : MonoBehaviour
 
     public void PlayMusic(AudioClip music, AudioMixerGroup mixerGroup, bool looping)
     {
+        audioSource.Stop();
         audioSource.clip = music;
         audioSource.outputAudioMixerGroup = mixerGroup;
         audioSource.loop = looping;
