@@ -6,59 +6,49 @@ using UnityEngine.UI;
 public class UIDeath : MonoBehaviour {
 
     [SerializeField]
-    private List<GameObject> _objectDeaths;
-
+    private GameObject[] _objectLose;
     [SerializeField]
-    private Button _buttonGameOver;
-
-    [SerializeField]
-    private Button _buttonGameOver2;
-
-    [SerializeField]
-    private Text _text;
+    private GameObject[] _objectWin;
 
     void Start()
     {
-
-        foreach (var c in _objectDeaths)
-         {
-             c.SetActive(false) ;
-         }
+        Deactivate();
     }
 
-    public void Activate(bool v)
+    public void Activate(bool isWin)
     {
-        foreach (var c in _objectDeaths)
+        if (isWin)
         {
-            c.SetActive(c);
-        }
-
-        if (GameSharedData.GetLocalPlayer().GetComponent<PlayerAuthorityScript>().cultisteLife > 0)
-        {
-            _text.text = "You Win !";
-
-            _buttonGameOver.gameObject.SetActive(true);
-            _buttonGameOver2.gameObject.SetActive(true);
+            foreach (var v in _objectWin)
+            {
+                v.SetActive(true);
+            }
         }
         else
         {
-            _text.text = "";
-
-            _buttonGameOver.gameObject.SetActive(false);
-            _buttonGameOver2.gameObject.SetActive(false);
+            foreach (var v in _objectLose)
+            {
+                v.SetActive(true);
+            }
         }
-        
     }
 
-    void Update()
+    public void Deactivate()
     {
-        transform.localPosition = Vector3.zero;
+        foreach (var v in _objectLose)
+        {
+            v.SetActive(false);
+        }
+        foreach (var v in _objectWin)
+        {
+            v.SetActive(false);
+        }
     }
 
     public void ButtonGameAgain()
     {
-        Activate(false);
-        
+        Deactivate();
+        GameSharedData.GetLocalPlayer().GetComponent<PlayerAuthorityScript>().CmdRematch();
     }
 
     public void ButtonGoLobby()

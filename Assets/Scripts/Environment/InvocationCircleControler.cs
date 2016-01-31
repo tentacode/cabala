@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class InvocationCircleControler : NetworkBehaviour
 {
     [SerializeField]
-    private SpawnerController _spawner;
+    public SpawnerController _spawner;
 
     [SerializeField]
     private Unit_ID _unitID;
@@ -54,8 +54,6 @@ public class InvocationCircleControler : NetworkBehaviour
             return;
         }
 
-        Debug.Log("Invoc enter !");
-
         if (other.tag == "Minion")
         {
             if (other.GetComponent<Unit_ID>().GetPlayerIndex() != _unitID.GetPlayerIndex())
@@ -70,13 +68,10 @@ public class InvocationCircleControler : NetworkBehaviour
         }
     }
 
+    bool DeadIsAquired = false;
     void Update()
     {
-        if (Life <= 0)
-        {
-            return;
-        }
-
+        // Just draw Cultitsts
         int count = 0;
         foreach (var c in AllCultists)
         {
@@ -91,45 +86,41 @@ public class InvocationCircleControler : NetworkBehaviour
             count++;
         }
 
-       
 
-       
+        if (!DeadIsAquired && Life <= 0)
+        {
+            DeadIsAquired = true;
+
+            if (PlayerDead >= GameSharedData.NumberOfPlayer)
+            {
+                // WIN
+                // Game OVER
+                //_unitID.GetComponent<PlayerAuthorityScript>().CmdGameOver();
+                GameObject.Find("GameOverEffects").GetComponent<UIDeath>().Activate(true);
+            }
+            else
+            {
+                // LOSE
+                GameObject.Find("GameOverEffects").GetComponent<UIDeath>().Activate(false);
+            }
+        }
+
+        
     }
 
     public void CultistDeath(string minionName)
     {
-        Debug.Log("Life--");
-
-        
-        /*
-        AllCultists.RemoveAt(0);
-        AllCultists[0].CmdSetIsActive(false);*/
-        
-
-       // Destroy( cultistsLeft[0].gameObject);
-       // NetworkServer.UnSpawn(cultistsLeft[0].gameObject);
-
-
         if (Life <= 0)
         {
             Lose();
         }
     }
-    public static int PlayerDead = 0;
+    [SyncVar]
+    private int PlayerDead = 0;
 
     public void Lose()
     {
         PlayerDead++;
-
-        _spawner.CmdisActive( false );
-
-        if (_unitID.IsReady() && PlayerDead >= GameSharedData.NumberOfPlayer - 1)
-        {
-            // Game OVER
-            _unitID.GetComponent<PlayerAuthorityScript>().CmdGameOver();
-        }
-
-
-        // do stuff
+        _spawner.CmdisActive(false);
     }
 }
