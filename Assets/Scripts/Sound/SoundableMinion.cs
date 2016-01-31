@@ -28,7 +28,7 @@ public class SoundableMinion : SoundableElement
         }
 
         ActionSound actionSound = minionSounds.getActionSoundFromAction(action);
-        Debug.Log("Playing Sound " + actionSound.sound.name);
+
         LaunchSound(actionSound.sound, actionSound.mixerGroup);
     }
 }

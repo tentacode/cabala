@@ -6,6 +6,12 @@ public class PlayerAuthorityScript : NetworkBehaviour {
 
     private Unit_ID _unit_ID;
 
+    [SyncVar]
+    public int cultisteLife = 5;
+
+    [SerializeField]
+    private InvocationCircleControler _invoc;
+
     void Start()
     {
         _unit_ID = GetComponent<Unit_ID>();
@@ -29,5 +35,19 @@ public class PlayerAuthorityScript : NetworkBehaviour {
         GameObject target = GameObject.Find(targetName);
 
         GameObject.Find(minionName).GetComponent<Minions>().MovementGoTo(target.transform.position);
+    }
+    
+    [Command]
+    public void CmdDestroyCultiste(string name)
+    {
+        cultisteLife--;
+
+        GameObject minion = GameObject.Find(name);
+        if (minion != null)
+        {
+            minion.GetComponent<Destructible>().CmdTakeDamage(1000);
+        }
+
+        _invoc.CultistDeath(name);
     }
 }
