@@ -268,7 +268,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 278.73227, y: 333.5859, z: -444.66385}
+  m_LocalPosition: {x: 6.248501, y: 14.945061, z: -4.816704}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 432534}
@@ -818,6 +818,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cultisteLife: 5
   _invoc: {fileID: 11456874}
+  IsGameOver: 0
 --- !u!114 &11433798
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -889,6 +890,27 @@ MonoBehaviour:
   _spawnPointWarrior: {fileID: 415428}
   _spawnPointGhost: {fileID: 404154}
   _spawnPointWizard: {fileID: 461132}
+  _portal: {fileID: 474190}
+  _texturesSpawnColorWarrior:
+  - {fileID: 2800000, guid: 8e37434236563c84aac94b35c9419780, type: 3}
+  - {fileID: 2800000, guid: 9ffb27df1ff01274bb2c892f1b3db7ed, type: 3}
+  - {fileID: 2800000, guid: eba4f71b2b1d70741955908d6d35bb77, type: 3}
+  - {fileID: 2800000, guid: a42eed4b18af1644893e68426db7f3be, type: 3}
+  _texturesSpawnColorWizard:
+  - {fileID: 2800000, guid: c40a6702bdd54b5439e45964951da74b, type: 3}
+  - {fileID: 2800000, guid: 7277983abe2139b46bd392937f87e613, type: 3}
+  - {fileID: 2800000, guid: bb8f3149a67fc904a9d3bc8096ecdd10, type: 3}
+  - {fileID: 2800000, guid: 697541d97868f5a41b2a46ab8c1fe58e, type: 3}
+  _texturesSpawnColorGhost:
+  - {fileID: 2800000, guid: c0a240bb15ad3814888f5d9202635261, type: 3}
+  - {fileID: 2800000, guid: 87a59985e7fe96648aaad4b0eacad28b, type: 3}
+  - {fileID: 2800000, guid: c0d419cd715ff2a4793083f0c286ff60, type: 3}
+  - {fileID: 2800000, guid: c498c14675fc3a041bbe3c0245db557e, type: 3}
+  _texturesSpawnColorPortal:
+  - {fileID: 2800000, guid: 9762322652e667844a478ecb74026835, type: 3}
+  - {fileID: 2800000, guid: 40708d74ddd8b8b43b9f65a9d9aa2ab3, type: 3}
+  - {fileID: 2800000, guid: cfa6ce5f1a9c228408b31f36327666bf, type: 3}
+  - {fileID: 2800000, guid: 059e94ba70505734fa13bec28e020493, type: 3}
 --- !u!114 &11454626
 MonoBehaviour:
   m_ObjectHideFlags: 1
