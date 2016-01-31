@@ -36,6 +36,12 @@ public class PlayerAuthorityScript : NetworkBehaviour {
 
         GameObject.Find(minionName).GetComponent<Minions>().MovementGoTo(target.transform.position);
     }
+
+    [Command]
+    public void CmdSetLife(int life)
+    {
+        this.cultisteLife = life;
+    }
     
     [Command]
     public void CmdDestroyCultiste(string name)
