@@ -23,4 +23,27 @@ public class MinionsInformations : ScriptableObject
 
     [Header("Minions Strenghts")]
     public MinionStrengths minionStrengths;
+
+    [Header("Minions Materials")]
+    public Material[] ghostsMaterials;
+    public Material[] warriorMaterials;
+    public Material[] wizardMaterials;
+
+    public Material[] getMinionMaterials(MinionType type)
+    {
+        switch(type)
+        {
+            case MinionType.Ghost:
+                return ghostsMaterials;
+
+            case MinionType.Warrior:
+                return warriorMaterials;
+
+            case MinionType.Wizard:
+                return wizardMaterials;
+
+            default:
+                return null;
+        }
+    }
 }

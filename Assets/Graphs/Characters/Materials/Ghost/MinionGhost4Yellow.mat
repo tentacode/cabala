@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: MinionBarbarian
+  m_Name: MinionGhost4Yellow
   m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _SPECGLOSSMAP
   m_LightmapFlags: 5
@@ -19,7 +19,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 18417a304b5c2a045aedcf4719eadc6c, type: 3}
+          m_Texture: {fileID: 2800000, guid: 028b6ac8c77871d42b164d2e29347b1f, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -82,7 +82,7 @@ Material:
         first:
           name: _SpecGlossMap
         second:
-          m_Texture: {fileID: 2800000, guid: c434ae077052df94c93c9ab485c7b041, type: 3}
+          m_Texture: {fileID: 2800000, guid: d843ce2a17f70644097a6411bcd4a760, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -98,6 +98,10 @@ Material:
         first:
           name: _Cutoff
         second: 0.5
+      data:
+        first:
+          name: _Shininess
+        second: 1
       data:
         first:
           name: _Parallax
