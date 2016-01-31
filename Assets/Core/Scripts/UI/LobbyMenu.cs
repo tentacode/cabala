@@ -6,7 +6,8 @@ public class LobbyMenu : MonoBehaviour
     public GameObject joinMenu;
     public GameObject joinButton;
     public GameObject readyMenu;
-    public Text readyText;
+    public GameObject readyButton;
+    public GameObject notReadyButton;
     public GameObject instructions;
     public GameObject schema;
     
@@ -72,7 +73,10 @@ public class LobbyMenu : MonoBehaviour
         schema.SetActive(true);
         instructions.SetActive(true);
         bool isReady = lobbyNetworkManager.IsLocalPlayerReady();
-        readyText.text = isReady ? "I'm not ready" : "I'm ready !";
+
+        readyButton.SetActive(!isReady);
+        notReadyButton.SetActive(isReady);
+
         joinMenu.SetActive(false);
         readyMenu.SetActive(true);
     }   
