@@ -301,7 +301,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.75
   m_Center: {x: 0, y: 0.27, z: 0}
 --- !u!195 &19575882
 NavMeshAgent:
@@ -365,6 +365,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: overrideMaterial
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Radius
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
