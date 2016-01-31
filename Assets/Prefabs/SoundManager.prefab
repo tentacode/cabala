@@ -8,7 +8,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 485188}
-  - 114: {fileID: 11406274}
   - 114: {fileID: 11440420}
   - 82: {fileID: 8243418}
   m_Layer: 0
@@ -104,38 +103,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &11406274
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 157040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 138
-    i1: 250
-    i2: 37
-    i3: 103
-    i4: 242
-    i5: 179
-    i6: 4
-    i7: 164
-    i8: 219
-    i9: 86
-    i10: 158
-    i11: 151
-    i12: 216
-    i13: 62
-    i14: 209
-    i15: 242
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
 --- !u!114 &11440420
 MonoBehaviour:
   m_ObjectHideFlags: 1
