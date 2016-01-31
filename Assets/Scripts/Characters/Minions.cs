@@ -29,8 +29,6 @@ public class Minions : NetworkBehaviour
     [SerializeField]
     public Dictionary<MinionType, MinionType> StongAgainst;
 
-    public MinionState DEBUGState;
-
     public MinionState state
     {
         get
@@ -74,6 +72,14 @@ public class Minions : NetworkBehaviour
 
     #region engine methods
 
+    public bool CanRun
+    {
+        get
+        {
+            return isServer && gameObject.activeSelf;
+        }
+    }
+
     public override void OnStartServer()
     {
         _destructible = GetComponent<Destructible>();
@@ -94,12 +100,10 @@ public class Minions : NetworkBehaviour
 
     void LateUpdate()
     {
-        if (!isServer)
+        if (!CanRun)
         {
             return;
         }
-
-        DEBUGState = state;
 
         if (_unit_ID.IsReady())
         {
@@ -109,7 +113,7 @@ public class Minions : NetworkBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (!isServer)
+        if (!CanRun)
         {
             return;
         }
@@ -131,7 +135,7 @@ public class Minions : NetworkBehaviour
 
     protected void initalize()
     {
-        if (!isServer)
+        if (!CanRun)
         {
             return;
         }
@@ -144,11 +148,8 @@ public class Minions : NetworkBehaviour
 
         state = MinionState.moving;
 
-        
-
         int numberOfPlayer = GameObject.Find("GameSharedData").GetComponent<GameSharedData>().NumberOfPlayer;
 
-        Debug.Log((PlayerIndex % numberOfPlayer) + 1);
         GameObject player = Unit_ID.FindPlayer((PlayerIndex % numberOfPlayer) + 1);
         SetGoal(player.transform);
     }
@@ -168,7 +169,7 @@ public class Minions : NetworkBehaviour
 
     public void SetGoal(Transform goalTransform)
     {
-        if (!isServer)
+        if (!CanRun)
         {
             return;
         }
@@ -188,7 +189,7 @@ public class Minions : NetworkBehaviour
 
     public void LaunchFight(Minions otherFighter)
     {
-        if (!isServer)
+        if (!CanRun)
         {
             return;
         }
@@ -209,14 +210,9 @@ public class Minions : NetworkBehaviour
 
     public void finishFight()
     {
-        if (!isServer)
+        if (!CanRun)
         {
             return;
-        }
-
-        if (_destructible.GetLife() <= 0)
-        {
-            return; // do nothing, will go on late state and die as it should
         }
 
         opponent = null;
@@ -230,7 +226,7 @@ public class Minions : NetworkBehaviour
 
     void setupMoving()
     {
-        if (!isServer)
+        if (!CanRun)
         {
             return;
         }
@@ -244,7 +240,7 @@ public class Minions : NetworkBehaviour
 
     public void setupFight()
     {
-        if (!isServer)
+        if (!CanRun)
         {
             return;
         }
@@ -255,22 +251,15 @@ public class Minions : NetworkBehaviour
 
     public void Attack()
     {
-        if (!isServer)
+        if (!CanRun)
         {
             
             return;
         }
 
-        if (opponent == null || _destructible == null)
-        {
-            state = MinionState.moving;
-            setupMoving();
-            return;
-        }
-
         Destructible opponentDestructible = opponent.GetComponent<Destructible>();
         opponentDestructible.CmdTakeDamage(computeDamages());
-       
+
         _destructible.CmdTakeDamage(opponent.computeDamages());
 
         Invoke("Attack", minionsInformations.attackSpeed);
@@ -278,7 +267,7 @@ public class Minions : NetworkBehaviour
 
     private int computeDamages()
     {
-        if (!isServer || opponent == null)
+        if (!CanRun || opponent == null)
         {
             return 0;
         }
@@ -293,7 +282,7 @@ public class Minions : NetworkBehaviour
 
     private void OnDie(GameObject whoDied)
     {
-        if (!isServer)
+        if (!CanRun)
         {
             return;
         }
@@ -309,7 +298,7 @@ public class Minions : NetworkBehaviour
    }
     private void OnAlive(GameObject whoAlive)
     {
-        if (!isServer)
+        if (!CanRun)
         {
             return;
         }
