@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: CharacterCultist_diff
+  m_Name: CharacterCultist
   m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _PARALLAXMAP _SPECGLOSSMAP
   m_LightmapFlags: 5
@@ -19,7 +19,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: c72673faa8ec3534b93cab0ff87555a2, type: 3}
+          m_Texture: {fileID: 2800000, guid: 3d64ec59b2e181043a57e8eb1d5b6041, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -40,7 +40,7 @@ Material:
         first:
           name: _ParallaxMap
         second:
-          m_Texture: {fileID: 2800000, guid: fcefb8199619a414ca82bdf4205d20b9, type: 3}
+          m_Texture: {fileID: 2800000, guid: 80f0f52c5dbb2694a91274dd4a66ecda, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -82,7 +82,7 @@ Material:
         first:
           name: _SpecGlossMap
         second:
-          m_Texture: {fileID: 2800000, guid: 1a59998a245faa94f9726519593e7d5c, type: 3}
+          m_Texture: {fileID: 2800000, guid: 238bbdfa90c9e3045951270a56995aba, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
