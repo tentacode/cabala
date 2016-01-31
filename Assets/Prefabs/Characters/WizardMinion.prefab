@@ -17,8 +17,10 @@ GameObject:
   - 114: {fileID: 11476888}
   - 114: {fileID: 11498254}
   - 114: {fileID: 11475744}
-  - 114: {fileID: 11464962}
   - 114: {fileID: 11402682}
+  - 114: {fileID: 11431244}
+  - 114: {fileID: 11481542}
+  - 114: {fileID: 11459586}
   m_Layer: 10
   m_Name: WizardMinion
   m_TagString: Minion
@@ -173,6 +175,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b0859a8c3777db44b05a9b8e6160453, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11431244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cc238e3f567c96458b96bec8efb41e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11439796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -187,9 +200,8 @@ MonoBehaviour:
   minionsInformations: {fileID: 11400000, guid: 16415e4dacfab264fb9f4bc45dca3e29,
     type: 2}
   minionType: 2
-  DEBUGState: 0
   overrideMaterial: 0
---- !u!114 &11464962
+--- !u!114 &11459586
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -197,18 +209,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 113106}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 85e5146040734b641b3ccbf523315e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
+  myTransform: {fileID: 438718}
+  useHistoricalLerping: 0
 --- !u!114 &11475744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -252,6 +257,17 @@ MonoBehaviour:
     i15: 64
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &11481542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64880a7e479cc4174a4e5939d02983ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11498254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -334,6 +350,10 @@ Prefab:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: myTransform
+      value: 
+      objectReference: {fileID: 438718}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 113106}

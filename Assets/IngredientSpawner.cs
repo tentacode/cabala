@@ -69,7 +69,7 @@ public class IngredientSpawner : MonoBehaviour
     {
         // pool of player id to know where to spawn the ingredients
         // randomize on each SpawnIngredients()
-        int playerCount = GetPlayerCount();
+        int playerCount = GameSharedData.NumberOfPlayer;
 
         players = new List<int>();
         for (int i = 0; i < playerCount; i++) {
@@ -79,20 +79,9 @@ public class IngredientSpawner : MonoBehaviour
         return players;
     }
 
-    int GetPlayerCount()
-    {
-        var gameSharedData = GameObject.Find("GameSharedData");
-        if (!gameSharedData) {
-            Debug.LogWarning("GameSharedData not found, spawning 1 ingredient.");
-            return 1;
-        }
-
-        return gameSharedData.GetComponent<GameSharedData>().NumberOfPlayer;
-    }
-
     int GetIngredientCount()
     {
-        var ingredientCount = GetPlayerCount() - 1;
+        var ingredientCount = GameSharedData.NumberOfPlayer - 1;
         if (ingredientCount < 0) {
             return 1;
         }

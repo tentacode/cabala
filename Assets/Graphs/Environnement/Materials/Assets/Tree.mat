@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Ground2
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: Tree
+  m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: -1
@@ -19,8 +19,8 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
-          m_Scale: {x: 5, y: 5}
+          m_Texture: {fileID: 2800000, guid: d5ff1aee485bab94888d2eea61ec142d, type: 3}
+          m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -55,7 +55,7 @@ Material:
           name: _EmissionMap
         second:
           m_Texture: {fileID: 0}
-          m_Scale: {x: 5, y: 5}
+          m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -78,6 +78,13 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _SpecGlossMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -94,7 +101,7 @@ Material:
       data:
         first:
           name: _Parallax
-        second: 0.02
+        second: 0.0239
       data:
         first:
           name: _ZWrite
@@ -102,7 +109,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: 0.021
+        second: 0.5
       data:
         first:
           name: _BumpScale
@@ -126,7 +133,7 @@ Material:
       data:
         first:
           name: _Metallic
-        second: 1
+        second: 0
     m_Colors:
       data:
         first:
@@ -135,4 +142,8 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0.64705884, g: 1, b: 0.6933063, a: 1}
+        second: {r: 0.355939, g: 0.9485294, b: 0.16738753, a: 1}
+      data:
+        first:
+          name: _SpecColor
+        second: {r: 0.006704158, g: 0.22794116, b: 0.044848476, a: 1}

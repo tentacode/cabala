@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 
 public class LANLobbyNetworkManager : NetworkLobbyManager
 {
-    GameObject localPlayer;
+    static GameObject localPlayer;
     
     public void TogglePlayerReady()
     {
@@ -85,7 +85,7 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
         return true;
     }
     
-    GameObject GetLocalPlayer()
+    public static GameObject GetLocalPlayer()
     {
         if (localPlayer) {
             return localPlayer;
@@ -93,7 +93,7 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
         
         var players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject player in players) {
-            if (player.GetComponent<PlayerNetwork>().connectionId == client.connection.connectionId) {
+            if (player.GetComponent<PlayerNetwork>().connectionId == LANLobbyNetworkManager.singleton.client.connection.connectionId) {
                 localPlayer = player;
             }
         }
