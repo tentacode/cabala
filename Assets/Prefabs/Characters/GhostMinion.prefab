@@ -54,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 113106}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 6.890691, y: 15.077797, z: -25.296112}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 464024}
@@ -108,7 +108,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 043b17b9a7e08c44bbfee4f8d044302b, type: 2}
+  - {fileID: 2100000, guid: f8bc68f720509f445a25c8e337bbd792, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -202,6 +202,7 @@ MonoBehaviour:
     type: 2}
   minionType: 0
   overrideMaterial: 0
+  overrideHealthBarMaterial: 1
 --- !u!114 &11466970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -300,7 +301,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.75
   m_Center: {x: 0, y: 0.27, z: 0}
 --- !u!195 &19575882
 NavMeshAgent:

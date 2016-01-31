@@ -42,7 +42,7 @@ public class PlayerAuthorityScript : NetworkBehaviour {
     {
         this.cultisteLife = life;
     }
-    
+
     [Command]
     public void CmdDestroyCultiste(string name)
     {
@@ -55,5 +55,51 @@ public class PlayerAuthorityScript : NetworkBehaviour {
         }
 
         _invoc.CultistDeath(name);
+    }
+    [SyncVar]
+    public bool IsGameOver = false;
+
+    [SyncVar]
+    bool rematch = false;
+
+    [Command]
+    public void CmdGameOver()
+    {
+        IsGameOver = true;
+    }
+
+    bool GameOverDOne = false;
+    void Update()
+    {
+        if (rematch)
+        {
+            GameOverDOne = false;
+            IsGameOver = false;
+            InvocationCircleControler.PlayerDead = 0;
+
+            foreach (var p in GameSharedData.GetAllPlayers)
+            {
+                p.GetComponent<PlayerAuthorityScript>().CmdSetLife(5);
+            }
+        }
+
+        if (IsGameOver == false)
+        {
+            GameOverDOne = false;
+        }
+
+        if (IsGameOver && !GameOverDOne)
+        {
+            GameOverDOne = true;
+            GameObject.Find("GameOverEffects").GetComponent<UIDeath>().Activate(true);
+        }
+    }
+
+    [Command]
+    public void CmdRematch()
+    {
+        rematch = true;
+
+
     }
 }

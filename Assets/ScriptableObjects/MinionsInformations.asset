@@ -16,7 +16,7 @@ MonoBehaviour:
   firstAttackSpeed: 0.5
   damages: 2
   damageMultiplicator: 2
-  teamMaterials:
+  healBarTeamMaterials:
   - {fileID: 2100000, guid: f8bc68f720509f445a25c8e337bbd792, type: 2}
   - {fileID: 2100000, guid: 38be5d30616073e4e97b55e59dbc0950, type: 2}
   - {fileID: 2100000, guid: 64ce2a768a1642c4fba1298f74989af8, type: 2}

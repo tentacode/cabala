@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd6384a8527f47e790862b69292686d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BroadcastPort: 47756
+  m_BroadcastPort: 47779
   m_BroadcastKey: 2222
   m_BroadcastVersion: 1
   m_BroadcastSubVersion: 1
@@ -161,6 +161,10 @@ Prefab:
       value: 
       objectReference: {fileID: 11419812, guid: 86e845a10142546c1959a0a4ea773604,
         type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_BroadcastPort
+      value: 47779
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 120086}
