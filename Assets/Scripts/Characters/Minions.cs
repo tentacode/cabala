@@ -55,6 +55,8 @@ public class Minions : NetworkBehaviour
     private Transform goal;
     private bool isInit = false;
 
+    public bool overrideMaterial = false;
+
 
     private Destructible _destructible;
     private Unit_ID _unit_ID;
@@ -75,13 +77,17 @@ public class Minions : NetworkBehaviour
     public override void OnStartServer()
     {
         _destructible = GetComponent<Destructible>();
-        _unit_ID = GetComponent<Unit_ID>();
         navAgent = GetComponent<NavMeshAgent>();
-
+        _unit_ID = GetComponent<Unit_ID>();
         _destructible.CmdSetMaxLife(minionsInformations.baseLifePoints);
 
         _destructible.HandleDestroyed += OnDie;
         _destructible.HandleAlive += OnAlive;
+    }
+
+    void Awake()
+    {
+        _unit_ID = GetComponent<Unit_ID>();
     }
 
 
@@ -138,7 +144,7 @@ public class Minions : NetworkBehaviour
 
         state = MinionState.moving;
 
-        setMaterial();
+        
 
         int numberOfPlayer = GameObject.Find("GameSharedData").GetComponent<GameSharedData>().NumberOfPlayer;
 
@@ -147,14 +153,17 @@ public class Minions : NetworkBehaviour
         SetGoal(player.transform);
     }
 
+    void Update()
+    {
+        setMaterial();
+    }
+
     private void setMaterial()
     {
-        if (!isServer)
+        if (overrideMaterial)
         {
-            return;
+            GetComponent<Renderer>().material = minionsInformations.teamMaterials[PlayerIndex - 1];
         }
-
-        GetComponent<Renderer>().material = minionsInformations.teamMaterials[PlayerIndex];
     }
 
     public void SetGoal(Transform goalTransform)
@@ -215,6 +224,17 @@ public class Minions : NetworkBehaviour
 
         CancelInvoke("Attack");
 
+        setupMoving();
+        
+    }
+
+    void setupMoving()
+    {
+        if (!isServer)
+        {
+            return;
+        }
+
         if (state == MinionState.moving)
         {
             navAgent.destination = goal.position;
@@ -237,19 +257,28 @@ public class Minions : NetworkBehaviour
     {
         if (!isServer)
         {
+            
+            return;
+        }
+
+        if (opponent == null || _destructible == null)
+        {
+            state = MinionState.moving;
+            setupMoving();
             return;
         }
 
         Destructible opponentDestructible = opponent.GetComponent<Destructible>();
-        opponentDestructible.TakeDamage(computeDamages(), _destructible);
-        _destructible.TakeDamage(opponent.computeDamages(), opponentDestructible);
+        opponentDestructible.CmdTakeDamage(computeDamages());
+       
+        _destructible.CmdTakeDamage(opponent.computeDamages());
 
         Invoke("Attack", minionsInformations.attackSpeed);
     }
 
     private int computeDamages()
     {
-        if (!isServer)
+        if (!isServer || opponent == null)
         {
             return 0;
         }
@@ -262,7 +291,7 @@ public class Minions : NetworkBehaviour
         return minionsInformations.damages;
     }
 
-    private void OnDie(GameObject whoDied, Destructible whokill)
+    private void OnDie(GameObject whoDied)
     {
         if (!isServer)
         {

@@ -4,16 +4,6 @@ using UnityEngine.Networking;
 
 public class Unit_ID : NetworkBehaviour {
 
-    Color[] _colors =
-    {
-        Color.black,
-        Color.white,
-        Color.blue,
-        Color.green
-    };
-
-    // Side 0 is neutral
-    [SerializeField]
     [SyncVar]
     private int PlayerIndex;
 
@@ -23,7 +13,8 @@ public class Unit_ID : NetworkBehaviour {
     }
 
     [HideInInspector]
-	[SyncVar] private string my_uniqueID ;
+	[SyncVar] 
+    private string my_uniqueID ;
 	private Transform myTransform;
 
     public bool IsReady()
@@ -40,15 +31,16 @@ public class Unit_ID : NetworkBehaviour {
     /// Has to be called on the server side !
     /// </summary>
     /// <param name="number"></param>
-    //[Command]
     public void CmdSetPlayerIndex(int number)
     {
+        Debug.Log("CmdSetPlayerIndex " + number + " " + name);
         PlayerIndex = number;
     }
 
-    //[Command]
     public void CmdSetMyUniqueID(string id)
     {
+
+        Debug.Log("CmdSetMyUniqueID " + id +" " + name);
         my_uniqueID = id;
     }
 
