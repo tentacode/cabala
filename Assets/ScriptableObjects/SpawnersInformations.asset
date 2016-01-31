@@ -20,12 +20,12 @@ MonoBehaviour:
       outSlope: 0
       tangentMode: 0
     - time: 1
-      value: 5
+      value: 3.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  TimeBeforeFirstLaunch: 0
-  maxTime: 60
+  TimeBeforeFirstLaunch: 2
+  maxTime: 180

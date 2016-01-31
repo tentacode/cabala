@@ -62,12 +62,9 @@ public class Minions : NetworkBehaviour
     private NavMeshAgent navAgent;
     private Transform goal;
     private bool isInit = false;
-
-    
-
-
     private Destructible _destructible;
     private Unit_ID _unit_ID;
+    private SoundableMinion minionSoundControler;
 
     public int PlayerIndex
     {
@@ -99,6 +96,8 @@ public class Minions : NetworkBehaviour
 
         _destructible.HandleDestroyed += OnDie;
         _destructible.HandleAlive += OnAlive;
+
+        minionSoundControler = GetComponent<SoundableMinion>();
     }
 
     void Awake()
@@ -158,7 +157,7 @@ public class Minions : NetworkBehaviour
 
         state = MinionState.moving;
 
-
+        minionSoundControler.PlaySound(MinionAction.spawn);
 
         GameObject player = GameSharedData.GetPlayerNumberNext(_unit_ID, 1);
         SetGoal(player.transform);
@@ -284,11 +283,14 @@ public class Minions : NetworkBehaviour
             return;
         }
 
+        minionSoundControler.PlaySound(MinionAction.attack);
+        opponent.minionSoundControler.PlaySound(MinionAction.attack);
+
         Destructible opponentDestructible = opponent.GetComponent<Destructible>();
         opponentDestructible.CmdTakeDamage(computeDamages());
 
         _destructible.CmdTakeDamage(opponent.computeDamages());
-
+        
         Invoke("Attack", minionsInformations.attackSpeed);
     }
 
@@ -320,7 +322,10 @@ public class Minions : NetworkBehaviour
         }
 
         state = MinionState.dead;
-   }
+
+        minionSoundControler.PlaySound(MinionAction.die);
+    }
+
     private void OnAlive(GameObject whoAlive)
     {
         if (!CanRun)

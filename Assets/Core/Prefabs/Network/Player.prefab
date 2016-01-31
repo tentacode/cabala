@@ -30,6 +30,7 @@ GameObject:
   - 4: {fileID: 451240}
   - 136: {fileID: 13632282}
   - 114: {fileID: 11456874}
+  - 114: {fileID: 11469746}
   m_Layer: 0
   m_Name: InvocationCircle
   m_TagString: SpawnPoint
@@ -291,7 +292,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.133712, y: -0.4803877, z: -0.42934823}
+  m_LocalPosition: {x: -3.228042, y: 8.112606, z: -7.41102}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 432534}
@@ -999,9 +1000,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0bab8c79da98e44a4286756b98082d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawner: {fileID: 0}
   _unitID: {fileID: 11471150}
-  lifePoints: 0
-  cultists: []
+  AllCultists: []
+  cultistsLeft: []
   autoFillCultists: 1
 --- !u!114 &11457758
 MonoBehaviour:
@@ -1067,6 +1069,38 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 80
+    i1: 101
+    i2: 50
+    i3: 144
+    i4: 164
+    i5: 57
+    i6: 68
+    i7: 80
+    i8: 88
+    i9: 40
+    i10: 206
+    i11: 77
+    i12: 178
+    i13: 245
+    i14: 36
+    i15: 33
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &11469746
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111674}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
