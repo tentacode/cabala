@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
-public class Cultist : MonoBehaviour
+public class Cultist : NetworkBehaviour
 {
     public InvocationCircleControler parentCircle;
 
@@ -10,6 +11,10 @@ public class Cultist : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (!isServer)
+        {
+            return;
+        }
 
         if (other.tag == "Minion")
         {
@@ -27,7 +32,7 @@ public class Cultist : MonoBehaviour
         parentCircle = parent;
     }
 
-    public void Die()
+    private void Die()
     {
         parentCircle.cultistDeath();
         gameObject.SetActive(false);
