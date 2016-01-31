@@ -19,7 +19,7 @@ GameObject:
   - 114: {fileID: 11488944}
   - 114: {fileID: 11479554}
   - 114: {fileID: 11471094}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GhostMinion
   m_TagString: Minion
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - 33: {fileID: 3388326}
   - 65: {fileID: 6561222}
   - 23: {fileID: 2361900}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: LifeBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,6 +177,7 @@ MonoBehaviour:
     type: 2}
   minionType: 0
   DEBUGState: 0
+  overrideMaterial: 0
 --- !u!114 &11471094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -219,7 +220,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 344882d421f672c4c85821f6afe74124, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerIndex: 0
 --- !u!114 &11491500
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -231,8 +231,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff4d8eb1cb6411f46ad0cc08912bb527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 10
-  maxLife: 0
 --- !u!114 &11496898
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -319,6 +317,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
