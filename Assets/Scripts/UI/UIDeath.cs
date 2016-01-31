@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class UIDeath : MonoBehaviour {
 
-    List<GameObject> objectsChilds = new List<GameObject>();
+    [SerializeField]
+    private List<GameObject> _objectDeaths;
 
     [SerializeField]
     private Button _buttonGameOver;
@@ -18,12 +19,8 @@ public class UIDeath : MonoBehaviour {
 
     void Start()
     {
-         for (int i = 0; i < transform.childCount; i++)
-         {
-             objectsChilds.Add(transform.GetChild(i).gameObject);
-         }
 
-        foreach(var c in objectsChilds)
+        foreach (var c in _objectDeaths)
          {
              c.SetActive(false) ;
          }
@@ -31,7 +28,7 @@ public class UIDeath : MonoBehaviour {
 
     public void Activate(bool v)
     {
-        foreach (var c in objectsChilds)
+        foreach (var c in _objectDeaths)
         {
             c.SetActive(c);
         }
@@ -51,6 +48,11 @@ public class UIDeath : MonoBehaviour {
             _buttonGameOver2.gameObject.SetActive(false);
         }
         
+    }
+
+    void Update()
+    {
+        transform.localPosition = Vector3.zero;
     }
 
     public void ButtonGameAgain()

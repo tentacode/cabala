@@ -57,15 +57,15 @@ public class PlayerAuthorityScript : NetworkBehaviour {
         _invoc.CultistDeath(name);
     }
     [SyncVar]
-    bool IsGameOver = false;
+    public bool IsGameOver = false;
 
     [SyncVar]
     bool rematch = false;
 
     [Command]
-    public void CmdGameOver(bool gameOver)
+    public void CmdGameOver()
     {
-        IsGameOver = gameOver;
+        IsGameOver = true;
     }
 
     bool GameOverDOne = false;
@@ -75,6 +75,7 @@ public class PlayerAuthorityScript : NetworkBehaviour {
         {
             GameOverDOne = false;
             IsGameOver = false;
+            InvocationCircleControler.PlayerDead = 0;
 
             foreach (var p in GameSharedData.GetAllPlayers)
             {
