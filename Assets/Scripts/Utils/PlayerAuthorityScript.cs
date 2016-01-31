@@ -40,6 +40,12 @@ public class PlayerAuthorityScript : NetworkBehaviour {
     }
 
     [Command]
+    public void CmdChangeMinionSide(string minionName, int newSide)
+    {
+        GameObject.Find(minionName).GetComponent<Unit_ID>().CmdSetPlayerIndex(newSide);
+    }
+
+    [Command]
     public void CmdDestroyCultiste(string name)
     {
         cultisteLife--;

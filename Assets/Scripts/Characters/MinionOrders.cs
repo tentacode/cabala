@@ -22,11 +22,11 @@ public class MinionOrders : MonoBehaviour {
         GameObject player = GameSharedData.GetLocalPlayer();
 
         // don't do it for other players
-        if (player.GetComponent<Unit_ID>().GetPlayerIndex() != GetComponent<Unit_ID>().GetPlayerIndex())
+    /*    if (player.GetComponent<Unit_ID>().GetPlayerIndex() != GetComponent<Unit_ID>().GetPlayerIndex())
         {
             enabled = false;
             return;
-        }
+        }*/
 
         Swipeable swipeable = GetComponent<Swipeable>();
 
@@ -71,6 +71,7 @@ public class MinionOrders : MonoBehaviour {
             trancheDangle = 3;
         }
 
+        GameSharedData.GetLocalPlayer().GetComponent<PlayerAuthorityScript>().CmdChangeMinionSide(name, unitID.GetPlayerIndex());
         
         string nameToGo = GameSharedData.GetPlayerNumberNext(GameSharedData.GetLocalPlayer().GetComponent<Unit_ID>(), trancheDangle).name;
         Debug.Log(trancheDangle + " " + nameToGo);
