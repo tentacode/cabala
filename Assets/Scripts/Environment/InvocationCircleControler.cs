@@ -2,7 +2,7 @@
 using UnityEngine.Networking;
 using System.Collections.Generic;
 
-public class InvocationCircleControler : MonoBehaviour
+public class InvocationCircleControler : NetworkBehaviour
 {
     [SerializeField]
     private SpawnerController _spawner;
@@ -10,24 +10,32 @@ public class InvocationCircleControler : MonoBehaviour
     [SerializeField]
     private Unit_ID _unitID;
 
+    private int Life
+    {
+        get
+        {
+            return _unitID.GetComponent<PlayerAuthorityScript>().cultisteLife;
+        }
+    }
+
     [HideInInspector]
     public int LlifePoints
     {
         get
         {
-            return cultistsLeft.Count;
+            return AllCultists.Count;
         }
     }
-    public List<Cultist> AllCultists = new List<Cultist>();
-    public List<Cultist> cultistsLeft;
+
+    public List<Cultist> AllCultists;
     public bool autoFillCultists;
 
     // Use this for initialization
-    void Start () {
+    void Awake () {
 
 	    if(autoFillCultists)
         {
-            cultistsLeft = new List<Cultist>();
+            AllCultists = new List<Cultist>();
             GameObject cultistsParents = transform.Find("Cultists").gameObject;
 
             for (int i = 0; i < cultistsParents.transform.childCount; i++)
@@ -35,62 +43,89 @@ public class InvocationCircleControler : MonoBehaviour
                 
                 Cultist currentCultist = cultistsParents.transform.GetChild(i).GetComponent<Cultist>();
                 AllCultists.Add(currentCultist);
-                cultistsLeft.Add(currentCultist);
-                currentCultist.init(this);
+             //   currentCultist.init(this);
             }
+
         }
 	}
 
-    void OnEnable()
-    {
-        CultistDead = 0;
-        cultistsLeft.Clear();
-        foreach (var c in AllCultists)
-        {
-            c.gameObject.SetActive(true);
-            cultistsLeft.Add(c);
-        }
-    }
-	
-
     void OnTriggerEnter(Collider other)
     {
+   
+        if (!_unitID.isLocalPlayer)
+        {
+            return;
+        }
+
+        if (Life <= 0)
+        {
+            return;
+        }
+
+        Debug.Log("Invoc enter !");
 
         if (other.tag == "Minion")
         {
             if (other.GetComponent<Unit_ID>().GetPlayerIndex() != _unitID.GetPlayerIndex())
             {
-                launchMinionOnCultist(other.GetComponent<Minions>());
+                //CmdCultistDeath(name);
+
+              //  cultistDeath(name);
+
+                Debug.Log("Do my job !");
+                _unitID.GetComponent<PlayerAuthorityScript>().CmdDestroyCultiste(other.name);
             }
         }
     }
 
-    public void launchMinionOnCultist(Minions minion)
+    void Update()
     {
-        //Debug.Log("Launch Minion " + minion.name + " on cultist " + (lifePoints - 1));
-        minion.SetGoal(cultistsLeft[LlifePoints - 1].transform);
+        int count = 0;
+        foreach (var c in AllCultists)
+        {
+            if (count < Life)
+            {
+                c.gameObject.SetActive(true);
+            }
+            else
+            {
+                c.gameObject.SetActive(false);
+            }
+            count++;
+        }
     }
 
-    public void cultistDeath()
+    public void CultistDeath(string minionName)
     {
-        cultistsLeft.RemoveAt(0);
+        Debug.Log("Life--");
 
-        if(LlifePoints <= 0)
+        
+        /*
+        AllCultists.RemoveAt(0);
+        AllCultists[0].CmdSetIsActive(false);*/
+        
+
+       // Destroy( cultistsLeft[0].gameObject);
+       // NetworkServer.UnSpawn(cultistsLeft[0].gameObject);
+
+
+        if (Life <= 0)
         {
             Lose();
         }
     }
 
 
-    static int CultistDead;
+    static int PlayerDead;
 
     public void Lose()
     {
-        CultistDead++;
+        PlayerDead++;
 
-        _spawner.enabled = false;
+        _spawner.CmdisActive( false );
+        enabled = false;
 
-        if (CultistDead >= GameSharedData.NumberOfPlayer - 1)
+        if (PlayerDead >= GameSharedData.NumberOfPlayer - 1)
         {
             Debug.Log("Game OVER !");
         }

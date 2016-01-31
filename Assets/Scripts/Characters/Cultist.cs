@@ -4,14 +4,36 @@ using System.Collections;
 
 public class Cultist : NetworkBehaviour
 {
-    public InvocationCircleControler parentCircle;
+  /*  [SyncVar]
+    bool isactive = true;
+
+    [Command]
+    public void CmdSetIsActive(bool v)
+    {
+        isactive = v;
+    }
+
+    void Update()
+    {
+        if (isactive == false)
+        {
+            gameObject.SetActive(false);
+        }
+    }*/
+
+  /*  public InvocationCircleControler parentCircle;
 
     [SerializeField]
     private Unit_ID _unitID;
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Cultist enter " + isServer);
+        Debug.Log("Cultist enter " + _unitID.isLocalPlayer);
+
+        if (!_unitID.isLocalPlayer)
+        {
+            return;
+        }
 
         if (other.tag == "Minion")
         {
@@ -33,5 +55,5 @@ public class Cultist : NetworkBehaviour
         GetComponent<MonoSoundable>().playSound();
         parentCircle.cultistDeath();
         gameObject.SetActive(false);
-    }
+    }*/
 }
