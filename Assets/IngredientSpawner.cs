@@ -40,6 +40,11 @@ public class IngredientSpawner : MonoBehaviour
         }
     }
 
+    void SpawnIngredient(GameObject ingredient, int playerIndex)
+    {
+        // TODO
+    }
+
     void Randomize(IList list)
     {
         for (int i = 0; i < list.Count; i++) {
@@ -54,6 +59,8 @@ public class IngredientSpawner : MonoBehaviour
     {
         // pool of player id to know where to spawn the ingredients
         // randomize on each SpawnIngredients()
+        int playerCount = GetPlayerCount();
+
         players = new List<int>();
         for (int i = 0; i < playerCount; i++) {
             players.Add(i + 1);
@@ -75,7 +82,7 @@ public class IngredientSpawner : MonoBehaviour
 
     int GetIngredientCount()
     {
-        var ingredientCount = playerCount - 1;
+        var ingredientCount = GetPlayerCount() - 1;
         if (ingredientCount < 0) {
             return 1;
         }
