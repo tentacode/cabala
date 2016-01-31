@@ -11,13 +11,12 @@ using UnityEngine.Networking;
 
 public class Destructible : NetworkBehaviour
 {
-    [SerializeField]
     [SyncVar]
     int life;
     [SyncVar]
     int maxLife;
 
-    public Action<GameObject, Destructible> HandleDestroyed = delegate { };
+    public Action<GameObject> HandleDestroyed = delegate { };
     public Action<GameObject> HandleAlive = delegate { };
     public Action<GameObject, int> HandleTakeDamage = delegate { };
 
@@ -36,7 +35,6 @@ public class Destructible : NetworkBehaviour
     [Command]
     public void CmdSetMaxLife(int v)
     {
-        
         maxLife = v;
 
         Debug.Log("MaxLife change " + maxLife);
@@ -51,25 +49,24 @@ public class Destructible : NetworkBehaviour
         {
             return;
         }
-
-        CmdSetMaxLife(life);
     }
 
-    public void TakeDamage(int damage, Destructible attaking)
+    [Command]
+    public void CmdTakeDamage(int damage)
     {
         life -= damage;
         if (life <= 0)
         {
-            GoDead(attaking);
+            GoDead();
         }
 
         HandleTakeDamage(gameObject, damage);
     }
 
-    public void GoDead(Destructible attaking)
+    private void GoDead()
     {
         GoDeadNoBroadcart();
-        HandleDestroyed(gameObject, attaking);
+        HandleDestroyed(gameObject);
     }
 
     public void GoDeadNoBroadcart()
