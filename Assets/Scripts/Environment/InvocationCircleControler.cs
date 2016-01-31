@@ -107,7 +107,6 @@ public class InvocationCircleControler : NetworkBehaviour
             return;
         }
 
-        Debug.Log("Player dead : " + CountPLayerDead() + " " + GameSharedData.NumberOfPlayer);
         if (_unitID.isLocalPlayer && !DeadIsAquired && Life <= 0)
         {
             DeadIsAquired = true;

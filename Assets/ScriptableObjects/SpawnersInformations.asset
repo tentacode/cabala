@@ -14,8 +14,8 @@ MonoBehaviour:
   spawnSpeedCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0.004360457
-      value: 3.9947486
+    - time: 0
+      value: 4.25
       inSlope: 0
       outSlope: 0
       tangentMode: 0

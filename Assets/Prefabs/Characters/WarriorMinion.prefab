@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 438718}
   - 33: {fileID: 3344632}
-  - 135: {fileID: 13525860}
   - 23: {fileID: 2326920}
   - 195: {fileID: 19575882}
   - 114: {fileID: 11439796}
@@ -22,6 +21,7 @@ GameObject:
   - 114: {fileID: 11466540}
   - 114: {fileID: 11471150}
   - 114: {fileID: 11413908}
+  - 65: {fileID: 6535634}
   m_Layer: 10
   m_Name: WarriorMinion
   m_TagString: Minion
@@ -272,6 +272,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &6535634
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113106}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 1.25, z: 2}
+  m_Center: {x: 0, y: 0.42962325, z: -0.000000052154064}
 --- !u!65 &6561222
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -424,18 +436,6 @@ MonoBehaviour:
   ghostAttack: {fileID: 19883810}
   warriorAttack: {fileID: 19844156}
   wizardAttack: {fileID: 19815222}
---- !u!135 &13525860
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 113106}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0.27, z: 0}
 --- !u!195 &19575882
 NavMeshAgent:
   m_ObjectHideFlags: 1
@@ -4965,6 +4965,22 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Radius
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Center.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.z
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
