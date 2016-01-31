@@ -34,8 +34,9 @@ public class PlayerNetwork : NetworkBehaviour
     
     void InitPosition()
     {
-        var ground = GameObject.Find("SpawnPlayer" + _unitID.GetPlayerIndex());
-        transform.position = ground.transform.position;
+        var spawn = GameObject.Find("SpawnPlayer" + _unitID.GetPlayerIndex());
+        transform.position = spawn.transform.position;
+        transform.rotation = spawn.transform.rotation;
     }
     
     void InitCamera()
