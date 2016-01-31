@@ -18,8 +18,8 @@ public class MinionsInformations : ScriptableObject
     [Tooltip("Damage dealt to units weak againts this unit")]
     public float damageMultiplicator;
 
-    [Header("material teams")]
-    public Material[] teamMaterials;
+    [Header("health bars teams material")]
+    public Material[] healBarTeamMaterials;
 
     [Header("Minions Strenghts")]
     public MinionStrengths minionStrengths;
