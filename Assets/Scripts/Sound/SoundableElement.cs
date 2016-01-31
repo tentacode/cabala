@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SoundableElement : MonoBehaviour
+public abstract class SoundableElement : MonoBehaviour
 {
     private SoundManager soundManager;
 	
@@ -14,7 +14,7 @@ public class SoundableElement : MonoBehaviour
 	
 	}
 
-    void PlaySound()
+    protected abstract void PlaySound()
     {
 
     }
