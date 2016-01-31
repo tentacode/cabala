@@ -24,6 +24,9 @@ public class LANNetworkDiscovery : NetworkDiscovery
 
     void Start()
     {
+        // Disable screen dimming
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
         networkManager = GetComponent<LANLobbyNetworkManager>();
 
         StartDiscovering();
