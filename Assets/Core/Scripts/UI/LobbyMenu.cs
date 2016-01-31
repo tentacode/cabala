@@ -5,9 +5,10 @@ public class LobbyMenu : MonoBehaviour
 {   
     public GameObject joinMenu;
     public GameObject joinButton;
-    public Text gameStatusText;
     public GameObject readyMenu;
     public Text readyText;
+    public GameObject instructions;
+    public GameObject schema;
     
     LANNetworkDiscovery networkDiscovery;
     LANLobbyNetworkManager lobbyNetworkManager;
@@ -59,14 +60,17 @@ public class LobbyMenu : MonoBehaviour
     
     void SwitchToDiscovering()
     {
+        schema.SetActive(false);
+        instructions.SetActive(false);
         joinMenu.SetActive(true);
         joinButton.SetActive(false);
         readyMenu.SetActive(false);
-        gameStatusText.text = "No game available :(";
     }
     
     void SwitchToLobby()
     {
+        schema.SetActive(true);
+        instructions.SetActive(true);
         bool isReady = lobbyNetworkManager.IsLocalPlayerReady();
         readyText.text = isReady ? "I'm not ready" : "I'm ready !";
         joinMenu.SetActive(false);
@@ -75,9 +79,10 @@ public class LobbyMenu : MonoBehaviour
     
     void SwitchToGameFound()
     {
+        schema.SetActive(false);
+        instructions.SetActive(false);
         joinMenu.SetActive(true);
         joinButton.SetActive(true);
         readyMenu.SetActive(false);
-        gameStatusText.text = "A game is available ! :)";
     }
 }
