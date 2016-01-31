@@ -55,12 +55,20 @@ public class Destructible : NetworkBehaviour
     public void CmdTakeDamage(int damage)
     {
         life -= damage;
+        HandleTakeDamage(gameObject, damage);
+    }
+
+    void LateUpdate()
+    {
+        if (!isServer)
+        {
+            return;
+        }
+
         if (life <= 0)
         {
             GoDead();
         }
-
-        HandleTakeDamage(gameObject, damage);
     }
 
     private void GoDead()

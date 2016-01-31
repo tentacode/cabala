@@ -261,16 +261,10 @@ public class Minions : NetworkBehaviour
             return;
         }
 
-        if (opponent == null || _destructible == null)
-        {
-            state = MinionState.moving;
-            setupMoving();
-            return;
-        }
 
         Destructible opponentDestructible = opponent.GetComponent<Destructible>();
         opponentDestructible.CmdTakeDamage(computeDamages());
-       
+
         _destructible.CmdTakeDamage(opponent.computeDamages());
 
         Invoke("Attack", minionsInformations.attackSpeed);
