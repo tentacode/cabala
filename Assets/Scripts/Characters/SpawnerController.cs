@@ -10,6 +10,9 @@ public class SpawnerController : NetworkBehaviour
     [SyncVar]
     public MinionType spawnedCharacter;
 
+    [SyncVar]
+    private bool ISActive;
+
     public SpawnersInformations spawnerInformations;
 
     private float beginTime;
@@ -40,6 +43,12 @@ public class SpawnerController : NetworkBehaviour
 
         beginTime = Time.time;
         CmdSpawn();
+    }
+
+    [Command]
+    public void CmdisActive(bool actif)
+    {
+        ISActive = actif;
     }
 
     [Command]
