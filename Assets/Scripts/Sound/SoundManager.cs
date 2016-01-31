@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : NetworkBehaviour
 {
     private AudioSource audioSource;
 
