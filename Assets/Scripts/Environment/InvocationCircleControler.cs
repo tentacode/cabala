@@ -127,7 +127,7 @@ public class InvocationCircleControler : NetworkBehaviour
 
         if (PlayerDead >= GameSharedData.NumberOfPlayer - 1)
         {
-            Debug.Log("Game OVER !");
+            GameObject.Find("GameOverEffects").GetComponent<UIDeath>().Activate(true);
         }
 
         // do stuff
