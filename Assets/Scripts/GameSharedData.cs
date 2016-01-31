@@ -3,6 +3,47 @@ using System.Collections;
 
 public class GameSharedData : MonoBehaviour
 {
+
+    static GameObject localPlayer;
+
+    public static GameObject GetLocalPlayer()
+    {
+        GameObject tofind;
+        if (Camera.main.transform.position.x > 0 && Camera.main.transform.position.z > 0)
+        {
+            tofind = Unit_ID.FindPlayer(2);
+        }
+        else if (Camera.main.transform.position.x < 0 && Camera.main.transform.position.z > 0)
+        {
+            tofind = Unit_ID.FindPlayer(3);
+        }
+        else if (Camera.main.transform.position.x > 0 && Camera.main.transform.position.z < 0)
+        {
+            tofind = Unit_ID.FindPlayer(1);
+        }
+        else //if (Camera.main.transform.position.x < 0 && Camera.main.transform.position.y < 0)
+        {
+            tofind = Unit_ID.FindPlayer(4);
+        }
+
+        return tofind;
+        /*
+        if (localPlayer)
+        {
+            return localPlayer;
+        }
+
+        foreach (GameObject player in GameSharedData.GetAllPlayers)
+        {
+            if (player.GetComponent<PlayerNetwork>().connectionId == LANLobbyNetworkManager.singleton.client.connection.connectionId)
+            {
+                localPlayer = player;
+            }
+        }
+
+        return localPlayer;*/
+    }
+
     public static GameObject[] GetAllPlayers
     {
         get
