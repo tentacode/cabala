@@ -6,7 +6,8 @@ public class LobbyMenu : MonoBehaviour
     public GameObject joinMenu;
     public GameObject joinButton;
     public GameObject readyMenu;
-    public Text readyText;
+    public GameObject readyButton;
+    public GameObject notReadyButton;
     public GameObject instructions;
     public GameObject schema;
     
