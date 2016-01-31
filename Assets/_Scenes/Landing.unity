@@ -297,10 +297,10 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "This game was made with love and a lot of coffee during the GlobalGameJam
-    2016.\n\nThe team : \n\nLeo Lefebvre (Game Design, Code), Marie-Jeanne 'Norma'
-    Seillet (Art), Gabriel Pillet (Code), Quentin Mercier (Sound Design, Music), Adrien
-    Delorme (Game Design, Level Design), Patricia Montero (Art) and Farges Maelyss
-    (Code).\n\nSpecial thanks to Agapete the blobfish and the build_info.txt"
+    2016.\n\nThe team : \n\nRemy Vignaud (Art), Leo Lefebvre (Game Design, Code),
+    Marie-Jeanne 'Norma' Seillet (Art), Gabriel Pillet (Code), Quentin Mercier (Sound
+    Design, Music), Adrien Delorme (Game Design, Level Design), Patricia Montero (Art)
+    and Farges Maelyss (Code).\n\nSpecial thanks to Agapete the blobfish and the build_info.txt"
 --- !u!222 &760550447
 CanvasRenderer:
   m_ObjectHideFlags: 0
