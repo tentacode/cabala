@@ -14,8 +14,8 @@ public class Unit_SyncPosition : NetworkBehaviour
     private Quaternion lastRot;
     private Transform myTransform;
     private float lerpRate = 10;
-    private float posThreshold = 0.5f;
-    private float rotThreshold = 5;
+    private float posThreshold = 0;//0.5f;
+    private float rotThreshold = 0;//5;
 
     // Use this for initialization
     void Start()
@@ -23,8 +23,9 @@ public class Unit_SyncPosition : NetworkBehaviour
         myTransform = transform;
     }
 
-    public void SetPosRot(Vector3 pos, Quaternion rot)
+    public void CmdSetPosRot(Vector3 pos, Quaternion rot)
     {
+        myTransform = transform;
 
         transform.position = pos;
         transform.rotation = rot;
@@ -32,12 +33,9 @@ public class Unit_SyncPosition : NetworkBehaviour
         lastPos = pos;
         lastRot = rot;
 
-        if (isServer)
-        {
-            syncPos = lastPos;
-            syncYRot = rot.eulerAngles.y;
-        }
-
+        syncPos = lastPos;
+        syncYRot = rot.eulerAngles.y;
+        
     }
 
     // Update is called once per frame
