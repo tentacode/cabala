@@ -7,11 +7,21 @@ public class SoundableElement : MonoBehaviour
     protected SoundManager soundManager;
 	
 	protected virtual void Start () {
-        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        setupSoundManager();
 	}
+
+    protected void setupSoundManager()
+    {
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+    }
 
     public virtual void LaunchSound(AudioClip sound, AudioMixerGroup mixerGroup)
     {
+        if(soundManager == null)
+        {
+            setupSoundManager();
+        }
+        
         soundManager.PlaySound(sound, mixerGroup);
     }
 }

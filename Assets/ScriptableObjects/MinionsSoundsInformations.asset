@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 186579afff8a28a4c97a661848a40705, type: 3}
-  m_Name: NewSoundsInformations
+  m_Name: MinionsSoundsInformations
   m_EditorClassIdentifier: 
   minionSounds:
   - {fileID: 11475538, guid: d5e8aabab7252c44488f94f317a90633, type: 2}

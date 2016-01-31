@@ -1,59 +1,61 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections.Generic;
 
 public class InvocationCircleControler : MonoBehaviour
 {
     [SerializeField]
+    private SpawnerController _spawner;
+
+    [SerializeField]
     private Unit_ID _unitID;
 
     [HideInInspector]
-    public int lifePoints;
-    
-    public List<Cultist> cultists;
+    public int LlifePoints
+    {
+        get
+        {
+            return cultistsLeft.Count;
+        }
+    }
+    public List<Cultist> AllCultists = new List<Cultist>();
+    public List<Cultist> cultistsLeft;
     public bool autoFillCultists;
-
-   // public List<SpawnerController> spawners;
-  //  public bool autoFillSpawners;
 
     // Use this for initialization
     void Start () {
+
 	    if(autoFillCultists)
         {
-            cultists = new List<Cultist>();
+            cultistsLeft = new List<Cultist>();
             GameObject cultistsParents = transform.Find("Cultists").gameObject;
-
-            lifePoints = cultistsParents.transform.childCount;
 
             for (int i = 0; i < cultistsParents.transform.childCount; i++)
             {
+                
                 Cultist currentCultist = cultistsParents.transform.GetChild(i).GetComponent<Cultist>();
-                cultists.Add(currentCultist);
+                AllCultists.Add(currentCultist);
+                cultistsLeft.Add(currentCultist);
                 currentCultist.init(this);
             }
         }
+	}
 
-      /*  if(autoFillSpawners)
+    void OnEnable()
+    {
+        CultistDead = 0;
+        cultistsLeft.Clear();
+        foreach (var c in AllCultists)
         {
-            spawners = new List<SpawnerController>();
-            GameObject spawnerParents = transform.Find("Spawners").gameObject;
-
-            for (int i = 0; i < spawnerParents.transform.childCount; i++)
-            {
-                SpawnerController currentSpawner = spawnerParents.transform.GetChild(i).GetComponent<SpawnerController>();
-                spawners.Add(currentSpawner);
-                currentSpawner.ownerIndex = ownerIndex;
-                //spawners.init(this, i);
-            }
-        }*/
-	}
+            c.gameObject.SetActive(true);
+            cultistsLeft.Add(c);
+        }
+    }
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     void OnTriggerEnter(Collider other)
     {
+
         if (other.tag == "Minion")
         {
             if (other.GetComponent<Unit_ID>().GetPlayerIndex() != _unitID.GetPlayerIndex())
@@ -66,22 +68,33 @@ public class InvocationCircleControler : MonoBehaviour
     public void launchMinionOnCultist(Minions minion)
     {
         //Debug.Log("Launch Minion " + minion.name + " on cultist " + (lifePoints - 1));
-        minion.SetGoal(cultists[lifePoints - 1].transform);
+        minion.SetGoal(cultistsLeft[LlifePoints - 1].transform);
     }
 
     public void cultistDeath()
     {
-        lifePoints--;
-        cultists.RemoveAt(lifePoints);
+        cultistsLeft.RemoveAt(0);
 
-        if(lifePoints <= 0)
+        if(LlifePoints <= 0)
         {
             Lose();
         }
     }
 
+
+    static int CultistDead;
+
     public void Lose()
     {
+        CultistDead++;
+
+        _spawner.enabled = false;
+
+        if (CultistDead >= GameSharedData.NumberOfPlayer - 1)
+        {
+            Debug.Log("Game OVER !");
+        }
+
         // do stuff
     }
 }

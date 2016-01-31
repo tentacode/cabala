@@ -3,11 +3,23 @@ using System.Collections;
 
 public class MinionOrders : MonoBehaviour {
 
-    PlayerAuthorityScript _localPlayer;
+    Unit_ID unitID;
 
     void Start()
     {
-        GameObject player = LANLobbyNetworkManager.GetLocalPlayer();
+        unitID = GetComponent<Unit_ID>();
+    }
+
+    bool IsInit = false;
+    void Update()
+    {
+        if (IsInit || !unitID.IsReady())
+        {
+            return;
+        }
+        IsInit = true;
+
+        GameObject player = GameSharedData.GetLocalPlayer();
 
         // don't do it for other players
         if (player.GetComponent<Unit_ID>().GetPlayerIndex() != GetComponent<Unit_ID>().GetPlayerIndex())
@@ -16,46 +28,48 @@ public class MinionOrders : MonoBehaviour {
             return;
         }
 
-        _localPlayer = player.GetComponent<PlayerAuthorityScript>();
         Swipeable swipeable = GetComponent<Swipeable>();
 
         swipeable.onSwipe = OnSwipe;
         swipeable.onTouched = OnTouched;
-
-
     }
 
     void OnTouched(TouchResult touchResult)
     {
-        _localPlayer.CmdOrderMinionToStop(name);
+        GameSharedData.GetLocalPlayer().GetComponent<PlayerAuthorityScript>().CmdOrderMinionToStop(name);
      }
 
     void OnSwipe(TouchResult touchResult)
     {
-        float dot = Vector2.Dot(new Vector2(-0.5f, 0.5f), touchResult.direction);
+        float dot = Vector2.Dot(new Vector2(0, 1), touchResult.direction);
+        float angle = Vector2.Angle(new Vector2(0.5f, 0.5f), touchResult.direction);
 
-        // Base
         if (dot < 0)
         {
-            _localPlayer.CmdOrderMinionToMoveTo(name, _localPlayer.name);
+            angle = 360 - angle;
+        }
+
+        int trancheDangle;
+        // Base
+        if (angle > 270)
+        {
+            trancheDangle = 0;
+        }
+        else if (angle >= 0 && angle <= 110)
+        {
+            trancheDangle = 1;
+        }
+        else if (angle > 110 && angle <= 160)
+        {
+            trancheDangle = 2;
         }
         else
         {
-            float angle = Vector2.Angle(new Vector2(0.5f, 0.5f), touchResult.direction);
-
-            int trancheDangle = Mathf.FloorToInt(angle / 60);
-
-            trancheDangle++;
-            Debug.Log(trancheDangle);
-
-            string nameToGo = GameSharedData.GetPlayerNumberNext(_localPlayer.GetComponent<Unit_ID>(), trancheDangle).name;
-            Debug.Log(nameToGo);
-
-            _localPlayer.CmdOrderMinionToMoveTo(name, nameToGo);
+            trancheDangle = 3;
         }
 
-        
+        string nameToGo = GameSharedData.GetPlayerNumberNext(GameSharedData.GetLocalPlayer().GetComponent<Unit_ID>(), trancheDangle).name;
 
-        Debug.Log("Swiped");
+        GameSharedData.GetLocalPlayer().GetComponent<PlayerAuthorityScript>().CmdOrderMinionToMoveTo(name, nameToGo);
     }
 }
