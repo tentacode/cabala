@@ -37,7 +37,6 @@ public class Destructible : NetworkBehaviour
     {
         maxLife = v;
 
-        Debug.Log("MaxLife change " + maxLife);
         life = maxLife;
     }
 
@@ -55,12 +54,20 @@ public class Destructible : NetworkBehaviour
     public void CmdTakeDamage(int damage)
     {
         life -= damage;
+        HandleTakeDamage(gameObject, damage);
+    }
+
+    void LateUpdate()
+    {
+        if (!isServer)
+        {
+            return;
+        }
+
         if (life <= 0)
         {
             GoDead();
         }
-
-        HandleTakeDamage(gameObject, damage);
     }
 
     private void GoDead()
@@ -75,18 +82,8 @@ public class Destructible : NetworkBehaviour
     }
 
     public void GoAlive()
-    {
-        //yield return null;
-      //  yield return new WaitForSeconds(1);
-
-        /*while (!unitId.IsReady())
-        {
-            yield return null;
-        }*/
-
-        
-
-        gameObject.SetActive(true);
+    {   
+        //  gameObject.SetActive(true);
         life = maxLife;
         HandleAlive(gameObject);  
     }

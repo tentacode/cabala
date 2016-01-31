@@ -42,7 +42,17 @@ public class IngredientSpawner : MonoBehaviour
 
     void SpawnIngredient(GameObject ingredient, int playerIndex)
     {
-        // TODO
+        Transform transform = GetRandomSpawnPosition(playerIndex);
+
+        Instantiate(ingredient, transform.position, transform.rotation);
+    }
+
+    Transform GetRandomSpawnPosition(int playerIndex)
+    {
+        var spawnPoints = GameObject.FindGameObjectsWithTag("IngredientSpawnPoint" + playerIndex);
+        var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length - 1)];
+
+        return spawnPoint.transform;
     }
 
     void Randomize(IList list)
