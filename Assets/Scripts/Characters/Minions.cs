@@ -4,6 +4,14 @@ using System;
 using UnityEngine.Networking;
 
 [Serializable]
+public enum MinionAction
+{
+    attack,
+    spawn,
+    die
+}
+
+[Serializable]
 public enum MinionState
 {
     stop,
@@ -163,7 +171,7 @@ public class Minions : NetworkBehaviour
     {
         if (overrideMaterial)
         {
-            GetComponent<Renderer>().material = minionsInformations.teamMaterials[PlayerIndex - 1];
+            GetComponent<Renderer>().material = minionsInformations.healBarTeamMaterials[PlayerIndex - 1];
         }
     }
 
