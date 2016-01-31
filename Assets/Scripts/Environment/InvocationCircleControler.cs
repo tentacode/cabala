@@ -18,15 +18,7 @@ public class InvocationCircleControler : NetworkBehaviour
         }
     }
 
-    [HideInInspector]
-    public int LlifePoints
-    {
-        get
-        {
-            return AllCultists.Count;
-        }
-    }
-
+   
     public List<Cultist> AllCultists;
     public bool autoFillCultists;
 
@@ -80,6 +72,11 @@ public class InvocationCircleControler : NetworkBehaviour
 
     void Update()
     {
+        if (Life <= 0)
+        {
+            return;
+        }
+
         int count = 0;
         foreach (var c in AllCultists)
         {
@@ -93,6 +90,10 @@ public class InvocationCircleControler : NetworkBehaviour
             }
             count++;
         }
+
+       
+
+       
     }
 
     public void CultistDeath(string minionName)
@@ -114,21 +115,20 @@ public class InvocationCircleControler : NetworkBehaviour
             Lose();
         }
     }
-
-
-    static int PlayerDead;
+    public static int PlayerDead = 0;
 
     public void Lose()
     {
         PlayerDead++;
 
         _spawner.CmdisActive( false );
-        enabled = false;
 
-        if (PlayerDead >= GameSharedData.NumberOfPlayer - 1)
+        if (_unitID.IsReady() && PlayerDead >= GameSharedData.NumberOfPlayer - 1)
         {
-            GameObject.Find("GameOverEffects").GetComponent<UIDeath>().Activate(true);
+            // Game OVER
+            _unitID.GetComponent<PlayerAuthorityScript>().CmdGameOver();
         }
+
 
         // do stuff
     }
