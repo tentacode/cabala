@@ -536,8 +536,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 11406274, guid: 8afa2567f2b304a4db569e97d83ed1f2, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8afa2567f2b304a4db569e97d83ed1f2, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &497110919
@@ -691,15 +690,15 @@ MonoBehaviour:
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 14
+    m_MaxSize: 80
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Quick! Setup your phones like the schema!
+  m_Text: Quick! Setup your phones as shown on the pattern!
 --- !u!222 &775197226
 CanvasRenderer:
   m_ObjectHideFlags: 0

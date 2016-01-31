@@ -18,6 +18,34 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
             networkLobbyPlayer.SendReadyToBeginMessage();
         }
     }
+
+    public override void OnLobbyClientConnect(NetworkConnection conn)
+    {
+        Debug.Log("Enters Lobby");
+        Debug.Log(conn.connectionId);
+
+        GameObject schema = GameObject.Find("Schema");
+        GameObject cameraTarget = GameObject.Find("CameraTarget");
+
+        switch (conn.connectionId) {
+            case 0:
+                schema.transform.rotation = Quaternion.Euler(new Vector3(0,-90,0));
+                cameraTarget.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
+                break;
+            case 1:
+                schema.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
+                cameraTarget.transform.rotation = Quaternion.Euler(new Vector3(0,-90,0));
+                break;
+            case 2:
+                schema.transform.rotation = Quaternion.Euler(new Vector3(0,90,0));
+                cameraTarget.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
+                break;
+            case 3:
+                schema.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
+                cameraTarget.transform.rotation = Quaternion.Euler(new Vector3(0,90,0));
+                break;
+        }
+    }
     
     public override void OnLobbyServerConnect(NetworkConnection conn)
     {        
