@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Team4
+  m_Name: Team4Bar
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
@@ -102,7 +102,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: 0.021
+        second: 0.5
       data:
         first:
           name: _BumpScale
@@ -126,12 +126,12 @@ Material:
       data:
         first:
           name: _Metallic
-        second: 1
+        second: 0
     m_Colors:
       data:
         first:
           name: _EmissionColor
-        second: {r: 0.7205882, g: 0.52326685, b: 0.005298448, a: 1}
+        second: {r: 0.71072215, g: 0.981, b: 0.005298448, a: 1}
       data:
         first:
           name: _Color

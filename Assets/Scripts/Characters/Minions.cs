@@ -35,6 +35,7 @@ public class Minions : NetworkBehaviour
     public MinionType minionType;
 
     public bool overrideMaterial = false;
+    public bool overrideHealthBarMaterial = true;
 
     [SerializeField]
     public Dictionary<MinionType, MinionType> StongAgainst;
@@ -166,13 +167,26 @@ public class Minions : NetworkBehaviour
     void Update()
     {
         setMaterial();
+        setHealthBarMaterial();
     }
 
     private void setMaterial()
     {
         if (overrideMaterial)
         {
-            GetComponent<Renderer>().material = minionsInformations.healBarTeamMaterials[PlayerIndex - 1];
+            //GetComponent<Renderer>().material = minionsInformations.healBarTeamMaterials[PlayerIndex - 1];
+        }
+    }
+
+    private void setHealthBarMaterial()
+    {
+        if(overrideHealthBarMaterial)
+        {
+            GameObject healthBar = transform.FindChild("Healthbar").gameObject;
+            if(healthBar != null)
+            {
+                healthBar.GetComponent<Renderer>().material = minionsInformations.healBarTeamMaterials[PlayerIndex - 1];
+            }
         }
     }
 
