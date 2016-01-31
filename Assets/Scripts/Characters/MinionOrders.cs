@@ -21,7 +21,6 @@ public class MinionOrders : MonoBehaviour {
 
         GameObject player = GameSharedData.GetLocalPlayer();
 
-        Debug.Log("LocalPlayer " + player.GetComponent<Unit_ID>().GetPlayerIndex() + " " + GetComponent<Unit_ID>().GetPlayerIndex());
         // don't do it for other players
         if (player.GetComponent<Unit_ID>().GetPlayerIndex() != GetComponent<Unit_ID>().GetPlayerIndex())
         {
