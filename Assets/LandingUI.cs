@@ -7,21 +7,26 @@ public class LandingUI : MonoBehaviour
     public GameObject landingUI;
     public GameObject creditsUI;
 
+    public MonoSoundable sound;
+
     bool isCredits = false;
 
     public void SwitchToCredits()
     {
         isCredits = true;
+        sound.playSound();
     }
 
     public void BackToLanding()
     {
         isCredits = false;
+        sound.playSound();
     }
 
     public void SwitchToPlay()
     {
         SceneManager.LoadScene("Lobby");
+        sound.playSound();
     }
 
 	void Update ()
