@@ -14,13 +14,13 @@ MonoBehaviour:
   spawnSpeedCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
-      value: 5
+    - time: 0.004360457
+      value: 3.9947486
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 1
-      value: 3
+    - time: 1.0014535
+      value: 1.9888079
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -28,4 +28,4 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   TimeBeforeFirstLaunch: 2
-  maxTime: 180
+  maxTime: 60
