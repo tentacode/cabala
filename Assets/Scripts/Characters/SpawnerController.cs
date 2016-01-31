@@ -10,6 +10,9 @@ public class SpawnerController : NetworkBehaviour
     [SyncVar]
     public MinionType spawnedCharacter;
 
+    [SerializeField]
+    private GameObject _smoke;
+
     [SyncVar]
     public bool ISActive = true;
 
@@ -48,6 +51,23 @@ public class SpawnerController : NetworkBehaviour
     bool IsInit = false;
     void Update()
     {
+        _smoke.SetActive(ISActive);
+
+        switch (spawnedCharacter)
+        {
+            case MinionType.Ghost:
+                _smoke.transform.position = _spawnPointGhost.transform.position;
+                break;
+            case MinionType.Warrior:
+                _smoke.transform.position = _spawnPointWarrior.transform.position;
+                break;
+            case MinionType.Wizard:
+                _smoke.transform.position = _spawnPointWizard.transform.position;
+                break;
+            default:
+                break;
+        }
+
         if (IsInit || !_unitId.IsReady())
         {
             return;
