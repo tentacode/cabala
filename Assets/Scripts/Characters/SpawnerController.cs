@@ -64,7 +64,7 @@ public class SpawnerController : NetworkBehaviour
                 break;
         }
 
-        minion.GetComponent<Unit_SyncPosition>().SetPosRot(spawnPoint.position, spawnPoint.rotation);
+        minion.GetComponent<Unit_SyncPosition>().CmdSetPosRot(spawnPoint.position, spawnPoint.rotation);
 
         minion.GetComponent<Unit_ID>().CmdSetPlayerIndex(_unitId.GetPlayerIndex());
 
