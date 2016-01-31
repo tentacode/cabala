@@ -72,18 +72,20 @@ public class Destructible : NetworkBehaviour
 
     private void GoDead()
     {
-        GoDeadNoBroadcart();
         HandleDestroyed(gameObject);
+
+        GoDeadNoBroadcart();
     }
 
     public void GoDeadNoBroadcart()
     {
-        gameObject.SetActive(false);
+        NetworkServer.UnSpawn(gameObject);
+        Destroy(gameObject);
     }
 
     public void GoAlive()
     {   
-        //  gameObject.SetActive(true);
+        gameObject.SetActive(true);
         life = maxLife;
         HandleAlive(gameObject);  
     }
