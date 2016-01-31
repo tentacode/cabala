@@ -162,10 +162,7 @@ public class Minions : NetworkBehaviour
 
         GameObject player = GameSharedData.GetPlayerNumberNext(_unit_ID, 1);
         SetGoal(player.transform);
-    }
 
-    void Update()
-    {
         setMaterial();
         setHealthBarMaterial();
     }
@@ -174,7 +171,10 @@ public class Minions : NetworkBehaviour
     {
         if (overrideMaterial)
         {
-            //GetComponent<Renderer>().material = minionsInformations.healBarTeamMaterials[PlayerIndex - 1];
+            if (minionsInformations.getMinionMaterials(minionType)[PlayerIndex - 1] != null)
+            {
+                GetComponent<Renderer>().material = minionsInformations.getMinionMaterials(minionType)[PlayerIndex - 1];
+            }
         }
     }
 
@@ -182,7 +182,7 @@ public class Minions : NetworkBehaviour
     {
         if(overrideHealthBarMaterial)
         {
-            GameObject healthBar = transform.FindChild("Healthbar").gameObject;
+            GameObject healthBar = transform.FindChild("LifeBar").gameObject;
             if(healthBar != null)
             {
                 healthBar.GetComponent<Renderer>().material = minionsInformations.healBarTeamMaterials[PlayerIndex - 1];
@@ -348,7 +348,7 @@ public class Minions : NetworkBehaviour
         }
 
         isInit = false;
-        initalize();
+        //initalize();
     }
 
     #endregion

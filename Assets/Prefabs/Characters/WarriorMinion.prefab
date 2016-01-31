@@ -234,7 +234,8 @@ MonoBehaviour:
   minionsInformations: {fileID: 11400000, guid: 16415e4dacfab264fb9f4bc45dca3e29,
     type: 2}
   minionType: 1
-  overrideMaterial: 0
+  overrideMaterial: 1
+  overrideHealthBarMaterial: 1
 --- !u!114 &11441484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -368,6 +369,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: overrideMaterial
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
