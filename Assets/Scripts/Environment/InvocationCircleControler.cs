@@ -69,6 +69,8 @@ public class InvocationCircleControler : NetworkBehaviour
     }
 
     bool DeadIsAquired = false;
+
+
     void Update()
     {
         // Just draw Cultitsts
@@ -86,23 +88,22 @@ public class InvocationCircleControler : NetworkBehaviour
             count++;
         }
 
-
-        if (!DeadIsAquired && Life <= 0)
+        
+        if (_unitID.isLocalPlayer && !DeadIsAquired && Life <= 0)
         {
             DeadIsAquired = true;
+            Debug.Log("Dead " + _unitID.GetComponent<PlayerAuthorityScript>().PlayerDeadSync + " " + GameSharedData.NumberOfPlayer);
 
-            if (PlayerDead >= GameSharedData.NumberOfPlayer)
-            {
-                // WIN
-                // Game OVER
-                //_unitID.GetComponent<PlayerAuthorityScript>().CmdGameOver();
-                GameObject.Find("GameOverEffects").GetComponent<UIDeath>().Activate(true);
-            }
-            else
-            {
-                // LOSE
-                GameObject.Find("GameOverEffects").GetComponent<UIDeath>().Activate(false);
-            }
+            GameObject.Find("GameOverEffects").GetComponent<UIDeath>().Activate(false);
+            
+        }
+        else if (_unitID.isLocalPlayer && !DeadIsAquired && _unitID.GetComponent<PlayerAuthorityScript>().PlayerDeadSync >= GameSharedData.NumberOfPlayer)
+        {
+
+            Debug.Log("Win " + _unitID.GetComponent<PlayerAuthorityScript>().PlayerDeadSync + " " + GameSharedData.NumberOfPlayer);
+
+            DeadIsAquired = true;
+             GameObject.Find("GameOverEffects").GetComponent<UIDeath>().Activate(true);
         }
 
         
@@ -115,12 +116,10 @@ public class InvocationCircleControler : NetworkBehaviour
             Lose();
         }
     }
-    [SyncVar]
-    private int PlayerDead = 0;
 
     public void Lose()
     {
-        PlayerDead++;
+        _unitID.GetComponent<PlayerAuthorityScript>().CmdAddPlayerDeadSync();
         _spawner.CmdisActive(false);
     }
 }

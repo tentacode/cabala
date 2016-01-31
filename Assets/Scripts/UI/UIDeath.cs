@@ -45,12 +45,6 @@ public class UIDeath : MonoBehaviour {
         }
     }
 
-    public void ButtonGameAgain()
-    {
-        Deactivate();
-        GameSharedData.GetLocalPlayer().GetComponent<PlayerAuthorityScript>().CmdRematch();
-    }
-
     public void ButtonGoLobby()
     {
         GameObject.Find("NetworkLobbyManager").GetComponent<LANLobbyNetworkManager>().SendReturnToLobby();
