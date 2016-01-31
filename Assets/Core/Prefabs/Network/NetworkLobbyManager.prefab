@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd6384a8527f47e790862b69292686d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BroadcastPort: 47778
+  m_BroadcastPort: 47756
   m_BroadcastKey: 2222
   m_BroadcastVersion: 1
   m_BroadcastSubVersion: 1
@@ -50,6 +50,7 @@ MonoBehaviour:
   m_ShowGUI: 0
   m_OffsetX: 0
   m_OffsetY: 0
+  broadcastTimeout: 5
 --- !u!114 &11482596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -126,7 +127,7 @@ MonoBehaviour:
     type: 2}
   m_GamePlayerPrefab: {fileID: 180276, guid: 50653290a43944505828ce4db2f52421, type: 2}
   m_LobbyScene: Lobby
-  m_PlayScene: Play
+  m_PlayScene: Arena
   lobbySlots: []
 --- !u!1001 &100100000
 Prefab:
@@ -153,7 +154,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_PlayScene
-      value: Play
+      value: Arena
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LobbyPlayerPrefab

@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 public class SpawnerController : NetworkBehaviour
 {
     #region parameters
+    [SyncVar]
     public MinionType spawnedCharacter;
 
     public SpawnersInformations spawnerInformations;
@@ -14,7 +15,11 @@ public class SpawnerController : NetworkBehaviour
     private float beginTime;
 
     [SerializeField]
-    private Transform _spawnPoint;
+    private Transform _spawnPointWarrior;
+    [SerializeField]
+    private Transform _spawnPointGhost;
+    [SerializeField]
+    private Transform _spawnPointWizard;
 
     private Unit_ID _unitId;
 
@@ -41,9 +46,26 @@ public class SpawnerController : NetworkBehaviour
     private void CmdSpawn()
     {
         GameObject minion = PoolManagerBase.FindPool(spawnedCharacter).Pop();
-        
-        minion.transform.position = _spawnPoint.position;
-        minion.transform.rotation = _spawnPoint.rotation;
+
+        Transform spawnPoint;
+        switch (spawnedCharacter)
+        {
+            case MinionType.Ghost:
+                spawnPoint = _spawnPointGhost;
+                break;
+            case MinionType.Warrior:
+                spawnPoint = _spawnPointWarrior;
+                break;
+            case MinionType.Wizard:
+                spawnPoint = _spawnPointWizard;
+                break;
+            default:
+                spawnPoint = _spawnPointWizard;
+                break;
+        }
+
+        minion.transform.position = spawnPoint.position;
+        minion.transform.rotation = spawnPoint.rotation;
 
         minion.GetComponent<Unit_ID>().CmdSetPlayerIndex(_unitId.GetPlayerIndex());
 

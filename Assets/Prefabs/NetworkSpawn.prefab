@@ -826,7 +826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   root: {fileID: 0}
-  objectToInstantiate: {fileID: 113106, guid: a19837b32e3ccc44492f4a81e792b53c, type: 2}
+  objectToInstantiate: {fileID: 113106, guid: 88615d4c96cbc1b40a9d8900c6efb7a5, type: 2}
   numberToPreInstantiate: 0
 --- !u!114 &11475262
 MonoBehaviour:
@@ -983,7 +983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   root: {fileID: 0}
-  objectToInstantiate: {fileID: 113106, guid: a19837b32e3ccc44492f4a81e792b53c, type: 2}
+  objectToInstantiate: {fileID: 113106, guid: 05ced1a4461f5f6438728fbed1fa8a40, type: 2}
   numberToPreInstantiate: 0
 --- !u!114 &11498026
 MonoBehaviour:

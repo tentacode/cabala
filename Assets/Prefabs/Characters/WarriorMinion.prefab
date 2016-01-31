@@ -19,6 +19,8 @@ GameObject:
   - 114: {fileID: 11441484}
   - 114: {fileID: 11402358}
   - 114: {fileID: 11419296}
+  - 114: {fileID: 11454946}
+  - 114: {fileID: 11466540}
   m_Layer: 10
   m_Name: WarriorMinion
   m_TagString: Minion
@@ -239,7 +241,6 @@ MonoBehaviour:
   minionsInformations: {fileID: 11400000, guid: 16415e4dacfab264fb9f4bc45dca3e29,
     type: 2}
   minionType: 1
-  DEBUGState: 0
   overrideMaterial: 0
 --- !u!114 &11441484
 MonoBehaviour:
@@ -261,6 +262,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff4d8eb1cb6411f46ad0cc08912bb527, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11454946
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cc238e3f567c96458b96bec8efb41e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11466540
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64880a7e479cc4174a4e5939d02983ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!135 &13525860

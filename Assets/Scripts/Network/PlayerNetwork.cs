@@ -45,9 +45,20 @@ public class PlayerNetwork : NetworkBehaviour
             return;
         }
      
-        Debug.Log("InitCamera");   
         GameObject cameraTarget = GameObject.Find("CameraTarget");
-        cameraTarget.transform.position = transform.position;
-        cameraTarget.transform.rotation = transform.rotation;
+        var playerIndex = _unitID.GetPlayerIndex();
+
+        switch (playerIndex) {
+            case 2:
+                cameraTarget.transform.Rotate(new Vector3(0, -90, 0));
+                break;
+            case 3:
+                cameraTarget.transform.Rotate(new Vector3(0, 180, 0));
+                break;
+            case 4:
+                cameraTarget.transform.Rotate(new Vector3(0, 90, 0));
+                break;
+        }
+
     }
 }

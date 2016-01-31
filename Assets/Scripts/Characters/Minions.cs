@@ -210,6 +210,9 @@ public class Minions : NetworkBehaviour
         opponent = otherFighter;
         opponent.opponent = this;
 
+        transform.LookAt(opponent.transform);
+        opponent.transform.LookAt(transform);
+
         setupFight();
         opponent.setupFight();
 
@@ -254,6 +257,11 @@ public class Minions : NetworkBehaviour
         }
 
         state = MinionState.fighting;
+        StopMovement();
+    }
+
+    public void StopMovement()
+    {
         navAgent.Stop();
     }
 
@@ -301,8 +309,6 @@ public class Minions : NetworkBehaviour
         }
 
         state = MinionState.dead;
-
-        //      Destroy(gameObject);
    }
     private void OnAlive(GameObject whoAlive)
     {
