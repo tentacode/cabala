@@ -20,15 +20,11 @@ public class UISelectToSpawn : NetworkBehaviour{
     void OnTouched(TouchResult touchResult)
     {
 
-        CmdSpawnUnit();
+        _unit_ID.GetComponent<PlayerAuthorityScript>().CmdSpawnUnit(_typeToSpawn);
         Debug.Log("Touched");
     }
 
-    [Command]
-    private void CmdSpawnUnit()
-    {
-        Unit_ID.FindPlayer(_unit_ID.GetPlayerIndex()).GetComponent<SpawnerController>().spawnedCharacter = _typeToSpawn;
-    }
+
 
     void OnSwipe(TouchResult touchResult)
     {
