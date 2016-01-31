@@ -286,7 +286,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.3414726, y: 4.0433893, z: -14.106364}
+  m_LocalPosition: {x: -4.6141953, y: 13.902323, z: -81.34392}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 432534}
@@ -342,7 +342,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 157406}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.58, y: -0.064, z: 0.058}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 411768}
@@ -1439,7 +1439,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 157406}
   serializedVersion: 2
-  lengthInSec: 5
+  lengthInSec: 1
   startDelay:
     scalar: 0
     maxCurve:
@@ -1486,7 +1486,7 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     startLifetime:
-      scalar: 5
+      scalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1778,7 +1778,7 @@ ParticleSystem:
     serializedVersion: 2
     m_Type: 0
     rate:
-      scalar: 30
+      scalar: 50
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -2895,7 +2895,7 @@ ParticleSystemRenderer:
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MaxParticleSize: 1
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 1
