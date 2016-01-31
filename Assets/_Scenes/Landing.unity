@@ -251,10 +251,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1540574529}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0, y: 0.09587014}
+  m_AnchorMin: {x: 0, y: 0.193}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9, y: -7.5}
-  m_SizeDelta: {x: -51, y: -54}
+  m_AnchoredPosition: {x: 8, y: 1}
+  m_SizeDelta: {x: -53, y: -71}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &760550446
 MonoBehaviour:
@@ -276,22 +276,23 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: ff324f3bfd62a4d45964f1779cea233c, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "This game was made with love and a lot of coffee during the GlobalGameJam
-    2016.\n\nThe team : L\xE9o Lefebvre (Game Design, Code) \u2014 Marie-Jeanne 'Norma'
-    Seillet (Graphism) \u2014 Gabriel Pillet (Code) \u2014 Quentin (Sound Design,
-    Music)"
+    2016.\n\nThe team : \n\nLeo Lefebvre (Game Design, Code), Marie-Jeanne 'Norma'
+    Seillet (Art), Gabriel Pillet (Code), Quentin Mercier (Sound Design, Music), Adrien
+    Delorme (Game Design, Level Design), Patricia Montero (Art) and Farges Maelyss
+    (Code).\n\nSpecial thanks to Agapete the blobfish and the build_info.txt"
 --- !u!222 &760550447
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -313,7 +314,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &946438065
 CanvasRenderer:
   m_ObjectHideFlags: 0
