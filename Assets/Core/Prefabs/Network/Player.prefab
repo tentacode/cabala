@@ -121,7 +121,7 @@ GameObject:
   - 114: {fileID: 11498060}
   - 114: {fileID: 11480636}
   m_Layer: 0
-  m_Name: SpawnPoint (2)
+  m_Name: SpawnPointWarrior
   m_TagString: SpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -157,7 +157,7 @@ GameObject:
   - 114: {fileID: 11433798}
   - 114: {fileID: 11415328}
   m_Layer: 0
-  m_Name: SpawnPoint
+  m_Name: SpawnPointGhost
   m_TagString: SpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -176,6 +176,7 @@ GameObject:
   - 114: {fileID: 11491492}
   - 114: {fileID: 11453392}
   - 114: {fileID: 11471150}
+  - 114: {fileID: 11431632}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -198,7 +199,7 @@ GameObject:
   - 114: {fileID: 11413606}
   - 114: {fileID: 11427666}
   m_Layer: 0
-  m_Name: SpawnPoint (1)
+  m_Name: SpawnPointWizard
   m_TagString: SpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -285,7 +286,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.0654078, y: 12.808405, z: 5.043872}
+  m_LocalPosition: {x: 4.1261487, y: 0, z: -4.2912464}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 432534}
@@ -825,7 +826,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unit_ID: {fileID: 11471150}
-  _typeToSpawn: 1
+  _typeToSpawn: 2
+--- !u!114 &11431632
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 180276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6593292a39e5d5a4c862ccc8db3e9320, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11433798
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -872,7 +884,9 @@ MonoBehaviour:
   spawnedCharacter: 0
   spawnerInformations: {fileID: 11400000, guid: d9c7e2bfe6d44dc49978641d7dd0bcbd,
     type: 2}
-  _spawnPoint: {fileID: 404154}
+  _spawnPointWarrior: {fileID: 415428}
+  _spawnPointGhost: {fileID: 404154}
+  _spawnPointWizard: {fileID: 461132}
 --- !u!114 &11456874
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -981,7 +995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unit_ID: {fileID: 11471150}
-  _typeToSpawn: 2
+  _typeToSpawn: 1
 --- !u!114 &11491492
 MonoBehaviour:
   m_ObjectHideFlags: 1
