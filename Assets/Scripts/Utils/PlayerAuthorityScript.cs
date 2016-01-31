@@ -20,6 +20,14 @@ public class PlayerAuthorityScript : NetworkBehaviour {
     [Command]
     public void CmdOrderMinionToStop(string minionName)
     {
-        GameObject.Find(minionName).GetComponent<Minions>().StopMovement();
+        GameObject.Find(minionName).GetComponent<Minions>().MovementStop();
+    }
+
+    [Command]
+    public void CmdOrderMinionToMoveTo(string minionName, string targetName)
+    {
+        GameObject target = GameObject.Find(targetName);
+
+        GameObject.Find(minionName).GetComponent<Minions>().MovementGoTo(target.transform.position);
     }
 }
