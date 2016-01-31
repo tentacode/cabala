@@ -14,7 +14,7 @@ public abstract class SoundableElement : MonoBehaviour
 	
 	}
 
-    protected abstract void PlaySound()
+    protected virtual void PlaySound()
     {
 
     }
