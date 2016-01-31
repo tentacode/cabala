@@ -52,6 +52,7 @@ public class Cultist : NetworkBehaviour
 
     private void Die()
     {
+        GetComponent<MonoSoundable>().playSound();
         parentCircle.cultistDeath();
         gameObject.SetActive(false);
     }*/
