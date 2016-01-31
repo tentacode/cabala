@@ -11,10 +11,7 @@ public class Cultist : NetworkBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (!isServer)
-        {
-            return;
-        }
+        Debug.Log("Cultist enter " + isServer);
 
         if (other.tag == "Minion")
         {
@@ -22,7 +19,6 @@ public class Cultist : NetworkBehaviour
             {
                 other.GetComponent<Destructible>().CmdTakeDamage(1000);
                 Die();
-
             }
         }
     }

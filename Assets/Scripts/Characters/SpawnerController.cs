@@ -26,7 +26,7 @@ public class SpawnerController : NetworkBehaviour
     #endregion
     
     // Use this for initialization
-    void Start () {
+    void OnEnable () {
         _unitId = GetComponent<Unit_ID>();
         Invoke("FirstSpawn", spawnerInformations.TimeBeforeFirstLaunch + 1);
     }
