@@ -67,6 +67,8 @@ public class Minions : NetworkBehaviour
     private Unit_ID _unit_ID;
     private SoundableMinion minionSoundControler;
 
+    private MinionParticlesController particleControler;
+
     public int PlayerIndex
     {
         
@@ -165,6 +167,8 @@ public class Minions : NetworkBehaviour
 
         setMaterial();
         setHealthBarMaterial();
+
+        particleControler = transform.FindChild("Particles").GetComponent<MinionParticlesController>();
     }
 
     private void setMaterial()
@@ -299,6 +303,9 @@ public class Minions : NetworkBehaviour
 
         minionSoundControler.PlaySound(MinionAction.attack);
         opponent.minionSoundControler.PlaySound(MinionAction.attack);
+
+        particleControler.displayAttack(opponent.minionType);
+        opponent.particleControler.displayAttack(minionType);
 
         Destructible opponentDestructible = opponent.GetComponent<Destructible>();
         opponentDestructible.CmdTakeDamage(computeDamages());
