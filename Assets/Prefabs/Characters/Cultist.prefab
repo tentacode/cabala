@@ -10,6 +10,9 @@ GameObject:
   - 4: {fileID: 455256}
   - 33: {fileID: 3336120}
   - 23: {fileID: 2351172}
+  - 114: {fileID: 11459742}
+  - 114: {fileID: 11403774}
+  - 114: {fileID: 11420812}
   m_Layer: 0
   m_Name: Cultist
   m_TagString: Untagged
@@ -62,13 +65,80 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 143402}
   m_Mesh: {fileID: 4300000, guid: ce4fd6803a7f40448b41469d6f83eb57, type: 3}
+--- !u!114 &11403774
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 330eca1f229fea04d925ec74c70fcd71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentCircle: {fileID: 0}
+  _unitID: {fileID: 0}
+--- !u!114 &11420812
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fad483b05107fb49ac3a518d47a2df8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: 315f21768684a4546bd043ed73eac710, type: 3}
+  mixerGroup: {fileID: 24345488, guid: 5bcf8c73e25ab524e9edf5e15b9c6a50, type: 2}
+--- !u!114 &11459742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 28
+    i1: 165
+    i2: 43
+    i3: 152
+    i4: 29
+    i5: 108
+    i6: 162
+    i7: 180
+    i8: 216
+    i9: 11
+    i10: 12
+    i11: 199
+    i12: 155
+    i13: 181
+    i14: 154
+    i15: 58
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: mixerGroup
+      value: 
+      objectReference: {fileID: 24345488, guid: 5bcf8c73e25ab524e9edf5e15b9c6a50,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: sound
+      value: 
+      objectReference: {fileID: 8300000, guid: 315f21768684a4546bd043ed73eac710, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 143402}

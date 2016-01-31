@@ -4,7 +4,6 @@ using UnityEngine.Audio;
 
 public class SoundableElement : MonoBehaviour
 {
-    [SerializeField]
     protected SoundManager soundManager;
 	
 	protected virtual void Start () {
@@ -22,8 +21,7 @@ public class SoundableElement : MonoBehaviour
         {
             setupSoundManager();
         }
-
-        Debug.Log("sound is " + (sound == null) + " || mixer is  " + (mixerGroup == null) + " || soundManager is " + (soundManager == null));
+        
         soundManager.PlaySound(sound, mixerGroup);
     }
 }
