@@ -85,7 +85,7 @@ NavMeshSettings:
     minRegionArea: 2
     cellSize: 0.16666667
     manualCellSize: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: a39520b1a854f4558b463685957778ca, type: 2}
 --- !u!1 &59202872
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,6 +403,22 @@ Prefab:
     - target: {fileID: 450694, guid: 027fcc81c2e4944ab80e91c5240264e4, type: 2}
       propertyPath: m_LocalRotation.w
       value: 0.1871938
+      objectReference: {fileID: 0}
+    - target: {fileID: 144532, guid: 027fcc81c2e4944ab80e91c5240264e4, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 171606, guid: 027fcc81c2e4944ab80e91c5240264e4, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 113722, guid: 027fcc81c2e4944ab80e91c5240264e4, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 164994, guid: 027fcc81c2e4944ab80e91c5240264e4, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 027fcc81c2e4944ab80e91c5240264e4, type: 2}
