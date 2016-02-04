@@ -34,7 +34,7 @@ public class TouchResult
 
 public class InputManager : MonoBehaviour
 {
-    public float clickDistanceThreshold = 80f;
+    public float clickDistanceThreshold = 40f;
 
     List<TouchInfo> touchInfos = new List<TouchInfo>();
 

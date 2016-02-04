@@ -22,11 +22,11 @@ public class MinionOrders : MonoBehaviour {
         GameObject player = GameSharedData.GetLocalPlayer();
 
         // don't do it for other players
-        if (player.GetComponent<Unit_ID>().GetPlayerIndex() != GetComponent<Unit_ID>().GetPlayerIndex())
+    /*    if (player.GetComponent<Unit_ID>().GetPlayerIndex() != GetComponent<Unit_ID>().GetPlayerIndex())
         {
             enabled = false;
             return;
-        }
+        }*/
 
         Swipeable swipeable = GetComponent<Swipeable>();
 
@@ -42,7 +42,10 @@ public class MinionOrders : MonoBehaviour {
     void OnSwipe(TouchResult touchResult)
     {
         float dot = Vector2.Dot(new Vector2(0, 1), touchResult.direction);
-        float angle = Vector2.Angle(new Vector2(0.5f, 0.5f), touchResult.direction);
+        float angle = Vector2.Angle(new Vector2(1, 0f), touchResult.direction);
+
+
+      
 
         if (dot < 0)
         {
@@ -51,15 +54,15 @@ public class MinionOrders : MonoBehaviour {
 
         int trancheDangle;
         // Base
-        if (angle > 270)
+        if (angle > 260)
         {
             trancheDangle = 0;
         }
-        else if (angle >= 0 && angle <= 110)
+        else if (angle >= 0 && angle <= 100)
         {
             trancheDangle = 1;
         }
-        else if (angle > 110 && angle <= 160)
+        else if (angle > 100 && angle <= 180)
         {
             trancheDangle = 2;
         }
@@ -68,8 +71,10 @@ public class MinionOrders : MonoBehaviour {
             trancheDangle = 3;
         }
 
+        GameSharedData.GetLocalPlayer().GetComponent<PlayerAuthorityScript>().CmdChangeMinionSide(name, unitID.GetPlayerIndex());
+        
         string nameToGo = GameSharedData.GetPlayerNumberNext(GameSharedData.GetLocalPlayer().GetComponent<Unit_ID>(), trancheDangle).name;
-
+        Debug.Log(trancheDangle + " " + nameToGo);
         GameSharedData.GetLocalPlayer().GetComponent<PlayerAuthorityScript>().CmdOrderMinionToMoveTo(name, nameToGo);
     }
 }
