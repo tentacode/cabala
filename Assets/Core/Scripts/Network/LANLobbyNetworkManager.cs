@@ -57,6 +57,9 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
         }
         
         minPlayers = playerConnected + 1;
+        if (minPlayers < 2) {
+            minPlayers = 2;
+        }
     }
     
     public override void OnLobbyServerDisconnect(NetworkConnection conn)
@@ -69,6 +72,9 @@ public class LANLobbyNetworkManager : NetworkLobbyManager
         }
         
         minPlayers = playerConnected;
+        if (minPlayers < 2) {
+            minPlayers = 2;
+        }
     }
     
     public void QuitLobby()
