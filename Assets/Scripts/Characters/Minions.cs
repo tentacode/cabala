@@ -34,7 +34,7 @@ public class Minions : NetworkBehaviour
     public MinionsInformations minionsInformations;
     public MinionType minionType;
 
-    public bool overrideMaterial = false;
+    public bool overrideMaterial = true;
     public bool overrideHealthBarMaterial = true;
 
     [SerializeField]
@@ -99,24 +99,19 @@ public class Minions : NetworkBehaviour
 
         _destructible.HandleDestroyed += OnDie;
         _destructible.HandleAlive += OnAlive;
-
-        minionSoundControler = GetComponent<SoundableMinion>();
     }
 
     void Awake()
     {
         _unit_ID = GetComponent<Unit_ID>();
+
+        minionSoundControler = GetComponent<SoundableMinion>();
     }
 
 
 
     void LateUpdate()
     {
-        if (!CanRun)
-        {
-            return;
-        }
-
         if (_unit_ID.IsReady())
         {
             initalize();
@@ -147,23 +142,21 @@ public class Minions : NetworkBehaviour
 
     protected void initalize()
     {
-        if (!CanRun)
-        {
-            return;
-        }
-
         if (isInit)
         {
             return;
         }
+
         isInit = true;
 
-        state = MinionState.moving;
+        if (CanRun)
+        {
+            state = MinionState.moving;
+            GameObject player = GameSharedData.GetPlayerNumberNext(_unit_ID, 1);
+            SetGoal(player.transform);
+        }
 
         minionSoundControler.PlaySound(MinionAction.spawn);
-
-        GameObject player = GameSharedData.GetPlayerNumberNext(_unit_ID, 1);
-        SetGoal(player.transform);
 
         setMaterial();
         setHealthBarMaterial();
@@ -173,12 +166,9 @@ public class Minions : NetworkBehaviour
 
     private void setMaterial()
     {
-        if (overrideMaterial)
+        if (minionsInformations.getMinionMaterials(minionType)[PlayerIndex - 1] != null)
         {
-            if (minionsInformations.getMinionMaterials(minionType)[PlayerIndex - 1] != null)
-            {
-                GetComponent<Renderer>().material = minionsInformations.getMinionMaterials(minionType)[PlayerIndex - 1];
-            }
+            GetComponent<Renderer>().material = minionsInformations.getMinionMaterials(minionType)[PlayerIndex - 1];
         }
     }
 
