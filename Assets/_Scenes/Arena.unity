@@ -39990,6 +39990,53 @@ ParticleSystemRenderer:
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
+--- !u!1 &1444802272 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 146606, guid: 071232e5b126b254bacea6098ba84cce, type: 2}
+  m_PrefabInternal: {fileID: 535447426}
+--- !u!114 &1444802273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1444802272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6856ff84588949bfafbbdeb46ba2a1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1444802274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1444802272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 7
+    i1: 18
+    i2: 50
+    i3: 229
+    i4: 177
+    i5: 38
+    i6: 178
+    i7: 84
+    i8: 186
+    i9: 206
+    i10: 166
+    i11: 9
+    i12: 139
+    i13: 168
+    i14: 76
+    i15: 206
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!1 &1550464034
 GameObject:
   m_ObjectHideFlags: 0

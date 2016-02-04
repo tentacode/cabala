@@ -28,4 +28,9 @@ public class MusicalElement : MonoBehaviour
 
         musicManager.PlayMusic(Music, mixerGroup, loop);
     }
+
+    public void StopMusicManager()
+    {
+        musicManager.Stop();
+    }
 }
